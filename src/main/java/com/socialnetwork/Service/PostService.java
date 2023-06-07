@@ -5,7 +5,7 @@ import com.socialnetwork.Infrastucture.Dto.PostDto;
 
 public interface PostService {
 
-    public PostDto createPost( PostDto postDto );
+    public PostDto createPost( PostDto postDto, Long id);
 
     public PostDto postId (Long id);
 }

@@ -1,5 +1,6 @@
 package com.socialnetwork.Infrastucture.Dto;
 
+import com.socialnetwork.Entity.User;
 import com.socialnetwork.Infrastucture.Request.User.SignupRequest;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserDto {
 
+    private Long id;
     private String username;
 
     private String password;
@@ -22,4 +24,5 @@ public class UserDto {
         userDto.setPassword(request.getPassword());
         return userDto;
     }
+
 }

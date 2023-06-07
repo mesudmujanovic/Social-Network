@@ -17,10 +17,10 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-    @PostMapping("/post")
-    public  ResponseEntity<PostResponse> createPost (@RequestBody PostRequest postRequest){
+    @PostMapping("/post/{id}")
+    public  ResponseEntity<PostResponse> createPost (@RequestBody PostRequest postRequest, @PathVariable Long id){
         PostDto postDto = PostDto.fromRequestToDto(postRequest);
-        PostDto savePost = postService.createPost(postDto);
+        PostDto savePost = postService.createPost(postDto,id);
         return ResponseEntity.ok(savePost.fromDtoToResponse());
     }
 }

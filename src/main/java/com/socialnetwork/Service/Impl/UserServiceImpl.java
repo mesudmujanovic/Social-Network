@@ -26,4 +26,12 @@ public class UserServiceImpl implements UserService {
         user.setPassword(encoder.encode(userDto.getPassword()));
         userRepository.save(user);
     }
+
+    @Override
+    public UserDto userId(Long id) {
+        User user = userRepository.findById(id).orElseThrow(()->new RuntimeException("not found user" + id));
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        return userDto;
+    }
 }
