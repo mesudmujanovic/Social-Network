@@ -1,0 +1,24 @@
+User jwt
+(oneToMany comment)
+(OneToManu Post)
+(oneToMany like,dislike,comment)
+(OneToOne to AccountUser)
+
+
+Post
+(ManyToOne User)
+(OneToMany like,dislike)
+(OneToMany commentPost)
+
+
+CommentPost
+(manyToOne Post)
+
+
+Like, dislike
+(ManyToOne User)
+(ManyToOne Post)
+
+
+AccountUser
+(OneToOne to User)
