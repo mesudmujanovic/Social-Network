@@ -1,4 +1,4 @@
-package com.socialnetwork.Controller.Auth;
+package com.socialnetwork.Controller;
 
 
 import com.socialnetwork.Infrastucture.Dto.UserDto;
