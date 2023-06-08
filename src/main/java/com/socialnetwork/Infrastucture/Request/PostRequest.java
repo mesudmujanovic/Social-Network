@@ -6,4 +6,7 @@ import lombok.Data;
 public class PostRequest {
 
     private String text;
+
+
+
 }

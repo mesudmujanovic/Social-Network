@@ -10,6 +10,8 @@ public class PostDto {
     private Long id;
     private String text;
 
+
+
     public static PostDto fromRequestToDto (PostRequest postRequest){
         PostDto postDto = new PostDto();
         postDto.setText(postRequest.getText());

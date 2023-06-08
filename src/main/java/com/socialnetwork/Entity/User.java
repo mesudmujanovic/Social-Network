@@ -22,4 +22,5 @@ public class User {
 
     @Column(nullable = false, unique = false)
     private String password;
+
 }

@@ -17,7 +17,7 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-    @PostMapping("/post/{id}")
+    @PostMapping("/post/userId/{id}")
     public  ResponseEntity<PostResponse> createPost (@RequestBody PostRequest postRequest, @PathVariable Long id){
         PostDto postDto = PostDto.fromRequestToDto(postRequest);
         PostDto savePost = postService.createPost(postDto,id);
