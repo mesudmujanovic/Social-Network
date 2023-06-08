@@ -1,0 +1,9 @@
+<form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="text">Tekst:</label>
+      <input type="text" name="text" formControlName="text">
+    </div>
+  
+    <button type="submit" >Objavi</button>
+  </form>
+  
