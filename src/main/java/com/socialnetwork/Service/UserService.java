@@ -5,6 +5,6 @@ import com.socialnetwork.Infrastucture.Dto.UserDto;
 public interface UserService {
     public  void register(UserDto userDto) throws Exception;
 
-    public UserDto userId ( Long id );
+    public UserDto userId ( Long userId );
 
 }

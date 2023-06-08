@@ -1,12 +1,12 @@
 User jwt
 (oneToMany comment)
-(OneToManu Post)
+(OneToManu Post) zavrseno
 (oneToMany like,dislike,comment)
 (OneToOne to AccountUser)
 
 
 Post
-(ManyToOne User)
+(ManyToOne User) zavrseno
 (OneToMany like,dislike)
 (OneToMany commentPost)
 
@@ -21,4 +21,9 @@ Like, dislike
 
 
 AccountUser
-(OneToOne to User)
+
+
+post ima user_id
+mesud postavio post(postId = mesud)
+komentarisao post userId(Profil) i treba postId(postId) jer ima vise postova
+ = Post ima userId, a comment ima postId i UserId;
