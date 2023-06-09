@@ -12,6 +12,9 @@ import com.socialnetwork.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -28,6 +31,12 @@ public class PostServiceImpl implements PostService {
         post.setUser(UserMapper.INSTANCE.apply(userService.userId(userId)));
         Post postSave = postRepository.save(post);
         return PostDtoMapper.INSTANCE.apply(postSave);
+    }
+
+    @Override
+    public List<PostDto> getAllPosts() {
+        List<Post> postList = postRepository.findAll();
+        return postList.stream().map( posts -> PostDtoMapper.INSTANCE.apply(posts)).collect(Collectors.toList());
     }
 
     @Override

@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/api")
-
 @CrossOrigin("*")
 public class PostController {
 
@@ -22,5 +24,11 @@ public class PostController {
         PostDto postDto = PostDto.fromRequestToDto(postRequest);
         PostDto savePost = postService.createPost(postDto,id);
         return ResponseEntity.ok(savePost.fromDtoToResponse());
+    };
+
+    @GetMapping("/allPosts")
+    public ResponseEntity<List<PostResponse>> getAllPosts(){
+        List<PostDto> postDtoList = postService.getAllPosts();
+        return ResponseEntity.ok(postDtoList.stream().map(PostDto::fromDtoToResponse).collect(Collectors.toList()));
     }
 }

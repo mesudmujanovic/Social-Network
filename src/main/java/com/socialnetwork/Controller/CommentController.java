@@ -8,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 @CrossOrigin("*")
-
 public class CommentController {
 
     @Autowired
@@ -24,5 +25,10 @@ public class CommentController {
         CommentDto commentDto = CommentDto.fromRequestToDto(commentRequest);
         CommentDto commentDtoSave = commentService.saveComment(commentDto,postId,userId);
         return ResponseEntity.ok(commentDtoSave.fromResponseToDto());
+    }
+
+    @GetMapping("/comment/post/{postId}")
+    public List<CommentDto> getCommentsByPostId(@PathVariable Long postId) {
+        return commentService.getCommentsByPostId(postId);
     }
 }
