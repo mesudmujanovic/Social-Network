@@ -1,8 +1,4 @@
 User jwt
-(oneToMany comment)
-(OneToManu Post) zavrseno
-(oneToMany like,dislike,comment)
-(OneToOne to AccountUser)
 
 
 Post

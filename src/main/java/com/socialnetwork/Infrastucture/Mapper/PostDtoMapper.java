@@ -14,7 +14,6 @@ public enum PostDtoMapper implements DtoMapper<PostDto, Post> {
         PostDto postDto = new PostDto();
         postDto.setId(post.getId());
         postDto.setText(post.getText());
-        postDto.setComments(post.getComments().stream().map( allComments -> CommentDtoMapper.INSTANCE.apply(allComments)).collect(Collectors.toList()));
         return postDto;
     }
 }
