@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable, catchError, of, switchMap, tap } from 'rxjs';
+import { Observable, catchError, map, of, switchMap, tap } from 'rxjs';
 import { Comment } from 'src/app/interface/Comment-interface';
 import { Post } from 'src/app/interface/Post-interface';
 import { CommentsService } from 'src/app/service/comments.service';
@@ -19,6 +19,7 @@ export class PostComponent {
   commForm: FormGroup
   comments$: Observable<Comment[]>;
   postId: number;
+  selectedPostComments$: { [postId: number]: Comment[] } = {};
 
   constructor(private formBuilder: FormBuilder,
     private postService: PostService,
@@ -37,30 +38,44 @@ export class PostComponent {
     })
   }
 
-  
-  
-  getPostId(post: Post){
-   this.postId = post.id;
-   console.log("postId",this.postId);
-  }
-
-  onSubmitComment(){
-    if(this.commForm.valid){
-      const text = this.commForm.get('text')?.value;
-      const userId = this.localStorage.getLocalStorage("user");
-      const postId = this.postId;
-      this.commentService.addComment( postId, text, userId ).pipe(
-       switchMap( () => this.allComments() ),
-       catchError(error => {
-        console.log("error", error)
-        return of([]);
-       })
-      ).subscribe( post =>{
-       console.log("post",post);
-      })
+  getPostId(post: Post) {
+    this.postId = post.id;
+    if (!this.selectedPostComments$.hasOwnProperty(post.id)) {
+      this.selectedPostComments$[post.id] = [];
     }
-    }
+    this.commentService.getCommentsByPostId(post.id)
+      .pipe(
+        catchError((error) => {
+          console.log('error', error);
+          return of([]);
+        })
+      )
+      .subscribe((comments) => {
+        this.selectedPostComments$[post.id] = comments;
+      });
+     }
   
+     onSubmitComment() {
+      if (this.commForm.valid) {
+        const text = this.commForm.get('text')?.value;
+        const userId = this.localStorage.getLocalStorage('user');
+        const postId = this.postId;
+    
+        this.commentService.addComment(postId, text, userId)
+          .pipe(
+            switchMap(() => this.commentService.getCommentsByPostId(postId)),
+            catchError((error) => {
+              console.log('error', error);
+              return of([]);
+            })
+          )
+          .subscribe((comments) => {
+            this.selectedPostComments$[postId] = comments;
+            this.commForm.reset();
+          });
+      }
+    }
+    
     allComments(): Observable<Comment[]>{
       return this.comments$ = this.commentService.getCommentsAll().pipe(
         catchError( (error) =>{
@@ -101,9 +116,9 @@ export class PostComponent {
     this.allPosts().subscribe(posts => {
       console.log("posts", posts);
     });
-    
     this.allComments().subscribe( comments => {
       console.log("comments", comments);
-    })
+    });
+    this.posts$ = this.allPosts();
   }
 }

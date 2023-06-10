@@ -21,8 +21,8 @@ export class CommentsService {
     return this.http.get<Comment[]>(`${BASE_URL}/allComments`)
   }
 
-  // getCommentsByPostId(postId: number): Observable<Comment[]> {
-  //   return this.http.get<Comment[]>(`${BASE_URL}/comment/post/${postId}`);
-  // }
+  getCommentsByPostId(postId: number): Observable<Comment[]> {
+    return this.http.get<Comment[]>(`${BASE_URL}/comment/post/${postId}`);
+  }
   
 }
