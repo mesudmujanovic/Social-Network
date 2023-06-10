@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
@@ -30,5 +31,11 @@ public class CommentController {
     @GetMapping("/comment/post/{postId}")
     public List<CommentDto> getCommentsByPostId(@PathVariable Long postId) {
         return commentService.getCommentsByPostId(postId);
+    }
+
+    @GetMapping("/allComments")
+    public ResponseEntity<List<CommentResponse>> getAllComments(){
+        List<CommentDto> commentDtos = commentService.getAllComments();
+        return ResponseEntity.ok(commentDtos.stream().map(CommentDto::fromResponseToDto).collect(Collectors.toList()));
     }
 }

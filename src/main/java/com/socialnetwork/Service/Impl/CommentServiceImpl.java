@@ -46,6 +46,13 @@ public class CommentServiceImpl implements CommentService {
                 .map(this::mapToDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<CommentDto> getAllComments() {
+        List<Comment> comments = commentRepository.findAll();
+        return comments.stream().map( allComments -> CommentDtoMapper.INSTANCE.apply(allComments)).collect(Collectors.toList());
+    }
+
     private CommentDto mapToDto(Comment comment) {
         CommentDto commentDto = new CommentDto();
         commentDto.setId(comment.getId());

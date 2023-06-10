@@ -1,8 +1,14 @@
 package com.socialnetwork.Infrastucture.Dto;
 
+import com.socialnetwork.Entity.Comment;
+import com.socialnetwork.Infrastucture.Mapper.CommentDtoMapper;
+import com.socialnetwork.Infrastucture.Mapper.CommentMapper;
 import com.socialnetwork.Infrastucture.Request.CommentRequest;
 import com.socialnetwork.Infrastucture.Response.CommentResponse;
 import lombok.Data;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class CommentDto {
@@ -10,6 +16,7 @@ public class CommentDto {
     private Long id;
 
     private String text;
+    private List<Comment> comments;
 
     public static CommentDto fromRequestToDto(CommentRequest commentRequest){
         CommentDto commentDto = new CommentDto();

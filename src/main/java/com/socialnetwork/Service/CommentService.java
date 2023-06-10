@@ -10,4 +10,6 @@ public interface CommentService {
      CommentDto saveComment(CommentDto commentDto, Long postId, Long userId);
      List<CommentDto> getCommentsByPostId(Long postId);
 
+     List<CommentDto> getAllComments();
+
 }
