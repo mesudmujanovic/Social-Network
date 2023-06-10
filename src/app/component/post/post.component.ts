@@ -1,8 +1,10 @@
+import { Token } from '@angular/compiler';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, catchError, map, of, switchMap, tap } from 'rxjs';
 import { Comment } from 'src/app/interface/Comment-interface';
 import { Post } from 'src/app/interface/Post-interface';
+import { AuthService } from 'src/app/service/auth.service';
 import { CommentsService } from 'src/app/service/comments.service';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { PostService } from 'src/app/service/post.service';
@@ -19,12 +21,14 @@ export class PostComponent {
   commForm: FormGroup
   comments$: Observable<Comment[]>;
   postId: number;
+  showComments: boolean = false
   selectedPostComments$: { [postId: number]: Comment[] } = {};
 
   constructor(private formBuilder: FormBuilder,
     private postService: PostService,
     private localStorage: LocalStorageService,
-    private commentService: CommentsService) {
+    private commentService: CommentsService,
+    private authService: AuthService) {
 
     this.postForm = this.formBuilder.group({
       text: ['', Validators.required]
@@ -52,7 +56,17 @@ export class PostComponent {
       )
       .subscribe((comments) => {
         this.selectedPostComments$[post.id] = comments;
+        console.log("see", this.selectedPostComments$);
+        
       });
+     }
+
+     hideText( postId: number ){
+         if(postId){
+          this.showComments = true;
+         }
+         console.log("show", this.showComments);
+         
      }
   
      onSubmitComment() {
@@ -122,3 +136,4 @@ export class PostComponent {
     this.posts$ = this.allPosts();
   }
 }
+

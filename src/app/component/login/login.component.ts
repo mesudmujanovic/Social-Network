@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subject, of, tap } from 'rxjs';
 import { User } from 'src/app/interface/User-interface';
+import { AuthService } from 'src/app/service/auth.service';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { LoginService } from 'src/app/service/login.service';
 
@@ -18,7 +19,8 @@ export class LoginComponent {
   constructor(private formBuilder: FormBuilder,
     private loginService: LoginService,
     private localStorage: LocalStorageService,
-    private router: Router)
+    private router: Router,
+    private authService: AuthService)
      {
 
     this.loginForm = this.formBuilder.group({
@@ -38,6 +40,8 @@ export class LoginComponent {
          console.log("userId",userInfo);  
           this.localStorage.setLocalStorage("user",userInfo);
           this.localStorage.setLocalStorage("token",response)
+          this.authService.setCurrentUser(username);
+
           this.router.navigate(['/post']);
         })
       ).subscribe( user =>{
