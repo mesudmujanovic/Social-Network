@@ -1,17 +1,33 @@
-<form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+ <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
     <div>
       <label for="text">Tekst:</label>
       <input type="text" name="text" formControlName="text">
     </div>
   
     <button type="submit" >Objavi</button>
-  </form>
+  </form>x
   
   <div>
     <div *ngIf="posts$ | async as posts">
       <div *ngFor="let post of posts">
         <h3>  {{ post.text }}  </h3>
+        <h3 *ngFor="let comm of  (comments$ | async)">
+        {{comm.text}}
+        </h3>
+        <div (click)="getPostId(post)">
+          <form [formGroup]="commForm" (ngSubmit)="onSubmitComment()">
+            <div>
+              <label for="text">Tekst:</label>
+              <input type="text" name="text" formControlName="text">
+            </div>
+            <button type="submit" >Objavi</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
+    
+
+
+  
   

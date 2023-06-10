@@ -17,8 +17,9 @@ export class PostComponent {
   postForm: FormGroup;
   posts$: Observable<Post[]>;
   commForm: FormGroup
-  comment$: Observable<Comment[]>;
- 
+  comments$: Observable<Comment[]>;
+  postId: number;
+
   constructor(private formBuilder: FormBuilder,
     private postService: PostService,
     private localStorage: LocalStorageService,
@@ -29,16 +30,45 @@ export class PostComponent {
     })
     this.commForm = this.formBuilder.group({
       text:['',Validators.required]
+    });
+
+    this.commForm = this.formBuilder.group({
+      text:['',Validators.required]
     })
   }
 
-  onComment(){
-  if(this.commForm.valid){
-    const text = this.commForm.get('text')?.value;
-    const userId = this.localStorage.getLocalStorage("user");
-   
+  
+  
+  getPostId(post: Post){
+   this.postId = post.id;
+   console.log("postId",this.postId);
   }
-  }
+
+  onSubmitComment(){
+    if(this.commForm.valid){
+      const text = this.commForm.get('text')?.value;
+      const userId = this.localStorage.getLocalStorage("user");
+      const postId = this.postId;
+      this.commentService.addComment( postId, text, userId ).pipe(
+       switchMap( () => this.allComments() ),
+       catchError(error => {
+        console.log("error", error)
+        return of([]);
+       })
+      ).subscribe( post =>{
+       console.log("post",post);
+      })
+    }
+    }
+  
+    allComments(): Observable<Comment[]>{
+      return this.comments$ = this.commentService.getCommentsAll().pipe(
+        catchError( (error) =>{
+          console.log("error",error);
+          return of([]);
+        })
+      )
+    }
 
   allPosts(): Observable<Post[]> {
     return this.posts$ = this.postService.getAllPosts().pipe(
@@ -71,6 +101,9 @@ export class PostComponent {
     this.allPosts().subscribe(posts => {
       console.log("posts", posts);
     });
-
+    
+    this.allComments().subscribe( comments => {
+      console.log("comments", comments);
+    })
   }
 }
