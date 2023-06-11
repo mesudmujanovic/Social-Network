@@ -14,6 +14,7 @@ public enum PostDtoMapper implements DtoMapper<PostDto, Post> {
         PostDto postDto = new PostDto();
         postDto.setId(post.getId());
         postDto.setText(post.getText());
+        postDto.setUsername(post.getUser().getUsername());
         return postDto;
     }
 }

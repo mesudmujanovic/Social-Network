@@ -6,6 +6,7 @@ import com.socialnetwork.Infrastucture.Request.User.LoginRequest;
 import com.socialnetwork.Infrastucture.Request.User.SignupRequest;
 import com.socialnetwork.Infrastucture.Response.UserJwt.JwtResponse;
 import com.socialnetwork.Infrastucture.Response.UserJwt.MessageResponse;
+import com.socialnetwork.Infrastucture.Response.UserResponse;
 import com.socialnetwork.Security.Jwt.JwtUtils;
 import com.socialnetwork.Security.Services.UserDetailsImpl;
 import com.socialnetwork.Service.UserService;
@@ -60,5 +61,11 @@ public class AuthController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("An error occurred while registrering the user");
         }
+    }
+
+    @GetMapping("/users/{id}")
+    public ResponseEntity<UserResponse> getUserById(@PathVariable Long id) {
+        UserDto userDto = userService.userId(id);
+        return ResponseEntity.ok(UserDto.fromResponse(userDto));
     }
 }

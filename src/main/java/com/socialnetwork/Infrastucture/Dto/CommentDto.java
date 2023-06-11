@@ -17,6 +17,8 @@ public class CommentDto {
 
     private String text;
     private List<Comment> comments;
+    private String username;
+
 
     public static CommentDto fromRequestToDto(CommentRequest commentRequest){
         CommentDto commentDto = new CommentDto();
@@ -28,6 +30,7 @@ public class CommentDto {
         CommentResponse commentResponse = new CommentResponse();
         commentResponse.setId(this.getId());
         commentResponse.setText(this.getText());
+        commentResponse.setUsername(this.getUsername());
         return  commentResponse;
     }
 }

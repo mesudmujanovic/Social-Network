@@ -32,6 +32,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id).orElseThrow(()->new RuntimeException("not found user" + id));
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());
+        userDto.setUsername(user.getUsername());
         return userDto;
     }
 }
