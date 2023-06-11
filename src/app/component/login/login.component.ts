@@ -40,8 +40,6 @@ export class LoginComponent {
          console.log("userId",userInfo);  
           this.localStorage.setLocalStorage("user",userInfo);
           this.localStorage.setLocalStorage("token",response)
-          this.authService.setCurrentUser(username);
-
           this.router.navigate(['/post']);
         })
       ).subscribe( user =>{

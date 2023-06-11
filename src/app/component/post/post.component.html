@@ -17,12 +17,11 @@
         <div *ngFor="let post of posts" class="post">
           <div class="post-text">
             <div> Post --- {{ post.text }}</div>
-            <div> User ---</div>
+            <div> User ---{{post.username}}</div>
           </div>
           <div *ngIf="selectedPostComments$[post.id] && selectedPostComments$[post.id].length;">
             <p  *ngFor="let comment of selectedPostComments$[post.id]" class="comment">
               <span class="comment-text">{{ comment.text }}</span>
-              <span class="comment-user">(userName)</span>
             </p>
           </div>
           <div (click)="getPostId(post)">
@@ -38,3 +37,4 @@
     </div>
   </div>
 </div>
+

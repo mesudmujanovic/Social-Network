@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin, map, of, switchMap } from 'rxjs';
 import { BASE_URL } from '../constants/Api-url';
 import { HttpClient } from '@angular/common/http';
 import { Comment } from '../interface/Comment-interface';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommentsService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private userService: AuthService) { }
 
 
   addComment(postId: number, text: string, userId: number): Observable<Comment> {
@@ -25,4 +27,5 @@ export class CommentsService {
     return this.http.get<Comment[]>(`${BASE_URL}/comment/post/${postId}`);
   }
   
+
 }

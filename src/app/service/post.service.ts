@@ -1,6 +1,6 @@
 import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin, map, of, switchMap } from 'rxjs';
 import { Post } from '../interface/Post-interface';
 import { BASE_URL } from '../constants/Api-url';
 
@@ -8,6 +8,7 @@ import { BASE_URL } from '../constants/Api-url';
   providedIn: 'root'
 })
 export class PostService {
+  userService: any;
 
   constructor(private http: HttpClient) { }
 
@@ -19,4 +20,6 @@ export class PostService {
   getAllPosts(): Observable<Post[]>{
     return this.http.get<Post[]>(`${BASE_URL}/allPosts`);
   }
+
+
 }

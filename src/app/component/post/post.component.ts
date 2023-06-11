@@ -1,9 +1,10 @@
 import { Token } from '@angular/compiler';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable, catchError, map, of, switchMap, tap } from 'rxjs';
+import { Observable, catchError, forkJoin, map, of, switchMap, tap } from 'rxjs';
 import { Comment } from 'src/app/interface/Comment-interface';
 import { Post } from 'src/app/interface/Post-interface';
+import { User } from 'src/app/interface/User-interface';
 import { AuthService } from 'src/app/service/auth.service';
 import { CommentsService } from 'src/app/service/comments.service';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
@@ -23,6 +24,7 @@ export class PostComponent {
   postId: number;
   showComments: boolean = false
   selectedPostComments$: { [postId: number]: Comment[] } = {};
+    usernames$: { [userId: number]: string } = {};
 
   constructor(private formBuilder: FormBuilder,
     private postService: PostService,
@@ -33,14 +35,14 @@ export class PostComponent {
     this.postForm = this.formBuilder.group({
       text: ['', Validators.required]
     })
+    
     this.commForm = this.formBuilder.group({
       text:['',Validators.required]
     });
-
-    this.commForm = this.formBuilder.group({
-      text:['',Validators.required]
-    })
   }
+
+
+  
 
   getPostId(post: Post) {
     this.postId = post.id;
@@ -57,7 +59,6 @@ export class PostComponent {
       .subscribe((comments) => {
         this.selectedPostComments$[post.id] = comments;
         console.log("see", this.selectedPostComments$);
-        
       });
      }
 
@@ -66,7 +67,6 @@ export class PostComponent {
           this.showComments = true;
          }
          console.log("show", this.showComments);
-         
      }
   
      onSubmitComment() {
@@ -74,7 +74,6 @@ export class PostComponent {
         const text = this.commForm.get('text')?.value;
         const userId = this.localStorage.getLocalStorage('user');
         const postId = this.postId;
-    
         this.commentService.addComment(postId, text, userId)
           .pipe(
             switchMap(() => this.commentService.getCommentsByPostId(postId)),
@@ -89,7 +88,9 @@ export class PostComponent {
           });
       }
     }
-    
+  
+  
+
     allComments(): Observable<Comment[]>{
       return this.comments$ = this.commentService.getCommentsAll().pipe(
         catchError( (error) =>{
@@ -108,6 +109,7 @@ export class PostComponent {
     )
   };
 
+  
   onSubmit() {
     if (this.postForm.valid) {
       const text = this.postForm.get('text')?.value;
@@ -133,7 +135,6 @@ export class PostComponent {
     this.allComments().subscribe( comments => {
       console.log("comments", comments);
     });
-    this.posts$ = this.allPosts();
   }
 }
 

@@ -1,26 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { LocalStorageService } from './local-storage.service';
+import { HttpClient } from '@angular/common/http';
+import { User } from '../interface/User-interface';
+import { BASE_URL } from '../constants/Api-url';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  private readonly USER_KEY = 'currentUser';
+  constructor(private http: HttpClient) { }
 
-
-  constructor(private localStorageService: LocalStorageService) { }
-
-  getCurrentUser(): Observable<string> {
-    const currentUser = this.localStorageService.getLocalStorage(this.USER_KEY);
-    return of(currentUser);
+  getUsernameById(userId: number): Observable<string> {
+    return this.http.get<string>(`${BASE_URL}/auth/users/${userId}/username`);
   }
 
-  setCurrentUser(username: string): void {
-    this.localStorageService.setLocalStorage(this.USER_KEY, username);
-  }
-  clearCurrentUser(): void {
-    this.localStorageService.setLocalStorage(this.USER_KEY, null);
-  }
+  
 }
