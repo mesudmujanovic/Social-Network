@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, Subject, of, tap } from 'rxjs';
-import { User } from 'src/app/interface/User-interface';
+import { tap } from 'rxjs';
 import { AuthService } from 'src/app/service/auth.service';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { LoginService } from 'src/app/service/login.service';
