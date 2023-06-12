@@ -1,8 +1,7 @@
 package com.socialnetwork.Infrastucture.Dto;
 
-import com.socialnetwork.Entity.User;
 import com.socialnetwork.Infrastucture.Request.User.SignupRequest;
-import com.socialnetwork.Infrastucture.Response.UserResponse;
+import com.socialnetwork.Infrastucture.Response.UserJwt.UserResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,6 +24,7 @@ public class UserDto {
         userDto.setPassword(request.getPassword());
         return userDto;
     }
+
 
     public static UserResponse fromResponse(UserDto userDto) {
         UserResponse userResponse = new UserResponse();

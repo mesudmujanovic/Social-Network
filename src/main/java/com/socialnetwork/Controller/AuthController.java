@@ -6,7 +6,7 @@ import com.socialnetwork.Infrastucture.Request.User.LoginRequest;
 import com.socialnetwork.Infrastucture.Request.User.SignupRequest;
 import com.socialnetwork.Infrastucture.Response.UserJwt.JwtResponse;
 import com.socialnetwork.Infrastucture.Response.UserJwt.MessageResponse;
-import com.socialnetwork.Infrastucture.Response.UserResponse;
+import com.socialnetwork.Infrastucture.Response.UserJwt.UserResponse;
 import com.socialnetwork.Security.Jwt.JwtUtils;
 import com.socialnetwork.Security.Services.UserDetailsImpl;
 import com.socialnetwork.Service.UserService;
@@ -18,6 +18,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -68,4 +69,5 @@ public class AuthController {
         UserDto userDto = userService.userId(id);
         return ResponseEntity.ok(UserDto.fromResponse(userDto));
     }
+
 }

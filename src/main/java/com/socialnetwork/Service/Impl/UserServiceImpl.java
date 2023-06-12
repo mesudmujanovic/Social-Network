@@ -2,12 +2,16 @@ package com.socialnetwork.Service.Impl;
 
 import com.socialnetwork.Entity.User;
 import com.socialnetwork.Infrastucture.Dto.UserDto;
+import com.socialnetwork.Infrastucture.Mapper.UserDtoMapper;
 import com.socialnetwork.Repository.UserRepository;
 import com.socialnetwork.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityNotFoundException;
 
 @Service
 @Transactional
@@ -35,4 +39,5 @@ public class UserServiceImpl implements UserService {
         userDto.setUsername(user.getUsername());
         return userDto;
     }
+
 }
