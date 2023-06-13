@@ -7,14 +7,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './component/login/login.component';
 import { SignUpComponent } from './component/sign-up/sign-up.component';
-import { VerifyAccComponent } from './component/verify-acc/verify-acc.component';
+import { PostComponent } from './component/post/post.component';
+import { CommentComponent } from './component/comment/comment.component';
+import { VerifyComponent } from './component/verify/verify.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignUpComponent,
-    VerifyAccComponent
+    PostComponent,
+    CommentComponent,
+    VerifyComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,32 @@
+<p>verify works!</p>
+
+<div class="container">
+  <form [formGroup]="verifyForm" (ngSubmit)="onVerify()" class="needs-validation" novalidate>
+    <div class="mb-3">
+      <label for="nameAccount" class="form-label">Name Account</label>
+      <input type="text" name="nameAccount" formControlName="nameAccount" class="form-control" required>
+      <div class="invalid-feedback">Please enter a name account.</div>
+    </div>
+    <div class="mb-3">
+      <label for="lastNameAccount" class="form-label">Last Name Account</label>
+      <input type="text" name="lastNameAccount" formControlName="lastNameAccount" class="form-control" required>
+      <div class="invalid-feedback">Please enter a last name account.</div>
+    </div>
+    <div class="mb-3">
+      <label for="age" class="form-label">Age</label>
+      <input type="number" name="age" formControlName="age" class="form-control" required>
+      <div class="invalid-feedback">Please enter a valid age.</div>
+    </div>
+    <div class="mb-3">
+      <label for="job" class="form-label">Job</label>
+      <input type="text" name="job" formControlName="job" class="form-control" required>
+      <div class="invalid-feedback">Please enter a job.</div>
+    </div>
+    <div class="mb-3">
+      <label for="phone" class="form-label">Phone</label>
+      <input type="text" name="phone" formControlName="phone" class="form-control" required>
+      <div class="invalid-feedback">Please enter a phone number.</div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
