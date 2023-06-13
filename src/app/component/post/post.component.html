@@ -1,1 +1,9 @@
 <p>post works!</p>
+<div class="container">
+<form [formGroup]="postForm" (ngSubmit)="onPost()">
+    <label for="postText"> Post </label>
+    <input type="text" name="postText" formControlName="postText">
+    <button type="submit" class="btn btn-primary form-control">Add Post</button>
+
+</form>    
+</div>

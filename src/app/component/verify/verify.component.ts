@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Route, Router } from '@angular/router';
 import { catchError, take, tap } from 'rxjs';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { VerifyService } from 'src/app/service/verify.service';
+import { Verify } from '../../interface/Verify-interface';
 
 @Component({
   selector: 'app-verify',
@@ -15,7 +17,8 @@ export class VerifyComponent {
 
   constructor( private formBuilder: FormBuilder,
                private verifyService: VerifyService,
-               private localStorage: LocalStorageService ){
+               private localStorage: LocalStorageService,
+               private router: Router ){
    
                 this.verifyForm = this.formBuilder.group({
                   nameAccount: ['', Validators.required],
@@ -32,7 +35,10 @@ export class VerifyComponent {
       const userId = this.localStorage.getLocalStorage("user")
       this.verifyService.addVerify( verify, userId ).pipe(
         tap(response =>{
-          console.log("verifyRes",response);
+           this.router.navigate(['/post']);
+           const verifyId = response.id;
+           this.localStorage.setLocalStorage("verifyId", verifyId)           
+           console.log("verifyRes",response);
         })
       ).subscribe( () =>{
         console.log();
@@ -41,6 +47,6 @@ export class VerifyComponent {
   }
 
   ngOnInit(): void {
-    
+
   }
 }
