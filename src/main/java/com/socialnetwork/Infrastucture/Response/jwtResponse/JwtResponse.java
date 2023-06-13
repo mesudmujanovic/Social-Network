@@ -1,4 +1,4 @@
-package com.socialnetwork.Infrastucture.Response.UserJwt;
+package com.socialnetwork.Infrastucture.Response.jwtResponse;
 
 import lombok.*;
 
