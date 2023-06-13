@@ -11,7 +11,8 @@ export class VerifyService {
 
   constructor( private http: HttpClient ) { }
 
-  addVerify( verify: Verify ): Observable<Verify>{
-    return this.http.post<Verify>(`${BASE_URL}/saveVerify`,verify);
-  }
+  addVerify(verify: Verify, userId: number): Observable<Verify> {
+    return this.http.post<Verify>(`${BASE_URL}/saveVerify/user/${userId}`, verify);
+}
+
 }

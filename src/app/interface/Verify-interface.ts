@@ -1,10 +1,10 @@
-export interface Verify{
-
+export interface Verify {
     id: number;
-    nameAccount: string
+    nameAccount: string;
     lastNameAccount: string;
     age: number;
     job: string;
     phone: string;
-
-}
+    userId: number;
+  }
+  
