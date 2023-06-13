@@ -20,10 +20,11 @@ public class PostController {
     @Autowired
     PostService postService;
 
-    @PostMapping("/savePost")
-    public ResponseEntity<PostResponse> createPost( @RequestBody PostRequest postRequest ){
+    @PostMapping("/savePost/verifyId/{id}")
+    public ResponseEntity<PostResponse> createPost( @RequestBody PostRequest postRequest,
+                                                    @PathVariable Long id){
         PostDto postDto = PostDto.fromRequest(postRequest);
-        PostDto postSave = postService.createPost(postDto);
+        PostDto postSave = postService.createPost(postDto,id);
         return  ResponseEntity.ok(postSave.toResponse());
     }
 

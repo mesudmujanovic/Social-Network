@@ -18,11 +18,16 @@ public class VerifyController {
     @Autowired
     VerifyService verifyService;
 
-    @PostMapping("/saveVerify/postId/{postId}")
-    public ResponseEntity<VerifyResponse> createVerify (@RequestBody VerifyRequest verifyRequest,
-                                                        @PathVariable Long postId){
+    @PostMapping("/saveVerify")
+    public ResponseEntity<VerifyResponse> createVerify (@RequestBody VerifyRequest verifyRequest){
         VerifyDto verifyDto = VerifyDto.fromRequest(verifyRequest);
-        VerifyDto verifyDtoService = verifyService.createVerify(verifyDto,postId);
+        VerifyDto verifyDtoService = verifyService.createVerify(verifyDto);
         return ResponseEntity.ok(verifyDtoService.toResponse());
+    }
+
+    @GetMapping("/verifyById/{verId}")
+    public ResponseEntity<VerifyResponse> gtById(@PathVariable Long verId){
+        VerifyDto verifyDto = verifyService.getVerifyById(verId);
+        return ResponseEntity.ok(verifyDto.toResponse());
     }
 }

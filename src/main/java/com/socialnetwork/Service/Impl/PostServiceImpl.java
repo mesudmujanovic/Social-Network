@@ -4,8 +4,10 @@ import com.socialnetwork.Entity.Post;
 import com.socialnetwork.Infrastucture.Dto.PostDto;
 import com.socialnetwork.Infrastucture.Mapper.PostDtoMapper;
 import com.socialnetwork.Infrastucture.Mapper.PostMapper;
+import com.socialnetwork.Infrastucture.Mapper.VerifyMapper;
 import com.socialnetwork.Repository.PostRepository;
 import com.socialnetwork.Service.PostService;
+import com.socialnetwork.Service.VerifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -17,10 +19,13 @@ public class PostServiceImpl  implements PostService {
 
     @Autowired
     PostRepository postRepository;
+    @Autowired
+    VerifyService verifyService;
 
     @Override
-    public PostDto createPost(PostDto postDto) {
+    public PostDto createPost(PostDto postDto, Long id) {
         Post post = PostMapper.INSTANCE.apply(postDto);
+        post.setVerifyAcc(VerifyMapper.INSTANCE.apply(verifyService.getVerifyById(id)));
         Post savePost = postRepository.save(post);
         return PostDtoMapper.INSTANCE.apply(post);
     }

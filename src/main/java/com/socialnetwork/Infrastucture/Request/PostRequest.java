@@ -9,6 +9,5 @@ import java.util.List;
 public class PostRequest {
     public String postText;
 
-    public List<VerifyDto> verifyAccs;
 
 }

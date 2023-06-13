@@ -14,13 +14,11 @@ public class PostDto {
 
     public Long id;
     public String postText;
-    public List<VerifyDto> verifyAccs;
 
 
     public static PostDto fromRequest (PostRequest postRequest){
         PostDto postDto = new PostDto();
         postDto.setPostText(postRequest.getPostText());
-        postDto.setVerifyAccs(postRequest.getVerifyAccs().stream().map( ver -> VerifyDtoMapper.INSTANCE.apply(VerifyMapper.INSTANCE.apply(ver))).collect(Collectors.toList()));
         return postDto;
     }
 
@@ -28,7 +26,6 @@ public class PostDto {
         PostResponse postResponse = new PostResponse();
         postResponse.setId(this.getId());
         postResponse.setPostText(this.getPostText());
-        postResponse.setVerifyAccs(this.getVerifyAccs());
         return postResponse;
     }
 }

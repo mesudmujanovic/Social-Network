@@ -12,6 +12,8 @@ import com.socialnetwork.Service.VerifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class VerifyServiceImpl implements VerifyService {
 
@@ -22,10 +24,16 @@ public class VerifyServiceImpl implements VerifyService {
     PostService postService;
 
     @Override
-    public VerifyDto createVerify(VerifyDto verifyDto, Long postId) {
+    public VerifyDto createVerify(VerifyDto verifyDto) {
         VerifyAcc verifyAcc = VerifyMapper.INSTANCE.apply(verifyDto);
-        verifyAcc.setPost( PostMapper.INSTANCE.apply(postService.postId(postId)));
+//        verifyAcc.setPost( PostMapper.INSTANCE.apply(postService.postId(postId)));
         VerifyAcc verifyAccSave = verifyRepository.save(verifyAcc);
+        return VerifyDtoMapper.INSTANCE.apply(verifyAcc);
+    }
+
+    @Override
+    public VerifyDto getVerifyById(Long id) {
+        VerifyAcc verifyAcc = verifyRepository.findById(id).orElseThrow(()->new RuntimeException("no such"));
         return VerifyDtoMapper.INSTANCE.apply(verifyAcc);
     }
 }

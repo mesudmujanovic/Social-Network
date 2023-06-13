@@ -15,7 +15,6 @@ public enum PostDtoMapper implements DtoMapper<PostDto, Post> {
         PostDto postDto = new PostDto();
         postDto.setId(post.getId());
         postDto.setPostText(post.getPostText());
-        postDto.setVerifyAccs(post.getVerifyAccs().stream().map( allVer -> VerifyDtoMapper.INSTANCE.apply(allVer)).collect(Collectors.toList()));
         return postDto;
     }
 }

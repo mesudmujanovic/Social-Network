@@ -10,6 +10,5 @@ public class PostResponse {
     public Long id;
 
     public String postText;
-    public List<VerifyDto> verifyAccs;
 
 }

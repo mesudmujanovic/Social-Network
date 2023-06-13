@@ -26,8 +26,9 @@ public class VerifyAcc {
 
     private String phone;
 
-    @ManyToOne()
-    @JoinColumn(name = "post_id")
-    private Post post;
+    @OneToMany(mappedBy = "verifyAcc", fetch = FetchType.LAZY)
+    private List<Post> posts;
 
+    @OneToMany(mappedBy = "verifyAcc", fetch = FetchType.LAZY)
+    private List<Comment> comments;
 }
