@@ -39,7 +39,7 @@ export class LoginComponent {
          console.log("userId",userInfo);  
           this.localStorage.setLocalStorage("user",userInfo);
           this.localStorage.setLocalStorage("token",response)
-          this.router.navigate(['/post']);
+          this.router.navigate(['/verify']);
         })
       ).subscribe( user =>{
         console.log("subs",user);
