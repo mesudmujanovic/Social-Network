@@ -1,9 +1,20 @@
-<p>post works!</p>
+ <p>post works!</p>
 <div class="container">
-<form [formGroup]="postForm" (ngSubmit)="onPost()">
+  <form [formGroup]="postForm" (ngSubmit)="onPost()">
     <label for="postText"> Post </label>
     <input type="text" name="postText" formControlName="postText">
     <button type="submit" class="btn btn-primary form-control">Add Post</button>
+  </form>    
 
-</form>    
-</div>
+  <div *ngIf="allPosts$ | async as allPosts">
+    <p *ngFor="let post of allPosts; let i = index">
+      {{ i + 1 }} {{ post.postText }} 
+      {{post.postName}}
+    </p>
+  </div>
+  
+  
+</div> 
+
+
+

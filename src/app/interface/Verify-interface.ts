@@ -1,4 +1,5 @@
 export interface Verify {
+  
     id: number;
     nameAccount: string;
     lastNameAccount: string;

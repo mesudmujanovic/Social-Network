@@ -36,7 +36,9 @@ export class LoginComponent {
         tap ( response =>{
           const userInfo = response.id;
           const token = response;
+          const name = response.username
          console.log("userId",userInfo);  
+          this.localStorage.setLocalStorage("name",name)
           this.localStorage.setLocalStorage("user",userInfo);
           this.localStorage.setLocalStorage("token",response)
           this.router.navigate(['/verify']);
