@@ -13,9 +13,7 @@ export class PostService {
   constructor(private http: HttpClient) { }
 
   addPost(post: string, name: string, id: number): Observable<Post> {
-    const postRequest = {
-      postText: post,
-      postName: name };
+    const postRequest = { postText: post, postName: name };
     return this.http.post<Post>(`${BASE_URL}/savePost/verifyId/${id}`, postRequest);
   }
 
