@@ -11,4 +11,6 @@ public class PostResponse {
 
     public String postText;
 
+    private String postName;
+
 }

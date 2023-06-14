@@ -20,6 +20,8 @@ public class Post {
 
     private String postText;
 
+    private String postName;
+
     @ManyToOne
     @JoinColumn(name = "verify_id")
     private VerifyAcc verifyAcc;

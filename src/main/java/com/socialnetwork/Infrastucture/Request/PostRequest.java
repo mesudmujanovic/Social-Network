@@ -8,6 +8,7 @@ import java.util.List;
 @Data
 public class PostRequest {
     public String postText;
+    private String postName;
 
 
 }

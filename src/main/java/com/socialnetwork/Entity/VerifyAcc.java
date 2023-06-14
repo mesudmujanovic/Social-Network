@@ -31,4 +31,8 @@ public class VerifyAcc {
 
     @OneToMany(mappedBy = "verifyAcc", fetch = FetchType.LAZY)
     private List<Comment> comments;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 }

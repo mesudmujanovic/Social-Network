@@ -13,8 +13,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin("*")
-
+@CrossOrigin(origins = "*")
 public class PostController {
 
     @Autowired

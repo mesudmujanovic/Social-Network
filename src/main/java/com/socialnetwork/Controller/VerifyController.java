@@ -9,25 +9,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("api")
-@CrossOrigin("*")
-
+@CrossOrigin(origins = "*")
 public class VerifyController {
 
     @Autowired
     VerifyService verifyService;
-
-    @PostMapping("/saveVerify")
-    public ResponseEntity<VerifyResponse> createVerify (@RequestBody VerifyRequest verifyRequest){
-        VerifyDto verifyDto = VerifyDto.fromRequest(verifyRequest);
-        VerifyDto verifyDtoService = verifyService.createVerify(verifyDto);
-        return ResponseEntity.ok(verifyDtoService.toResponse());
-    }
 
     @GetMapping("/verifyById/{verId}")
     public ResponseEntity<VerifyResponse> gtById(@PathVariable Long verId){
         VerifyDto verifyDto = verifyService.getVerifyById(verId);
         return ResponseEntity.ok(verifyDto.toResponse());
     }
-}
+
+    @PostMapping("/saveVerify/user/{userId}")
+    public ResponseEntity<VerifyResponse> createVerify (@RequestBody VerifyRequest verifyRequest,
+                                                        @PathVariable Long userId){
+        VerifyDto verifyDto = VerifyDto.fromRequest(verifyRequest);
+        VerifyDto verifyDtoService = verifyService.createVerify(verifyDto, userId);
+        return ResponseEntity.ok(verifyDtoService.toResponse());
+    }
+
+    @GetMapping("/allVerify")
+    public ResponseEntity<List<VerifyResponse>> getAll (){
+        List<VerifyDto> verifyDtos = verifyService.getAllVerify();
+        return ResponseEntity.ok(verifyDtos.stream().map( all -> all.toResponse()).collect(Collectors.toList()));
+    }
+ }
