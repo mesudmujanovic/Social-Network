@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable, catchError, map, of, switchMap, take, tap } from 'rxjs';
+import { Observable, catchError, distinctUntilChanged, map, of, switchMap, take, tap } from 'rxjs';
 import { Post } from 'src/app/interface/Post-interface';
 import { Verify } from 'src/app/interface/Verify-interface';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
@@ -22,7 +22,7 @@ export class PostComponent {
   verifySave: Verify[];
   commentForm: FormGroup;
   clickedPost: number;
-  allComments$: Observable<Comment[] >;
+  allComments$: Observable<Comment[]>;
   posts: { [postId: number]: Comment[] } = {};
 
 
@@ -45,60 +45,7 @@ export class PostComponent {
   getClickedPost(postId: number) {
     this.clickedPost = postId;
   }
-  
-  
 
-  onComment() {
-    if (this.commentForm.valid) {
-      const commentText = this.commentForm.value.commentText;
-      const commentName = this.localStorage.getLocalStorage('name');
-      const postId = this.clickedPost;
-      const verId = this.localStorage.getLocalStorage('verifyId');
-  
-      this.commentService.addComment(commentText, commentName, postId, verId)
-        .subscribe((response: any) => {
-          console.log("response", response);
-          const comment: Comment = {
-            id: response.id,
-            userId: response.userId,
-            postId: postId,
-            commentText: commentText,
-            commentName: commentName,
-            verId: verId
-          };
-  
-          if (this.posts.hasOwnProperty(postId)) {
-            this.posts[postId].push(comment);
-          } else {
-            this.posts[postId] = [comment];
-          }
-  
-          this.commentForm.reset();
-        }, error => {
-          console.log("error", error);
-        });
-    }
-  }
-  
-  
-  
-
-  
-  
-  allComments(): Observable<any> {
-    return this.allComments$ = this.commentService.getAllComments().pipe(
-      tap(comments => {
-        console.log(comments);
-      }),
-      catchError(error => {
-        console.log("error", error);
-        return of([]);
-      })
-    )
-  }
-  
-  
-  
   onPost(){
     if( this.postForm) {
       const postText = this.postForm.value.postText;
@@ -115,6 +62,74 @@ export class PostComponent {
     }
   };
 
+  onComment() {
+    if (this.commentForm.valid) {
+      const commentText = this.commentForm.value.commentText;
+      const commentName = this.localStorage.getLocalStorage('name');
+      const verId = this.localStorage.getLocalStorage('verifyId');
+      const postId = this.clickedPost;
+        this.commentService.addComment(commentText, commentName, postId, verId).pipe(
+          tap(response => {
+            console.log("responsePost", response)
+          }),
+          switchMap( () => this.allComments() ),
+          catchError( (error) =>{
+            console.log("eror",error);
+            return of([]);
+          })
+        ).subscribe(comments => console.log("comments", comments));
+      
+    }
+  }
+  
+
+allComments(): Observable<Comment[]> {
+  return this.allComments$ = this.commentService.getAllComments().pipe(
+    distinctUntilChanged(),
+    tap(comments => {
+      console.log(comments);
+      comments.forEach(comment => {
+        const postId = comment.postId;
+        if (postId in this.posts) {
+          const existingComments = this.posts[postId];
+          if (!existingComments.some(c => c.id === comment.id)) {
+            existingComments.push(comment);
+          }
+        } else {
+          this.posts[postId] = [comment];
+        }
+      });
+    }),
+    catchError(error => {
+      console.log("error", error);
+      return of([]);
+    })
+  );
+}
+
+
+  // allComments(): Observable<Comment[]> {
+  //   return this.allComments$ = this.commentService.getAllComments().pipe(
+  //     tap(comments => {
+  //       console.log(comments);
+  //       comments.forEach(comment => {
+  //         const postId = comment.postId;
+  //         if (postId in this.posts) {
+  //           this.posts[postId].push(comment);
+  //         } else {
+  //           this.posts[postId] = [comment];
+  //         }
+  //       });
+  //     }),
+  //     catchError(error => {
+  //       console.log("error", error);
+  //       return of([]);
+  //     })
+  //   );
+  // }
+  
+
+
   allPosts(): Observable<Post[]>{
     return this.allPosts$ = this.postService.getAllPosts().pipe(
       catchError( (error) =>{
@@ -125,10 +140,9 @@ export class PostComponent {
   }
   
   ngOnInit(): void{
-    this.allPosts().subscribe(posts =>  console.log("allPosts", posts));
-    
-    this.allComments().subscribe( comments => console.log("allComments", comments))
-  }
-
+    this.allPosts().subscribe(posts => console.log("allPosts", posts));
+  
+    this.allComments().subscribe();
+ }
 }
 
