@@ -4,12 +4,15 @@ import { SignUpComponent } from './component/sign-up/sign-up.component';
 import { LoginComponent } from './component/login/login.component';
 import { VerifyComponent } from './component/verify/verify.component';
 import { PostComponent } from './component/post/post.component';
+import { ProfileComponent } from './component/profile/profile.component';
 
 const routes: Routes = [
-  {path:'', component: SignUpComponent},
-  {path:'login', component: LoginComponent},
-  {path:'verify', component: VerifyComponent},
-  {path:'post', component:PostComponent}
+  { path: '', redirectTo: '/signUp', pathMatch: 'full' },
+  { path: 'signUp',  component: SignUpComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'verify', component: VerifyComponent },
+  { path: 'post', component: PostComponent },
+  { path: 'profile', component: ProfileComponent }
 
 ];
 

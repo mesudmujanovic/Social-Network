@@ -1,0 +1,14 @@
+<nav class="navbar navbar-light bg-primary">
+    <div class="container-fluid">
+      <div class="d-flex">
+        <a class="navbar-brand" [routerLink]="['/login']">Login</a>
+        <a class="navbar-brand" [routerLink]="['/signUp']">Sign Up</a>
+        <a class="navbar-brand" (click)="linkToProfile()">Profile</a>
+      </div>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-dark" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+  
