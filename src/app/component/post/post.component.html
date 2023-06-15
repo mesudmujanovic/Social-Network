@@ -1,10 +1,11 @@
 <div class="container">
+
   <form [formGroup]="postForm" (ngSubmit)="onPost()">
     <label for="postText">Post</label>
     <input class="form-control" type="text" name="postText" formControlName="postText">
     <button type="submit" class="btn btn-primary form-control">Add Post</button>
   </form>
-  
+
   <div *ngIf="allPosts$ | async as allPosts">
     <div *ngFor="let post of allPosts; let i = index">
       <div class="row">
@@ -13,21 +14,23 @@
             <div class="card-head text-center">
               username: {{ post.postName }}
             </div>
+
             <div class="card-body text-center">
-              {{ i + 1 }} post: {{ post.postText }} 
+              {{ i + 1 }} post: {{ post.postText }}
             </div>
+            
             <div class="card-footer">
               <p *ngFor="let comment of posts[post.id]">
                 {{ comment.commentText }}
                 username:{{comment.commentName}}
               </p>
-              
-                <form [formGroup]="commentForm" (ngSubmit)="onComment()">
-                  <label for="commentText">Unesi komentar</label>
-                  <input type="text" name="commentText" formControlName="commentText">
-                  <button type="submit" (click)="getClickedPost(post.id)">Add Comment</button>
-                </form>
-            
+
+              <form [formGroup]="commentForm" (ngSubmit)="onComment()">
+                <label for="commentText">Unesi komentar</label>
+                <input type="text" name="commentText" formControlName="commentText">
+                <button type="submit" (click)="getClickedPost(post.id)">Add Comment</button>
+              </form>
+
             </div>
           </div>
         </div>

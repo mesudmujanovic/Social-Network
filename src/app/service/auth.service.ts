@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { LocalStorageService } from './local-storage.service';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { User } from '../interface/User-interface';
 import { BASE_URL } from '../constants/Api-url';
 
 @Injectable({

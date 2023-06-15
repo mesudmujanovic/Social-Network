@@ -15,12 +15,11 @@ export class LoginComponent {
 
   loginForm: FormGroup
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private loginService: LoginService,
     private localStorage: LocalStorageService,
-    private router: Router,
-    private authService: AuthService)
-     {
+    private router: Router) {
 
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -28,31 +27,30 @@ export class LoginComponent {
     })
   }
 
-  onLogin(){
-    if( this.loginForm.valid ){
+  onLogin() {
+    if (this.loginForm.valid) {
       const username = this.loginForm.value.username;
       const password = this.loginForm.get('password')?.value
-        this.loginService.login( username, password).pipe(
-        tap ( response =>{
+      this.loginService.login(username, password).pipe(
+        tap(response => {
           const userInfo = response.id;
           const token = response;
           const name = response.username
-         console.log("userId",userInfo);  
-          this.localStorage.setLocalStorage("name",name)
-          this.localStorage.setLocalStorage("user",userInfo);
-          this.localStorage.setLocalStorage("token",response)
+          console.log("userId", userInfo);
+          this.localStorage.setLocalStorage("name", name)
+          this.localStorage.setLocalStorage("user", userInfo);
+          this.localStorage.setLocalStorage("token", response)
           this.router.navigate(['/verify']);
         })
-      ).subscribe( user =>{
-        console.log("subs",user);
+      ).subscribe(user => {
+        console.log("subs", user);
       }, error => {
-        console.log("error",error);
+        console.log("error", error);
       })
     }
   }
-
   
-  ngOnInit(): void{
+  ngOnInit(): void {
   }
-  
+
 }
