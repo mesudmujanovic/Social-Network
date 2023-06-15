@@ -27,12 +27,13 @@ public class CommentController {
                                                          @PathVariable Long verId){
         CommentDto commentDto = new CommentDto().fromReqToDto(commentRequest);
         CommentDto saveComment = commentService.createComment(commentDto, postId, verId);
-        return ResponseEntity.ok(saveComment.fromDtoToRes(saveComment));
+        return ResponseEntity.ok(saveComment.toResponse());
     }
+
 
     @GetMapping("/allComments")
     public ResponseEntity<List<CommentResponse>> getAllComments(){
         List<CommentDto> commentDto = commentService.getAllComments();
-        return ResponseEntity.ok(commentDto.stream().map(commss -> commss.fromDtoToRes(commss)).collect(Collectors.toList()));
+        return ResponseEntity.ok(commentDto.stream().map(commss -> commss.toResponse()).collect(Collectors.toList()));
     }
 }

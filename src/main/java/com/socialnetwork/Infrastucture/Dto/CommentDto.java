@@ -11,17 +11,27 @@ public class CommentDto {
 
     private String commentText;
 
+    private String commentName;
+
+    private Long postId;
+
+    private Long verId;
+
 
     public CommentDto fromReqToDto (CommentRequest commentRequest){
         CommentDto commentDto = new CommentDto();
         commentDto.setCommentText(commentRequest.getCommentText());
+        commentDto.setCommentName(commentRequest.getCommentName());
         return commentDto;
     }
 
-    public CommentResponse fromDtoToRes (CommentDto commentDto){
+    public CommentResponse toResponse() {
         CommentResponse commentResponse = new CommentResponse();
-        commentResponse.setId(commentDto.getId());
-        commentResponse.setCommentText(commentDto.getCommentText());
+        commentResponse.setId(this.id);
+        commentResponse.setCommentText(this.commentText);
+        commentResponse.setCommentName(this.commentName);
+        commentResponse.setPostId(this.postId);
+        commentResponse.setVerId(this.verId);
         return commentResponse;
     }
 }

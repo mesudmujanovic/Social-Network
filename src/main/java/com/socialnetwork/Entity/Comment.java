@@ -18,6 +18,8 @@ public class Comment {
 
     private String commentText;
 
+    private String commentName;
+
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
