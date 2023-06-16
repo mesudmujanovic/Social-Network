@@ -53,6 +53,8 @@ export class PostComponent {
       this.postService.addPost(postText, postName, id).pipe(
         tap(response => {
           console.log("addPosts", response);
+          const postId = response.id
+          this.localStorage.setLocalStorage('postId',postId)
         }),
         switchMap(() => this.allPosts()),
       ).subscribe(posts => {

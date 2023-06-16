@@ -36,7 +36,9 @@ export class VerifyComponent {
         tap(response => {
           this.router.navigate(['/post']);
           const verifyId = response.id;
-          this.localStorage.setLocalStorage("verifyId", verifyId)
+          const allVerify = response;
+          this.localStorage.setLocalStorage("verifyId", verifyId);
+          this.localStorage.setLocalStorage("allVerify", allVerify)
           console.log("verifyRes", response);
         })
       ).subscribe(() => {
