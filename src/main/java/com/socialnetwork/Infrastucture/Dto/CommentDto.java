@@ -30,6 +30,7 @@ public class CommentDto {
         commentResponse.setId(this.id);
         commentResponse.setCommentText(this.commentText);
         commentResponse.setCommentName(this.commentName);
+        //PostId, VerId from comment database;
         commentResponse.setPostId(this.postId);
         commentResponse.setVerId(this.verId);
         return commentResponse;

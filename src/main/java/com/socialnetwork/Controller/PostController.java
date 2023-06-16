@@ -37,6 +37,12 @@ public class PostController {
         public ResponseEntity<PostResponse> getPostById(@PathVariable Long postId){
             PostDto postDto = postService.postId(postId);
             return ResponseEntity.ok(postDto.toResponse());
-         }
+    }
+
+     @GetMapping("/post/{postName}")
+       public ResponseEntity<List<PostResponse>> getPostByName ( @PathVariable String postName ){
+        List<PostDto> postDto = postService.getPostByName(postName);
+        return ResponseEntity.ok(postDto.stream().map(PostDto::toResponse).collect(Collectors.toList()));
+     }
 
 }

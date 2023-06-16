@@ -41,4 +41,10 @@ public class PostServiceImpl  implements PostService {
         Post post = postRepository.findById(id).orElseThrow(()->new RuntimeException("not found byId"));
         return PostDtoMapper.INSTANCE.apply(post);
     }
+
+    @Override
+    public List<PostDto> getPostByName(String postName) {
+        List<Post> posts = postRepository.findByPostName(postName);
+        return  posts.stream().map( allPosts -> PostDtoMapper.INSTANCE.apply(allPosts)).collect(Collectors.toList());
+    }
 }

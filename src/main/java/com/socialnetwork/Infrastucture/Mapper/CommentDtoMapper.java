@@ -13,6 +13,7 @@ public enum CommentDtoMapper implements DtoMapper<CommentDto, Comment> {
         commentDto.setId(comment.getId());
         commentDto.setCommentText(comment.getCommentText());
         commentDto.setCommentName(comment.getCommentName());
+        //set PostId from comment get Post get Post id
         commentDto.setPostId(comment.getPost().getId());
         commentDto.setVerId(comment.getVerifyAcc().getId());
         return commentDto;
