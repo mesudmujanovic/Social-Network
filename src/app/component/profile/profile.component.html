@@ -12,14 +12,24 @@
     </div>
     <div class="d-flex justify-content-center align-items-center" style="background-color: bisque; width: 60%">
         
-        <div *ngIf="postByPostName | async as postByPostName">
+      <div *ngIf="postByPostName | async as postName">
+       <div *ngIf="postName.length > 0; else noPosts">
          <h3>My Post</h3>
-          <h4 *ngFor="let allPost of postByPostName; let i = index">
-              <div class="btn btn-primary" [routerLink]="['/post']">
-               {{i + 1}} {{ allPost.postText}}
-              </div>
-          </h4>
-        </div>
+         <h4 *ngFor="let allPost of postName; let i = index">
+           <div class="btn btn-primary" [routerLink]="['/post']">
+             {{i + 1}} {{ allPost.postText}}
+           </div>
+         </h4>
+       </div>
+       </div>
+       
+       <ng-template #noPosts>
+         <p>Ne postoji ništa.</p>
+       </ng-template>
+       
+        <ng-template #noPosts>
+
+        </ng-template>
     </div>
     <div class="d-flex" style="background-color: blue; width: 20%">
        Lorem ipsum dolor sit amet.
