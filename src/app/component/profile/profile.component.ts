@@ -24,12 +24,10 @@ export class ProfileComponent {
 
 
   ngOnInit(): void{
-   
     this.userName = this.localStorage.getLocalStorage('name'); 
 
     this.getPostByUsername().subscribe( response =>{
       console.log("profile", response);
-      
     })
   }
 }

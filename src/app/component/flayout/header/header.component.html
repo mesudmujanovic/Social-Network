@@ -1,15 +1,23 @@
 <nav class="navbar navbar-light bg-primary">
-    <div class="container-fluid">
-      <div class="d-flex">
-        <a class="navbar-brand" [routerLink]="['/login']">Login</a>
-        <a class="navbar-brand" [routerLink]="['/signUp']">Sign Up</a>
-        <a class="navbar-brand" [routerLink]="['/profile']" (click)="linkToProfile()">Profile</a>
-        <a class="navbar-brand" [routerLink]="['/logOut']" (click)="logOut()">LogOut</a>
-      </div>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-dark" type="submit">Search</button>
-      </form>
+  <div class="container-fluid">
+    <div class="d-flex">
+      <a class="navbar-brand" [routerLink]="['/login']">Login</a>
+      <a class="navbar-brand" [routerLink]="['/signUp']">Sign Up</a>
+      <a class="navbar-brand" [routerLink]="['/profile']" (click)="linkToProfile()">Profile</a>
+      <a class="navbar-brand" [routerLink]="['/logOut']" (click)="logOut()">LogOut</a>
     </div>
-  </nav>
-  
+    <form class="d-flex" (ngSubmit)="search(searchKeyword.value)">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" #searchKeyword>
+      <button class="btn btn-dark" type="submit">Search</button>
+    </form>
+    <div *ngIf="filteredUsers.length > 0" class="search-results">
+      <h4>Found Users:</h4>
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let user of filteredUsers" [routerLink]="['/profile', user.id]">
+        <a [routerLink]="['/profile,user.id']">{{ user.nameAccount }} {{ user.lastNameAccount }} {{user.userId}}
+        </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

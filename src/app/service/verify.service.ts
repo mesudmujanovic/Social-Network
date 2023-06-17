@@ -19,4 +19,8 @@ getVerifybyId(verId: number): Observable<Verify[]> {
   return this.http.get<Verify[]>(`${BASE_URL}/verifyById/${verId}`);
 }
 
+getAll(): Observable<Verify[]> {
+  return this.http.get<Verify[]>(`${BASE_URL}/allVerify`)
+}
+
 }

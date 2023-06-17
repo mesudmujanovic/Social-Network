@@ -44,7 +44,6 @@ export class LoginComponent {
            } else{
             this.router.navigate(['/post']);
            }
-      
         }),
         catchError( (error) =>{
           console.log("loginError",error);

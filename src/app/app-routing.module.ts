@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'verify', component: VerifyComponent },
   { path: 'post', component: PostComponent },
-  { path: 'profile', component: ProfileComponent }
+  { path: 'profile', component: ProfileComponent },
+  { path: 'profile/:id', component: ProfileComponent }
 
 ];
 

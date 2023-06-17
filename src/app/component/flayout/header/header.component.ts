@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { LoginService } from 'src/app/service/login.service';
+import { VerifyService } from '../../../service/verify.service';
+import { Verify } from 'src/app/interface/Verify-interface';
 
 @Component({
   selector: 'app-header',
@@ -11,10 +13,13 @@ import { LoginService } from 'src/app/service/login.service';
 export class HeaderComponent {
 
   token: string = this.localStorage.getLocalStorage("token");
+  users: Verify[] = [];
+  filteredUsers: Verify[] = [];
 
   constructor(
     private router: Router,
-    private localStorage: LocalStorageService ){}
+    private localStorage: LocalStorageService,
+    private VerifyService: VerifyService ){}
 
   linkToProfile(){
     const token = localStorage.getItem('token');
@@ -30,5 +35,24 @@ export class HeaderComponent {
   this.localStorage.removeLocalStorage("token");
   this.router.navigate(['/']);
   }
+
+  ngOnInit(){
+    this.VerifyService.getAll().subscribe(
+      ( users: Verify[]) =>{
+        this.users = users;
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    )
+  };
+
+ search( keyword: string ): void {
+  this.filteredUsers = this.users.filter( user =>{
+    return user.nameAccount.toLowerCase().includes( keyword.toLowerCase() ) ||
+           user.lastNameAccount.toLowerCase().includes( keyword.toLowerCase() );
+  })
+ }
+
 
 }
