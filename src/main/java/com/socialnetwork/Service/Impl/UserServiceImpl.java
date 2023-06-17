@@ -6,12 +6,11 @@ import com.socialnetwork.Infrastucture.Mapper.UserDtoMapper;
 import com.socialnetwork.Repository.UserRepository;
 import com.socialnetwork.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityNotFoundException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -38,6 +37,12 @@ public class UserServiceImpl implements UserService {
         userDto.setId(user.getId());
         userDto.setUsername(user.getUsername());
         return userDto;
+    }
+
+    @Override
+    public List<UserDto> getAll() {
+        List<User> allUsers = userRepository.findAll();
+        return allUsers.stream().map( users -> UserDtoMapper.INSTANCE.apply(users)).collect(Collectors.toList());
     }
 
 }

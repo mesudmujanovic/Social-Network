@@ -4,6 +4,7 @@ package com.socialnetwork.Controller;
 import com.socialnetwork.Infrastucture.Dto.UserDto;
 import com.socialnetwork.Infrastucture.Request.User.LoginRequest;
 import com.socialnetwork.Infrastucture.Request.User.SignupRequest;
+import com.socialnetwork.Infrastucture.Request.UserRequest;
 import com.socialnetwork.Infrastucture.Response.jwtResponse.JwtResponse;
 import com.socialnetwork.Infrastucture.Response.jwtResponse.MessageResponse;
 import com.socialnetwork.Infrastucture.Response.UserResponse;
@@ -22,6 +23,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -67,6 +70,12 @@ public class AuthController {
     public ResponseEntity<UserResponse> getUserById(@PathVariable Long id) {
         UserDto userDto = userService.userId(id);
         return ResponseEntity.ok(UserDto.fromResponse(userDto));
+    }
+
+    @GetMapping("/allUsers")
+    public ResponseEntity<List<UserResponse>> getAllUsers(){
+        List<UserDto> userDtoList = userService.getAll();
+        return ResponseEntity.ok( userDtoList.stream().map( UserDto::fromResponse ).collect(Collectors.toList()));
     }
 
 }
