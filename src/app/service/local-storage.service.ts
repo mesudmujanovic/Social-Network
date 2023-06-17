@@ -19,6 +19,14 @@ export class LocalStorageService {
     return value ? JSON.parse(value) : null
   }
 
+  removeLocalStorage( key:string ): void {
+   localStorage.removeItem(key); 
+  }
+
+  logOutFromLS( key:string ): void {
+    localStorage.removeItem(key); 
+   }
+
   getVerifyNameAccount(id: number): Observable<string> {
     return this.http.get<string>(`${BASE_URL}/verifyById/${id}`);
   }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs';
+import { catchError, of, tap } from 'rxjs';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { VerifyService } from 'src/app/service/verify.service';
 
@@ -40,7 +40,13 @@ export class VerifyComponent {
           this.localStorage.setLocalStorage("verifyId", verifyId);
           this.localStorage.setLocalStorage("allVerify", allVerify)
           console.log("verifyRes", response);
-        })
+        }),
+        catchError( (error) =>{
+          console.log("verError",error);
+          alert("Morate se prvo ulogovati")
+          this.router.navigate(['/login']);
+          return of([]);
+        }),
       ).subscribe(() => {
         console.log();
       })

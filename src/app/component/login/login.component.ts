@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { tap } from 'rxjs';
-import { AuthService } from 'src/app/service/auth.service';
+import { catchError, of, tap } from 'rxjs';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { LoginService } from 'src/app/service/login.service';
 
@@ -40,7 +39,18 @@ export class LoginComponent {
           this.localStorage.setLocalStorage("name", name)
           this.localStorage.setLocalStorage("user", userInfo);
           this.localStorage.setLocalStorage("token", response)
-          this.router.navigate(['/verify']);
+          if( !this.localStorage.getLocalStorage("allVerify")){
+            this.router.navigate(['/verify']);
+           } else{
+            this.router.navigate(['/post']);
+           }
+      
+        }),
+        catchError( (error) =>{
+          console.log("loginError",error);
+          alert('Niste registrovani!');
+          this.router.navigate(['/']);
+          return of ([]);
         })
       ).subscribe(user => {
         console.log("subs", user);
@@ -51,6 +61,7 @@ export class LoginComponent {
   }
   
   ngOnInit(): void {
+    this.onLogin();
   }
 
 }

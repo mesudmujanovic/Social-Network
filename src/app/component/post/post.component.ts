@@ -9,6 +9,7 @@ import { VerifyService } from '../../service/verify.service';
 import { HttpClient } from '@angular/common/http';
 import { CommentService } from 'src/app/service/comment.service';
 import { Comment } from 'src/app/interface/Comment-interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post',
@@ -28,8 +29,7 @@ export class PostComponent {
   constructor(private formBuilder: FormBuilder,
     private localStorage: LocalStorageService,
     private postService: PostService,
-    private verifyService: VerifyService,
-    private http: HttpClient,
+    private router: Router,
     private commentService: CommentService) {
 
     this.postForm = this.formBuilder.group({
@@ -46,7 +46,7 @@ export class PostComponent {
   }
 
   onPost() {
-    if (this.postForm) {
+    if (this.postForm.valid) {
       const postText = this.postForm.value.postText;
       const postName = this.localStorage.getLocalStorage('name')
       const id = this.localStorage.getLocalStorage('verifyId');
@@ -56,6 +56,12 @@ export class PostComponent {
           const postId = response.id
           this.localStorage.setLocalStorage('postId',postId)
         }),
+         catchError( (error) => {
+          console.log("errorPost", error);
+          alert("Morate prvo popuniti informacije o vama!");
+          this.router.navigate(['/verify']);
+          return of([])
+         }),
         switchMap(() => this.allPosts()),
       ).subscribe(posts => {
         console.log("posts", posts);

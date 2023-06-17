@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { LoginService } from 'src/app/service/login.service';
 
 @Component({
@@ -9,10 +10,11 @@ import { LoginService } from 'src/app/service/login.service';
 })
 export class HeaderComponent {
 
+  token: string = this.localStorage.getLocalStorage("token");
 
   constructor(
-    private loginService: LoginService,
-    private router: Router ){}
+    private router: Router,
+    private localStorage: LocalStorageService ){}
 
   linkToProfile(){
     const token = localStorage.getItem('token');
@@ -22,6 +24,11 @@ export class HeaderComponent {
       alert("morate se prvo prijaviti");
       this.router.navigate(['/signUp'])
     }
-    
   }
+
+  logOut(): void {
+  this.localStorage.removeLocalStorage("token");
+  this.router.navigate(['/']);
+  }
+
 }
