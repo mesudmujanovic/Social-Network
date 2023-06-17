@@ -1,41 +1,67 @@
 <nav class="navbar navbar-light navbar-brand bg-primary">
-   <div class="d-flex justify-content-center align-items-center w-100">
+  <div class="d-flex justify-content-center align-items-center w-100">
     <a class="navbar-brand" [routerLink]="['/post']">Home</a>
     <a class="navbar-brand" [routerLink]="['/post']">Friends</a>
     <a class="navbar-brand" [routerLink]="['/profile']">Edit/Delete Profile</a>
-   </div>
+    User Name: {{userName}}
+  </div>
 </nav>
 
 <div class="d-flex mt-4">
-    <div class="d-flex"  style="background-color: aqua; width: 20%; "> 
-       Lorem ipsum dolor sit amet.
-    </div>
-    <div class="d-flex justify-content-center align-items-center" style="background-color: bisque; width: 60%">
-        
-      <div *ngIf="postByPostName | async as postName">
-       <div *ngIf="postName.length > 0; else noPosts">
-         <h3>My Post</h3>
-         <h4 *ngFor="let allPost of postName; let i = index">
-           <div class="btn btn-primary" [routerLink]="['/post']">
-             {{i + 1}} {{ allPost.postText}}
-           </div>
-         </h4>
-       </div>
-       </div>
-       
-       <ng-template #noPosts>
-         <p>Ne postoji nijedan vas post.</p>
-       </ng-template>
-       
-        <ng-template #noPosts>
 
-        </ng-template>
+  <div class="d-flex" style="width: 20%; ">
+    <div class="d-block">
+      <div class="m-3 text-center">
+        <a href="#" class="text-decoration-none"><i class="fab fa-youtube"></i> Youtube</a>
+      </div>
+      <div class="m-3 text-center">
+        <a href="#" class="text-decoration-none"><i class="fab fa-facebook"></i> Facebook</a>
+      </div>
+      <div class="m-3 text-center">
+        <a href="#" class="text-decoration-none"><i class="fab fa-instagram"></i> Instagram</a>
+      </div>
+      <div>
+        <span class="bi bi-heart"></span>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-heart"></i>
+      </div>
     </div>
-    <div class="d-flex" style="background-color: blue; width: 20%">
-       Lorem ipsum dolor sit amet.
+  </div>
+  <div class="d-flex justify-content-center align-items-center" style="background-color: bisque; width: 60%">
+
+    <div *ngIf="postByPostName | async as postName">
+      <div *ngIf="postName.length > 0; else noPosts">
+        <h3>My Post</h3>
+        <div *ngFor="let allPost of postName; let i = index">
+          <div class="btn btn-primary" [routerLink]="['/post']">
+            {{ i + 1 }} {{ allPost.postText }}
+          </div>
+        </div>
+      </div>
+      <ng-template #noPosts>
+        <p>Ne postoji nijedan vaš post.</p>
+      </ng-template>
     </div>
+  </div>
+  
+  <div class="d-flex" style="background-color: blue; width: 20%">
+    <div *ngIf="(allVerifyUser | async) as verify" class="p-3">
+      <div class="mb-2">
+        <strong>Name: </strong>{{ verify.nameAccount }}
+      </div>
+      <div class="mb-2">
+        <strong>Last Name: </strong>{{ verify.lastNameAccount }}
+      </div>
+      <div class="mb-2">
+        <strong>Age: </strong>{{ verify.age }}
+      </div>
+      <div class="mb-2">
+        <strong>Job: </strong>{{ verify.job }}
+      </div>
+      <div class="mb-2">
+        <strong>Phone: </strong>{{ verify.phone }}
+      </div>
+    </div>
+  </div>
+
 </div>
-
- 
- 
- 

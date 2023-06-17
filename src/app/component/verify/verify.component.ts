@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { catchError, of, tap } from 'rxjs';
+import { Observable, catchError, of, tap } from 'rxjs';
+import { Verify } from 'src/app/interface/Verify-interface';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { VerifyService } from 'src/app/service/verify.service';
 
@@ -13,6 +14,7 @@ import { VerifyService } from 'src/app/service/verify.service';
 export class VerifyComponent {
 
   verifyForm: FormGroup
+  allVerify: Observable<Verify[]>;
 
   constructor(private formBuilder: FormBuilder,
     private verifyService: VerifyService,
@@ -53,7 +55,15 @@ export class VerifyComponent {
     }
   }
 
-  ngOnInit(): void {
+  allVerifuUsers(): Observable<Verify[]>{
+  return this.allVerify = this.verifyService.getAll().pipe( 
+    tap( response =>{
+      console.log();
+    })
+  )
+  }
 
+  ngOnInit(): void {
+    this.allVerifuUsers().subscribe()
   }
 }

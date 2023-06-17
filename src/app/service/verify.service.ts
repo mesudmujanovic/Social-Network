@@ -15,8 +15,8 @@ export class VerifyService {
     return this.http.post<Verify>(`${BASE_URL}/saveVerify/user/${userId}`, verify);
 }
 
-getVerifybyId(verId: number): Observable<Verify[]> {
-  return this.http.get<Verify[]>(`${BASE_URL}/verifyById/${verId}`);
+getVerifybyId(verId: number): Observable<Verify> {
+  return this.http.get<Verify>(`${BASE_URL}/verifyById/${verId}`);
 }
 
 getAll(): Observable<Verify[]> {
