@@ -1,0 +1,26 @@
+.user-details {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 60%;
+    padding: 20px;
+    z-index: 1;
+    color: black;
+    text-decoration: none;
+  }
+  
+  .close-btn {
+    border: none;
+    background-color: black;
+    color: white;
+    border-radius: 2px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .close-btn:hover {
+    background-color: #333333;
+  }
+  

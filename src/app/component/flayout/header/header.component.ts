@@ -15,6 +15,7 @@ export class HeaderComponent {
   token: string = this.localStorage.getLocalStorage("token");
   users: Verify[] = [];
   filteredUsers: Verify[] = [];
+  selectedUser: Verify | null = null;
 
   constructor(
     private router: Router,
@@ -45,13 +46,21 @@ export class HeaderComponent {
         console.error(error);
       }
     )
-  };
+  }
 
  search( keyword: string ): void {
   this.filteredUsers = this.users.filter( user =>{
     return user.nameAccount.toLowerCase().includes( keyword.toLowerCase() ) ||
            user.lastNameAccount.toLowerCase().includes( keyword.toLowerCase() );
   })
+ }
+ 
+ userView(user){
+  this.selectedUser = user;
+ }
+
+ closeView(){
+  this.selectedUser = null;
  }
 
 
