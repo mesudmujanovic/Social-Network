@@ -3,23 +3,21 @@ package com.socialnetwork.Infrastucture.Dto;
 import com.socialnetwork.Infrastucture.Request.VerifyRequest;
 import com.socialnetwork.Infrastucture.Response.VerifyResponse;
 import lombok.Data;
+import org.springframework.core.io.ByteArrayResource;
 
 @Data
 public class VerifyDto {
 
-    public Long id;
+    private Long id;
+    private String nameAccount;
+    private String lastNameAccount;
+    private int age;
+    private String job;
+    private String phone;
 
-    public String nameAccount;
+    private Long userId;
 
-    public String lastNameAccount;
-
-    public int age;
-
-    public String job;
-
-    public String phone;
-
-    public static VerifyDto fromRequest(VerifyRequest verifyRequest){
+    public static VerifyDto fromRequest(VerifyRequest verifyRequest) {
         VerifyDto verifyDto = new VerifyDto();
         verifyDto.setAge(verifyRequest.getAge());
         verifyDto.setJob(verifyRequest.getJob());
@@ -29,14 +27,15 @@ public class VerifyDto {
         return verifyDto;
     }
 
-    public VerifyResponse toResponse(){
+    public VerifyResponse toResponse() {
         VerifyResponse verifyResponse = new VerifyResponse();
         verifyResponse.setId(this.getId());
         verifyResponse.setAge(this.getAge());
         verifyResponse.setJob(this.getJob());
         verifyResponse.setNameAccount(this.getNameAccount());
-        verifyResponse.setLastNameAccount(this.lastNameAccount);
+        verifyResponse.setLastNameAccount(this.getLastNameAccount());
         verifyResponse.setPhone(this.getPhone());
-        return  verifyResponse;
+        verifyResponse.setUserId(this.userId);
+        return verifyResponse;
     }
 }

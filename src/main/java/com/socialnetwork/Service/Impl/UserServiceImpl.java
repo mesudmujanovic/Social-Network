@@ -2,6 +2,7 @@ package com.socialnetwork.Service.Impl;
 
 import com.socialnetwork.Entity.User;
 import com.socialnetwork.Infrastucture.Dto.UserDto;
+import com.socialnetwork.Infrastucture.Dto.VerifyDto;
 import com.socialnetwork.Infrastucture.Mapper.UserDtoMapper;
 import com.socialnetwork.Repository.UserRepository;
 import com.socialnetwork.Service.UserService;

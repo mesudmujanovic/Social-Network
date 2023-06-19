@@ -1,6 +1,7 @@
 package com.socialnetwork.Infrastucture.Response;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 public class VerifyResponse {
@@ -16,4 +17,7 @@ public class VerifyResponse {
     public String job;
 
     public String phone;
+
+    public Long userId;
+
 }

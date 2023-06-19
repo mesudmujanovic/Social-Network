@@ -14,4 +14,6 @@ public class VerifyRequest {
     public String job;
 
     public String phone;
+
+
 }

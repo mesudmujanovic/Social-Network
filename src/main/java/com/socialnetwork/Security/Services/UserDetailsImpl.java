@@ -3,6 +3,7 @@ package com.socialnetwork.Security.Services;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.socialnetwork.Entity.User;
+import com.socialnetwork.Infrastucture.Dto.VerifyDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
@@ -20,6 +21,7 @@ public class UserDetailsImpl implements UserDetails {
     private Long id;
 
     private String username;
+
 
     @JsonIgnore
     private String password;

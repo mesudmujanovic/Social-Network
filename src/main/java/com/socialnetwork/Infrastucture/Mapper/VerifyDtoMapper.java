@@ -16,6 +16,7 @@ public enum VerifyDtoMapper implements DtoMapper<VerifyDto, VerifyAcc> {
         verifyDto.setNameAccount(verifyAcc.getNameAccount());
         verifyDto.setLastNameAccount(verifyAcc.getLastNameAccount());
         verifyDto.setAge(verifyAcc.getAge());
+        verifyDto.setUserId(verifyAcc.getUser().getId());
         return verifyDto;
     }
 }

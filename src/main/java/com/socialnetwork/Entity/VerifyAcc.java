@@ -26,13 +26,15 @@ public class VerifyAcc {
 
     private String phone;
 
+
+
     @OneToMany(mappedBy = "verifyAcc", fetch = FetchType.LAZY)
     private List<Post> posts;
 
     @OneToMany(mappedBy = "verifyAcc", fetch = FetchType.LAZY)
     private List<Comment> comments;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 }

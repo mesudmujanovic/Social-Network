@@ -1,6 +1,10 @@
 package com.socialnetwork.Infrastucture.Response.jwtResponse;
 
+import com.socialnetwork.Entity.VerifyAcc;
+import com.socialnetwork.Infrastucture.Dto.VerifyDto;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -12,6 +16,7 @@ public class JwtResponse {
     private String type = "Bearer";
     private Long id;
     private String username;
+
 
     public JwtResponse(String accessToken, Long id, String username) {
         this.token = accessToken;
