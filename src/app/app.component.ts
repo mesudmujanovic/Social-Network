@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 
@@ -10,7 +11,8 @@ export class AppComponent {
   title = 'fr';
   isProfileRoute: boolean;
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+    private http: HttpClient) {
     // pretplata na events navigaciju
    this.router.events.subscribe( (event) =>{
     if(event instanceof NavigationEnd){
@@ -18,6 +20,8 @@ export class AppComponent {
       this.isProfileRoute = this.router.url.includes('/profile');
     }
    })
-}
+};
+
+
 
 }

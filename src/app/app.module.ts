@@ -12,6 +12,7 @@ import { VerifyComponent } from './component/verify/verify.component';
 import { FooterComponent } from './component/flayout/footer/footer.component';
 import { HeaderComponent } from './component/flayout/header/header.component';
 import { ProfileComponent } from './component/profile/profile.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,7 @@ import { ProfileComponent } from './component/profile/profile.component';
     VerifyComponent,
     FooterComponent,
     HeaderComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

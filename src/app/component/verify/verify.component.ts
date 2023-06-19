@@ -15,6 +15,7 @@ export class VerifyComponent {
 
   verifyForm: FormGroup
   allVerify: Observable<Verify[]>;
+  fromDBtoLocalStorage: Verify[];
 
   constructor(private formBuilder: FormBuilder,
     private verifyService: VerifyService,
@@ -38,9 +39,9 @@ export class VerifyComponent {
         tap(response => {
           this.router.navigate(['/post']);
           const verifyId = response.id;
-          const allVerify = response;
+          const allVerifys = response;
           this.localStorage.setLocalStorage("verifyId", verifyId);
-          this.localStorage.setLocalStorage("allVerify", allVerify)
+          this.localStorage.setLocalStorage("allVerify", allVerifys)
           console.log("verifyRes", response);
         }),
         catchError( (error) =>{
@@ -58,12 +59,15 @@ export class VerifyComponent {
   allVerifuUsers(): Observable<Verify[]>{
   return this.allVerify = this.verifyService.getAll().pipe( 
     tap( response =>{
-      console.log();
+      console.log("ver",response);
+      this.fromDBtoLocalStorage = response;
     })
   )
   }
 
   ngOnInit(): void {
-    this.allVerifuUsers().subscribe()
+    this.allVerifuUsers().subscribe( users =>{
+      console.log();
+    })
   }
 }

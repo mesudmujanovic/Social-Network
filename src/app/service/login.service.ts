@@ -15,4 +15,8 @@ export class LoginService {
     const userPass = { username, password }
   return this.http.post<User>(`${BASE_URL}/auth/login`, userPass);
   }
+
+  getAllUsers(): Observable<User[]>{
+    return this.http.get<User[]>(`${BASE_URL}/auth/allUsers`)
+  }
 }

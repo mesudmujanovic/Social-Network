@@ -5,6 +5,8 @@ import { Verify } from 'src/app/interface/Verify-interface';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { PostService } from 'src/app/service/post.service';
 import { VerifyService } from 'src/app/service/verify.service';
+import { LoginService } from '../../service/login.service';
+import { User } from 'src/app/interface/User-interface';
 
 @Component({
   selector: 'app-profile',
@@ -16,36 +18,60 @@ export class ProfileComponent {
   postByPostName: Observable<Post[]>;
   userName: string;
   verifyId: number
+  userId: number = -1;
   allVerifyUser: Observable<Verify>;
+  
 
   constructor(private postService: PostService,
     private localStorage: LocalStorageService,
-    private verifyService: VerifyService) { }
+    private verifyService: VerifyService,
+    private loginService: LoginService) { }
 
   getPostByUsername(): Observable<Post[]> {
     return this.postByPostName = this.postService.getPostByUserName(this.userName).pipe(
       tap(response => {
+        console.log("responseUsernmae", response);
+      })
+    )
+  }
+
+  getAllUsers(): Observable<User[]>{
+    return this.loginService.getAllUsers().pipe(
+      tap( response =>{
+        console.log("profileRes", response);        
       })
     )
   }
 
   getVerifyById(): Observable<Verify> {
+ 
     return this.allVerifyUser = this.verifyService.getVerifybyId(this.verifyId).pipe(
       tap(response => {
+        console.log("responseVer",response);
+      
       })
     );
   }
 
+
   ngOnInit(): void {
     this.userName = this.localStorage.getLocalStorage('name');
-
-    this.verifyId = this.localStorage.getLocalStorage("verifyId");
-
+    this.userId += this.localStorage.getLocalStorage("user");
+    console.log("this,user",this.userId);
+ 
+    this.getAllUsers().subscribe(response => {
+      const verifyDtoList = response[this.userId].verifyDtoList;
+      if (verifyDtoList ) {
+        this.verifyId = verifyDtoList[0].id;
+        console.log("ID:", this.verifyId);
+      }
+      this.getVerifyById().subscribe();
+    });
+    
     this.getPostByUsername().subscribe(response => {
     })
 
-    this.getVerifyById().subscribe(response => {
-      console.log("res", response);
-    });
+
+ 
   }
 }

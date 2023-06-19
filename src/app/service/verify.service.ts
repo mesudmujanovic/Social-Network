@@ -23,4 +23,5 @@ getAll(): Observable<Verify[]> {
   return this.http.get<Verify[]>(`${BASE_URL}/allVerify`)
 }
 
+
 }

@@ -34,6 +34,11 @@ export class HeaderComponent {
 
   logOut(): void {
   this.localStorage.removeLocalStorage("token");
+  this.localStorage.removeLocalStorage("user");
+  this.localStorage.removeLocalStorage("verifyId");
+  this.localStorage.removeLocalStorage("name");
+  this.localStorage.removeLocalStorage("allVerify");
+  this.localStorage.removeLocalStorage("postId");
   this.router.navigate(['/']);
   }
 
