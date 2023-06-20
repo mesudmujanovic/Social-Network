@@ -19,6 +19,8 @@ export class LoginComponent {
   allVerify: Observable<Verify[]>
   verId: number;
   getAllUsers$: Observable<User[]>
+  userId: number;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,7 +34,6 @@ export class LoginComponent {
       password: ['', Validators.required]
     })
   }
-
   onLogin() {
     if (this.loginForm.valid) {
       const username = this.loginForm.value.username;
@@ -46,17 +47,7 @@ export class LoginComponent {
           this.localStorage.setLocalStorage("name", name)
           this.localStorage.setLocalStorage("user", userInfo);
           this.localStorage.setLocalStorage("token", response)
-          if( !this.localStorage.getLocalStorage("allVerify")){
-            this.router.navigate(['/verify']);
-           } else{
-            this.router.navigate(['/post']);
-           }
-        }),
-        catchError( (error) =>{
-          console.log("loginError",error);
-          alert('Niste registrovani!');
-          this.router.navigate(['/']);
-          return of ([]);
+          this.router.navigate(['/profile'])
         })
       ).subscribe(user => {
         console.log("subs", user);
@@ -66,18 +57,33 @@ export class LoginComponent {
     }
   };
 
-  allUsers(): Observable<User[]>{
+  allUsers(): Observable<User[]> {
     return this.getAllUsers$ = this.loginService.getAllUsers().pipe(
-      tap( response =>{
-        console.log("response",response);
+      tap(response => {
       })
     )
   }
 
-  
+  getAllVerifyUser(): Observable<Verify[]> {
+    return this.allVerify = this.verifyService.getAll().pipe(
+      tap(response => {
+
+      })
+    )
+  }
+
   ngOnInit(): void {
     this.onLogin();
-    this.allUsers().subscribe()
+
+    this.getAllVerifyUser().subscribe(response => {
+      console.log("response", response);
+    });
+
+    this.allUsers().subscribe(response => {
+      console.log("allUsers", response[0].verifyDtoList.length === 0);
+      console.log("users", response[0].verifyDtoList);
+      console.log("all", response);
+    })
   }
 
 

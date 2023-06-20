@@ -30,7 +30,6 @@ export class ProfileComponent {
   getPostByUsername(): Observable<Post[]> {
     return this.postByPostName = this.postService.getPostByUserName(this.userName).pipe(
       tap(response => {
-        console.log("responseUsernmae", response);
       })
     )
   }
@@ -38,17 +37,14 @@ export class ProfileComponent {
   getAllUsers(): Observable<User[]>{
     return this.loginService.getAllUsers().pipe(
       tap( response =>{
-        console.log("profileRes", response);        
       })
     )
   }
 
   getVerifyById(): Observable<Verify> {
- 
     return this.allVerifyUser = this.verifyService.getVerifybyId(this.verifyId).pipe(
       tap(response => {
-        console.log("responseVer",response);
-      
+
       })
     );
   }
@@ -57,15 +53,15 @@ export class ProfileComponent {
   ngOnInit(): void {
     this.userName = this.localStorage.getLocalStorage('name');
     this.userId += this.localStorage.getLocalStorage("user");
-    console.log("this,user",this.userId);
- 
+
     this.getAllUsers().subscribe(response => {
       const verifyDtoList = response[this.userId].verifyDtoList;
       if (verifyDtoList ) {
         this.verifyId = verifyDtoList[0].id;
-        console.log("ID:", this.verifyId);
       }
-      this.getVerifyById().subscribe();
+      this.getVerifyById().subscribe( ver =>{
+        this.localStorage.setLocalStorage("verifyId", this.verifyId)
+      });
     });
     
     this.getPostByUsername().subscribe(response => {
