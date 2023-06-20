@@ -26,7 +26,6 @@ public class UserDto {
 
     private String password;
 
-    private List<VerifyDto> verifyDtoList;
 
     public static  UserDto fromRequest(SignupRequest request){
         UserDto userDto = new UserDto();
@@ -35,17 +34,10 @@ public class UserDto {
         return userDto;
     }
 
-    public  static UserDto fromRequestToDto(UserRequest userRequest){
-        UserDto userDto = new UserDto();
-        userDto.setVerifyDtoList(userRequest.getVerifyDtoList().stream().map( verifys -> VerifyDtoMapper.INSTANCE.apply(VerifyMapper.INSTANCE.apply(verifys))).collect(Collectors.toList()));
-        return userDto;
-    }
-
     public static UserResponse fromResponse(UserDto userDto) {
         UserResponse userResponse = new UserResponse();
         userResponse.setId(userDto.getId());
         userResponse.setUsername(userDto.getUsername());
-        userResponse.setVerifyDtoList(userDto.getVerifyDtoList());
         return userResponse;
     }
 }

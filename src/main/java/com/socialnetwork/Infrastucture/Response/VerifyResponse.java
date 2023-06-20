@@ -18,6 +18,5 @@ public class VerifyResponse {
 
     public String phone;
 
-    public Long userId;
 
 }

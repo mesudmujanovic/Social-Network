@@ -25,7 +25,7 @@ public class User {
     @Column(nullable = false, unique = false)
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<VerifyAcc> verifyAcc;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private VerifyAcc verifyAcc;
 
 }

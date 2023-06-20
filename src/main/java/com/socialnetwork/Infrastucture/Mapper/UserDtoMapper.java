@@ -14,7 +14,6 @@ public enum UserDtoMapper implements DtoMapper<UserDto, User> {
         UserDto userDto = new UserDto();
         userDto.setId(user.getId());
         userDto.setUsername(user.getUsername());
-        userDto.setVerifyDtoList(user.getVerifyAcc().stream().map( verifys -> VerifyDtoMapper.INSTANCE.apply(verifys)).collect(Collectors.toList()));
         return userDto;
     }
 }

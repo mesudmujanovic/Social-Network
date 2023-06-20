@@ -15,7 +15,6 @@ public class VerifyDto {
     private String job;
     private String phone;
 
-    private Long userId;
 
     public static VerifyDto fromRequest(VerifyRequest verifyRequest) {
         VerifyDto verifyDto = new VerifyDto();
@@ -35,7 +34,6 @@ public class VerifyDto {
         verifyResponse.setNameAccount(this.getNameAccount());
         verifyResponse.setLastNameAccount(this.getLastNameAccount());
         verifyResponse.setPhone(this.getPhone());
-        verifyResponse.setUserId(this.userId);
         return verifyResponse;
     }
 }

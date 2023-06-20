@@ -12,5 +12,4 @@ public class UserResponse {
 
     public String username;
 
-    public List<VerifyDto> verifyDtoList;
 }

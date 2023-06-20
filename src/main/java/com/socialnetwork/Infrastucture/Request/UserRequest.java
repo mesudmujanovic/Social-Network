@@ -10,5 +10,4 @@ public class UserRequest {
 
     private String username;
 
-    public List<VerifyDto> verifyDtoList;
 }
