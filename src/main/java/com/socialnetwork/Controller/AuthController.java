@@ -4,7 +4,6 @@ package com.socialnetwork.Controller;
 import com.socialnetwork.Infrastucture.Dto.UserDto;
 import com.socialnetwork.Infrastucture.Request.User.LoginRequest;
 import com.socialnetwork.Infrastucture.Request.User.SignupRequest;
-import com.socialnetwork.Infrastucture.Request.UserRequest;
 import com.socialnetwork.Infrastucture.Response.jwtResponse.JwtResponse;
 import com.socialnetwork.Infrastucture.Response.jwtResponse.MessageResponse;
 import com.socialnetwork.Infrastucture.Response.UserResponse;

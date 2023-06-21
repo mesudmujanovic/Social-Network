@@ -3,7 +3,6 @@ package com.socialnetwork.Infrastucture.Dto;
 import com.socialnetwork.Infrastucture.Request.VerifyRequest;
 import com.socialnetwork.Infrastucture.Response.VerifyResponse;
 import lombok.Data;
-import org.springframework.core.io.ByteArrayResource;
 
 @Data
 public class VerifyDto {

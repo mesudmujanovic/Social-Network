@@ -1,11 +1,8 @@
 package com.socialnetwork.Infrastucture.Mapper;
 
 import com.socialnetwork.Entity.User;
-import com.socialnetwork.Entity.VerifyAcc;
 import com.socialnetwork.Infrastucture.Dto.UserDto;
 import com.socialnetwork.Intergration.DtoMapper;
-
-import java.util.stream.Collectors;
 
 public enum UserMapper implements DtoMapper<User, UserDto> {
     INSTANCE;

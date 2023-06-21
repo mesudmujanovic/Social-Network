@@ -12,4 +12,6 @@ public interface VerifyService {
 
      List<VerifyDto> getAllVerify ();
 
+     VerifyDto findBynameAccount (String nameAccount);
+
 }

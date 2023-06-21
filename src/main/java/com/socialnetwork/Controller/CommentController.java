@@ -2,7 +2,6 @@ package com.socialnetwork.Controller;
 
 
 import com.socialnetwork.Infrastucture.Dto.CommentDto;
-import com.socialnetwork.Infrastucture.Dto.PostDto;
 import com.socialnetwork.Infrastucture.Request.CommentRequest;
 import com.socialnetwork.Infrastucture.Response.CommentResponse;
 import com.socialnetwork.Service.CommentService;
@@ -29,7 +28,6 @@ public class CommentController {
         CommentDto saveComment = commentService.createComment(commentDto, postId, verId);
         return ResponseEntity.ok(saveComment.toResponse());
     }
-
 
     @GetMapping("/allComments")
     public ResponseEntity<List<CommentResponse>> getAllComments(){

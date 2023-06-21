@@ -26,8 +26,6 @@ public class VerifyAcc {
 
     private String phone;
 
-
-
     @OneToMany(mappedBy = "verifyAcc", fetch = FetchType.LAZY)
     private List<Post> posts;
 

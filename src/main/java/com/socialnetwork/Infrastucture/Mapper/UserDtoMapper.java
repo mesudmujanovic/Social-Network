@@ -4,8 +4,6 @@ import com.socialnetwork.Entity.User;
 import com.socialnetwork.Infrastucture.Dto.UserDto;
 import com.socialnetwork.Intergration.DtoMapper;
 
-import java.util.stream.Collectors;
-
 public enum UserDtoMapper implements DtoMapper<UserDto, User> {
     INSTANCE;
 

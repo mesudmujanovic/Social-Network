@@ -1,6 +1,5 @@
 package com.socialnetwork.Infrastucture.Mapper;
 
-import com.socialnetwork.Entity.User;
 import com.socialnetwork.Entity.VerifyAcc;
 import com.socialnetwork.Infrastucture.Dto.VerifyDto;
 import com.socialnetwork.Intergration.DtoMapper;

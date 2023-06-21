@@ -1,19 +1,12 @@
 package com.socialnetwork.Infrastucture.Dto;
 
-import com.socialnetwork.Entity.User;
-import com.socialnetwork.Entity.VerifyAcc;
-import com.socialnetwork.Infrastucture.Mapper.VerifyDtoMapper;
-import com.socialnetwork.Infrastucture.Mapper.VerifyMapper;
 import com.socialnetwork.Infrastucture.Request.User.SignupRequest;
-import com.socialnetwork.Infrastucture.Request.UserRequest;
 import com.socialnetwork.Infrastucture.Response.UserResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -25,7 +18,6 @@ public class UserDto {
     private String username;
 
     private String password;
-
 
     public static  UserDto fromRequest(SignupRequest request){
         UserDto userDto = new UserDto();

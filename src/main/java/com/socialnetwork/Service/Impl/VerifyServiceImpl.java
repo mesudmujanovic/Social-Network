@@ -1,9 +1,7 @@
 package com.socialnetwork.Service.Impl;
 
-import com.socialnetwork.Entity.Post;
 import com.socialnetwork.Entity.VerifyAcc;
 import com.socialnetwork.Infrastucture.Dto.VerifyDto;
-import com.socialnetwork.Infrastucture.Mapper.PostMapper;
 import com.socialnetwork.Infrastucture.Mapper.UserMapper;
 import com.socialnetwork.Infrastucture.Mapper.VerifyDtoMapper;
 import com.socialnetwork.Infrastucture.Mapper.VerifyMapper;
@@ -15,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,5 +45,11 @@ public class VerifyServiceImpl implements VerifyService {
     public List<VerifyDto> getAllVerify() {
         List<VerifyAcc> verifyAccs = verifyRepository.findAll();
         return verifyAccs.stream().map( vers -> VerifyDtoMapper.INSTANCE.apply(vers)).collect(Collectors.toList());
+    }
+
+    @Override
+    public VerifyDto findBynameAccount(String nameAccount) {
+       VerifyAcc verifyAcc = verifyRepository.findBynameAccount(nameAccount);
+       return VerifyDtoMapper.INSTANCE.apply(verifyAcc);
     }
 }
