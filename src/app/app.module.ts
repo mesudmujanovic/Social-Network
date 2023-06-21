@@ -11,6 +11,9 @@ import { PostComponent } from './component/post/post.component';
 import { VerifyComponent } from './component/verify/verify.component';
 import { HeaderComponent } from './component/flayout/header/header.component';
 import { ProfileComponent } from './component/profile/profile.component';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools'
+import { StoreModule } from '@ngrx/store';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +30,8 @@ import { ProfileComponent } from './component/profile/profile.component';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    StoreDevtoolsModule.instrument({maxAge:25})
   ],
   providers: [],
   bootstrap: [AppComponent]
