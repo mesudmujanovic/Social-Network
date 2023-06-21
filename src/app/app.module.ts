@@ -9,7 +9,6 @@ import { LoginComponent } from './component/login/login.component';
 import { SignUpComponent } from './component/sign-up/sign-up.component';
 import { PostComponent } from './component/post/post.component';
 import { VerifyComponent } from './component/verify/verify.component';
-import { FooterComponent } from './component/flayout/footer/footer.component';
 import { HeaderComponent } from './component/flayout/header/header.component';
 import { ProfileComponent } from './component/profile/profile.component';
 
@@ -20,7 +19,6 @@ import { ProfileComponent } from './component/profile/profile.component';
     SignUpComponent,
     PostComponent,
     VerifyComponent,
-    FooterComponent,
     HeaderComponent,
     ProfileComponent,
   ],

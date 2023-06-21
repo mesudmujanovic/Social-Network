@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, catchError, of, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { User } from 'src/app/interface/User-interface';
 import { Verify } from 'src/app/interface/Verify-interface';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
@@ -16,11 +16,11 @@ import { VerifyService } from 'src/app/service/verify.service';
 export class LoginComponent {
 
   loginForm: FormGroup
-  allVerify: Observable<Verify[]>
+  allVerifyUser: Observable<Verify>;
   verId: number;
   getAllUsers$: Observable<User[]>
   userId: number;
-
+  verifyId: number
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,11 +43,10 @@ export class LoginComponent {
           const userInfo = response.id;
           const token = response;
           const name = response.username
-          console.log("userId", userInfo);
           this.localStorage.setLocalStorage("name", name)
           this.localStorage.setLocalStorage("user", userInfo);
-          this.localStorage.setLocalStorage("token", response)
-          this.router.navigate(['/profile'])
+          this.localStorage.setLocalStorage("token", token)
+          this.router.navigate(['/post'])
         })
       ).subscribe(user => {
         console.log("subs", user);
@@ -64,27 +63,11 @@ export class LoginComponent {
     )
   }
 
-  getAllVerifyUser(): Observable<Verify[]> {
-    return this.allVerify = this.verifyService.getAll().pipe(
-      tap(response => {
-
-      })
-    )
-  }
-
   ngOnInit(): void {
-    this.onLogin();
 
-    this.getAllVerifyUser().subscribe(response => {
-      console.log("response", response);
-    });
+    this.userId += this.localStorage.getLocalStorage("user");
 
-    this.allUsers().subscribe(response => {
-      console.log("allUsers", response[0].verifyDtoList.length === 0);
-      console.log("users", response[0].verifyDtoList);
-      console.log("all", response);
-    })
+    this.allUsers().subscribe()
   }
-
 
 }

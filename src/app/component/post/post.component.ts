@@ -23,6 +23,8 @@ export class PostComponent {
   verifySave: Verify[];
   commentForm: FormGroup;
   clickedPost: number;
+  verifyName: string;
+  verifyId: number;
   allComments$: Observable<Comment[]>;
   posts: { [postId: number]: Comment[] } = {};
 
@@ -30,7 +32,8 @@ export class PostComponent {
     private localStorage: LocalStorageService,
     private postService: PostService,
     private router: Router,
-    private commentService: CommentService) {
+    private commentService: CommentService,
+    private verifyService: VerifyService) {
 
     this.postForm = this.formBuilder.group({
       postText: ['', Validators.required]
@@ -52,7 +55,6 @@ export class PostComponent {
       const id = this.localStorage.getLocalStorage('verifyId');
       this.postService.addPost(postText, postName, id).pipe(
         tap(response => {
-          console.log("addPosts", response);
           const postId = response.id
           this.localStorage.setLocalStorage('postId',postId)
         }),
@@ -72,19 +74,17 @@ export class PostComponent {
   onComment() {
     if (this.commentForm.valid) {
       const commentText = this.commentForm.value.commentText;
-      const commentName = this.localStorage.getLocalStorage('name');
       const verId = this.localStorage.getLocalStorage('verifyId');
       const postId = this.clickedPost;
-      this.commentService.addComment(commentText, commentName, postId, verId).pipe(
+      this.commentService.addComment(commentText, this.verifyName, postId, verId).pipe(
         tap(response => {
-          console.log("responsePost", response)
         }),
         switchMap(() => this.allComments()),
         catchError((error) => {
           console.log("eror", error);
           return of([]);
         })
-      ).subscribe(comments => console.log("comments", comments));
+      ).subscribe();
 
     }
   }
@@ -96,10 +96,9 @@ export class PostComponent {
         comments.forEach(comment => {
           //all postId from Comment
           const postId = comment.postId;
-          console.log("postcome", postId);
+       
           if (postId in this.posts) {
             const existingComments = this.posts[postId];
-            console.log("existingComments", existingComments);
             //existence two indentic comment in one post
             //no reply comment
             if (!existingComments.some(c => c.id === comment.id)) {
@@ -126,10 +125,34 @@ export class PostComponent {
     )
   }
 
+  getVerifyByUserName(): Observable<Verify>{
+    return this.verifyService.getByVerifyName(this.verifyName).pipe(
+      tap( response =>{})
+    )
+  }
+
+  getVerifyById(): Observable<Verify>{
+    return this.verifyService.getVerifybyId(this.verifyId).pipe(
+      tap ( response => {
+      })
+    )
+  }
+
   ngOnInit(): void {
+     
+    this.verifyName = this.localStorage.getLocalStorage("name")
+
+    this.getVerifyByUserName().subscribe( byVerify =>{
+      this.verifyId = byVerify.id;
+      this.localStorage.setLocalStorage("verifyId", this.verifyId)    
+    })
+
     this.allPosts().subscribe(posts => console.log("allPosts", posts));
 
     this.allComments().subscribe();
+    
+    this.getVerifyById().subscribe()
+
   }
 }
 

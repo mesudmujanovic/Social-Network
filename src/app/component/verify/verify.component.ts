@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, catchError, of, tap } from 'rxjs';
+import { User } from 'src/app/interface/User-interface';
 import { Verify } from 'src/app/interface/Verify-interface';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
+import { LoginService } from 'src/app/service/login.service';
 import { VerifyService } from 'src/app/service/verify.service';
 
 @Component({
@@ -16,14 +18,22 @@ export class VerifyComponent {
   verifyForm: FormGroup
   allVerify: Observable<Verify[]>;
   fromDBtoLocalStorage: Verify[];
+  verifyId: number
+  userId: number = -1;
+  allVerifyUser: Observable<Verify>;
+  nameAccounts: string;
+  false: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
     private verifyService: VerifyService,
     private localStorage: LocalStorageService,
-    private router: Router) {
+    private router: Router,
+    private loginService: LoginService) {
+
+    this.nameAccounts = this.localStorage.getLocalStorage("name");
 
     this.verifyForm = this.formBuilder.group({
-      nameAccount: ['', Validators.required],
+      nameAccount: [this.nameAccounts, Validators.required],
       lastNameAccount: ['', Validators.required],
       age: [null, Validators.required],
       job: ['', Validators.required],
@@ -34,6 +44,7 @@ export class VerifyComponent {
   onVerify() {
     if (this.verifyForm) {
       const verify = this.verifyForm.value;
+      console.log("ver", verify);
       const userId = this.localStorage.getLocalStorage("user")
       this.verifyService.addVerify(verify, userId).pipe(
         tap(response => {
@@ -44,8 +55,8 @@ export class VerifyComponent {
           this.localStorage.setLocalStorage("allVerify", allVerifys)
           console.log("verifyRes", response);
         }),
-        catchError( (error) =>{
-          console.log("verError",error);
+        catchError((error) => {
+          console.log("verError", error);
           alert("Morate se prvo ulogovati")
           this.router.navigate(['/login']);
           return of([]);
@@ -56,18 +67,37 @@ export class VerifyComponent {
     }
   }
 
-  allVerifuUsers(): Observable<Verify[]>{
-  return this.allVerify = this.verifyService.getAll().pipe( 
-    tap( response =>{
-      console.log("ver",response);
-      this.fromDBtoLocalStorage = response;
-    })
-  )
+  allVerifuUsers(): Observable<Verify[]> {
+    return this.allVerify = this.verifyService.getAll().pipe(
+      tap(response => {
+        console.log("ver", response);
+        this.fromDBtoLocalStorage = response;
+      })
+    )
+  }
+
+ 
+
+  getAllUsers(): Observable<User[]> {
+    return this.loginService.getAllUsers().pipe(
+      tap(response => {
+      })
+    )
   }
 
   ngOnInit(): void {
-    this.allVerifuUsers().subscribe( users =>{
-      console.log();
-    })
+
+    this.userId += this.localStorage.getLocalStorage("user");
+    this.getAllUsers().subscribe(response => {
+      const verifyDtoList = response[this.userId].verifyDtoList;
+      if (verifyDtoList) {
+        this.verifyId = verifyDtoList[0].id;
+        console.log("thisver", this.verifyId);
+      }
+    });
+
+    this.allVerifuUsers().subscribe(response => { });
+
+    this.nameAccounts = this.localStorage.getLocalStorage("name")
   }
 }

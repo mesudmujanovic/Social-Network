@@ -1,14 +1,12 @@
-<p>verify works!</p>
-
 <div class="container">
   <form [formGroup]="verifyForm" (ngSubmit)="onVerify()" class="needs-validation" novalidate>
     <div class="mb-3">
-      <label for="nameAccount" class="form-label">Name Account</label>
-      <input type="text" name="nameAccount" formControlName="nameAccount" class="form-control" required>
-      <div class="invalid-feedback">Please enter a name account.</div>
+      <label for="nameAccount" class="form-label"></label>
+      <input type="text" name="nameAccount" formControlName="nameAccount" class="form-control" required
+        [readonly]="true">
     </div>
     <div class="mb-3">
-      <label for="lastNameAccount" class="form-label">Last Name Account</label>
+      <label for="lastNameAccount" class="form-label">Last Name Account</label>d
       <input type="text" name="lastNameAccount" formControlName="lastNameAccount" class="form-control" required>
       <div class="invalid-feedback">Please enter a last name account.</div>
     </div>

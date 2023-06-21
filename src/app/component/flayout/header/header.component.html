@@ -5,7 +5,7 @@ background-image: linear-gradient(315deg, #182b3a 0%, #20a4f3 74%);
     <div class="d-flex">
       <a class="navbar-brand" [routerLink]="['/login']">Login</a>
       <a class="navbar-brand" [routerLink]="['/signUp']">Sign Up</a>
-      <a class="navbar-brand" [routerLink]="['/profile']" (click)="linkToProfile()">Profile</a>
+      <a class="navbar-brand" [routerLink]="['/profile']">Profile</a>
       <a class="navbar-brand" [routerLink]="['/logOut']" (click)="logOut()">LogOut</a>
     </div>
     <form class="d-flex" (ngSubmit)="search(searchKeyword.value)">
@@ -15,22 +15,22 @@ background-image: linear-gradient(315deg, #182b3a 0%, #20a4f3 74%);
     <div *ngIf="filteredUsers.length > 0" class="search-results">
       <h4>Found Users:</h4>
       <ul class="list-group">
-        <li class="list-group-item"  *ngFor="let user of filteredUsers">
-        <a (click)="userView(user)">{{ user.nameAccount }} {{ user.lastNameAccount }} 
-        </a>
+        <li class="list-group-item" *ngFor="let user of filteredUsers">
+          <a (click)="userView(user)">{{ user.nameAccount }} {{ user.lastNameAccount }}
+          </a>
         </li>
       </ul>
     </div>
     <div *ngIf="selectedUser">
-      <a  class="user-details"  style="background-color: #182b3a;
+      <a class="user-details" style="background-color: #182b3a;
       background-image: linear-gradient(315deg, #182b3a 0%, #20a4f3 74%);
       ">
-       <button class="close-btn" (click)="closeView()">Close</button>
-        <h4>Job:  {{selectedUser.job}}</h4>
-        <h4>NameAccount:  {{selectedUser.nameAccount}}</h4>
-        <h4>LastNameAccount:  {{selectedUser.lastNameAccount}}</h4>
-        <h4>Phone:  {{selectedUser.phone}}</h4>
-        <h4>Age:  {{selectedUser.age}}</h4>
+        <button class="close-btn" (click)="closeView()">Close</button>
+        <h4>Job: {{selectedUser.job}}</h4>
+        <h4>NameAccount: {{selectedUser.nameAccount}}</h4>
+        <h4>LastNameAccount: {{selectedUser.lastNameAccount}}</h4>
+        <h4>Phone: {{selectedUser.phone}}</h4>
+        <h4>Age: {{selectedUser.age}}</h4>
         <h4>Image: {{selectedUser.image}} </h4>
       </a>
     </div>

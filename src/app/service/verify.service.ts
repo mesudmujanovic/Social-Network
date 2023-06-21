@@ -23,5 +23,9 @@ getAll(): Observable<Verify[]> {
   return this.http.get<Verify[]>(`${BASE_URL}/allVerify`)
 }
 
+getByVerifyName( nameAccount: string ): Observable<Verify>{
+  return this.http.get<Verify>(`${BASE_URL}/verifyUsername/${nameAccount}`)
+}
+
 
 }

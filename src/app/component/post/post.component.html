@@ -1,45 +1,48 @@
-<div class="container">
-  <form [formGroup]="postForm" (ngSubmit)="onPost()" style="background-color: #a55c1b;
-background-image: linear-gradient(315deg, #a55c1b 0%, #000000 74%)">
-    <label for="postText" style="color: white;">Post</label>
-    <input class="form-control" type="text" name="postText" formControlName="postText">
-    <button type="submit" class="btn form-control" style="color: white;" >Add Post</button> 
+<div class="container mt-5">
+
+  <form class="form-group form-control mb-4" [formGroup]="postForm" (ngSubmit)="onPost()" style="background-color: #a55c1b;
+  background-image: linear-gradient(315deg, #a55c1b 0%, #000000 74%)">
+    <label class="d-flex justify-content-center align-items-center" for="postText" style="color: white;">Post</label>
+    <input placeholder="Unesite Post" class="form-control" type="text" name="postText" formControlName="postText">
+    <button type="submit" class="btn btnPost" style="color: white;">Add Post</button>
   </form>
+
   <div *ngIf="allPosts$ | async as allPosts">
     <div *ngFor="let post of allPosts; let i = index">
       <div class="row">
         <div class="col-12">
-          <div class="card" style="background-color: #182b3a;
+          <div class="card mb-5" style="background-color: #182b3a;
           background-image: linear-gradient(315deg, #182b3a 0%, #20a4f3 74%);
           ">
             <div class="card-head text-center" style="background-color: #182b3a;
             background-image: linear-gradient(315deg, #182b3a 0%, #20a4f3 74%);
-            " >
-             <div style="color: white;">
-              username: {{ post.postName }}
-             </div>
+            ">
+              <div style="color: white;">
+                <p class="postName">Post by: {{ post.postName }}</p>
+                <p class="postName"> post: {{ post.postText }}</p>
+              </div>
             </div>
 
-            <div style="color: white;" class="card-body text-center">
-              {{ i + 1 }} post: {{ post.postText }}
-            </div>
-            
-            <div class="card-footer" style="background-color: #182b3a;
+            <div class="card-body" style="background-color: #182b3a;
             background-image: linear-gradient(315deg, #182b3a 0%, #20a4f3 74%);
             ">
-              <p style="color: white;" *ngFor="let comment of posts[post.id]">
-                {{ comment.commentText }}
-                username:{{comment.commentName}}
-              </p>
-
-              <form [formGroup]="commentForm" (ngSubmit)="onComment()" style="background-color: #a55c1b;
-              background-image: linear-gradient(315deg, #a55c1b 0%, #000000 74%)">
-                <label style="color: white;" for="commentText">Unesi komentar</label>
-                <input type="text" name="commentText" formControlName="commentText">
-                <button class="btn" type="submit" style="color: white;" (click)="getClickedPost(post.id)">Add Comment</button>
-              </form>
-
+              <div style="color: white; border: 1px solid white; border-radius: 10px;" class="text-center"
+                *ngFor="let comment of posts[post.id]">
+                <p class="commentText">{{ comment.commentText }}</p>
+                <p class="comentName">Comment by:{{comment.commentName}}</p>
+              </div>
             </div>
+
+            <div class="card-footer">
+              <form class="form-group form-control d-flex justify-content-center align-items-center"
+                [formGroup]="commentForm" (ngSubmit)="onComment()" style="background-color: #a55c1b;
+              background-image: linear-gradient(315deg, #a55c1b 0%, #000000 74%)">
+                <input placeholder="Unesite Komentar" type="text" name="commentText" formControlName="commentText">
+                <button class="btn" type="submit" style="color: white;" (click)="getClickedPost(post.id)">Add
+                  Comment</button>
+              </form>
+            </div>
+
           </div>
         </div>
       </div>

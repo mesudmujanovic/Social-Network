@@ -1,17 +1,17 @@
-<h1>Login</h1>
 <div class="container">
-    <div class="form-wrapper">
-      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input type="text" name="username" formControlName="username">
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" name="password" formControlName="password">
-        </div>
-        <button type="submit">Login</button>
-      </form>
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <div class="form-group">
+      <label class="d-flex justify-content-center align-items-center" for="username">
+        <p>Username</p>
+      </label>
+      <input class="form-group form-control" type="text" name="username" formControlName="username">
     </div>
-  </div>
-  
+    <div class="form-group">
+      <label class="d-flex justify-content-center align-items-center" for="password">
+        <p>Password</p>
+      </label>
+      <input class="form-group form-control" type="password" name="password" formControlName="password">
+    </div>
+    <button class="btn btn-primary form-control mt-2" type="submit">Login</button>
+  </form>
+</div>

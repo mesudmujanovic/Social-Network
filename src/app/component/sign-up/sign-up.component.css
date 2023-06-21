@@ -1,0 +1,14 @@
+.container{
+    margin: 200px auto;
+}
+
+ label{
+    color: blue;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+
+  input{
+    border-radius: 10px;
+    border: 2px solid blue;
+  }
+ 
