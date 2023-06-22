@@ -14,4 +14,7 @@ public interface VerifyService {
 
      VerifyDto findBynameAccount (String nameAccount);
 
+     VerifyDto addConnectedVerifyAcc(Long verifyAccId, Long connectedVerifyAccId);
+
+
 }

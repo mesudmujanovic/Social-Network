@@ -52,4 +52,21 @@ public class VerifyServiceImpl implements VerifyService {
        VerifyAcc verifyAcc = verifyRepository.findBynameAccount(nameAccount);
        return VerifyDtoMapper.INSTANCE.apply(verifyAcc);
     }
+
+    @Override
+    public VerifyDto addConnectedVerifyAcc(Long verifyAccId, Long connectedVerifyAccId) {
+        VerifyAcc verifyAcc = verifyRepository.findById(verifyAccId).orElse(null);
+        VerifyAcc connectedVerifyAcc = verifyRepository.findById(connectedVerifyAccId).orElse(null);
+
+        if (verifyAcc != null && connectedVerifyAcc != null) {
+            verifyAcc.getConnectedVerifyAccs().add(connectedVerifyAcc);
+            VerifyAcc savedVerifyAcc = verifyRepository.save(verifyAcc);
+            return VerifyDtoMapper.INSTANCE.apply(savedVerifyAcc);
+        }
+
+        return null;
+    }
+
 }
+
+

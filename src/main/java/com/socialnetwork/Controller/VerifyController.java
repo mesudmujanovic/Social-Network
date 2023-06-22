@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,5 +44,16 @@ public class VerifyController {
     public ResponseEntity<VerifyResponse> getByUsername( @PathVariable String nameAccount ){
         VerifyDto verifyDto = verifyService.findBynameAccount(nameAccount);
         return ResponseEntity.ok( verifyDto.toResponse() );
+    }
+
+    @PostMapping("/verify/{verifyAccId}/addConnectedVerifyAcc/{connectedVerifyAccId}")
+    public ResponseEntity<VerifyResponse> addConnectedVerifyAcc(@PathVariable Long verifyAccId,
+                                                                @PathVariable Long connectedVerifyAccId) {
+        VerifyDto verifyDto = verifyService.addConnectedVerifyAcc(verifyAccId, connectedVerifyAccId);
+        if (verifyDto != null) {
+            return ResponseEntity.ok(verifyDto.toResponse());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
  }

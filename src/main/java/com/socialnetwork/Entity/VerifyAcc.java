@@ -35,4 +35,13 @@ public class VerifyAcc {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "verifyacc_connections",
+            joinColumns = @JoinColumn(name = "verifyacc_id"),
+            inverseJoinColumns = @JoinColumn(name = "connected_verifyacc_id")
+    )
+    private List<VerifyAcc> connectedVerifyAccs;
+
 }
