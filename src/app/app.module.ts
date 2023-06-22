@@ -11,8 +11,9 @@ import { PostComponent } from './component/post/post.component';
 import { VerifyComponent } from './component/verify/verify.component';
 import { HeaderComponent } from './component/flayout/header/header.component';
 import { ProfileComponent } from './component/profile/profile.component';
-import {StoreDevtoolsModule} from '@ngrx/store-devtools'
+import {StoreDevtools, StoreDevtoolsModule} from '@ngrx/store-devtools'
 import { StoreModule } from '@ngrx/store';
+import { appReducer } from './ngrx-store/reducers/app.reducer';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { StoreModule } from '@ngrx/store';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    StoreModule.forRoot( appReducer ),
     StoreDevtoolsModule.instrument({maxAge:25})
   ],
   providers: [],

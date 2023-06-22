@@ -46,6 +46,7 @@ export class VerifyComponent {
       const verify = this.verifyForm.value;
       console.log("ver", verify);
       const userId = this.localStorage.getLocalStorage("user")
+      this.verifyService.saveVerifyToNgrx(verify);
       this.verifyService.addVerify(verify, userId).pipe(
         tap(response => {
           this.router.navigate(['/post']);

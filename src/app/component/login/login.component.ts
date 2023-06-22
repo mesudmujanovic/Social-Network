@@ -38,6 +38,13 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       const username = this.loginForm.value.username;
       const password = this.loginForm.get('password')?.value
+      // code from 41 to 47 for save to ngrx
+      const user: User = {
+        username: this.loginForm.get('username').value,
+        password: this.loginForm.get('password').value,
+        id: this.userId,
+      }
+      this.loginService.saveUserToNgrx(user)
       this.loginService.login(username, password).pipe(
         tap(response => {
           const userInfo = response.id;
