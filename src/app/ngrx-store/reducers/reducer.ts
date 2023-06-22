@@ -1,5 +1,5 @@
 import { initalUserState, UserInfoState } from '../state/user.state';
-import { _SaveUser, _SaveVerify, UserAction } from '../acionts/actions';
+import { _SaveComment, _SavePost, _SaveUser, _SaveVerify, UserAction } from '../acionts/actions';
 
 
 export const userReducer = (
@@ -16,7 +16,19 @@ export const userReducer = (
                 return{
                     ...state,
                     verify: [ action.payload ]
-                };
+                }
+            break;
+            case _SavePost.AddPost:
+                return{
+                    ...state,
+                    post: [ ...state.post, action.payload ]
+                } 
+            break;
+            case _SaveComment.AddComment:
+                return{
+                    ...state,
+                    comment: [ ...state.comment, action.payload ]
+                }
                 default:
                     return state;
       }

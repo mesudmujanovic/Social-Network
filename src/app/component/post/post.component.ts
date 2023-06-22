@@ -53,6 +53,7 @@ export class PostComponent {
       const postText = this.postForm.value.postText;
       const postName = this.localStorage.getLocalStorage('name')
       const id = this.localStorage.getLocalStorage('verifyId');
+      this.postService.addPostToNgrx(postText);
       this.postService.addPost(postText, postName, id).pipe(
         tap(response => {
           const postId = response.id
@@ -76,6 +77,7 @@ export class PostComponent {
       const commentText = this.commentForm.value.commentText;
       const verId = this.localStorage.getLocalStorage('verifyId');
       const postId = this.clickedPost;
+      this.commentService.addCommentToNgrx(commentText);
       this.commentService.addComment(commentText, this.verifyName, postId, verId).pipe(
         tap(response => {
         }),
