@@ -59,6 +59,7 @@ public class VerifyServiceImpl implements VerifyService {
         VerifyAcc connectedVerifyAcc = verifyRepository.findById(connectedVerifyAccId).orElse(null);
 
         if (verifyAcc != null && connectedVerifyAcc != null) {
+            //korisnik A =  daj listu verifikonavih korisnika (getConnectedVerifyAccs()) i dodaj u tu listu  verifyUser(Korisnik B) (connectedVerifyAcc)
             verifyAcc.getConnectedVerifyAccs().add(connectedVerifyAcc);
             VerifyAcc savedVerifyAcc = verifyRepository.save(verifyAcc);
             return VerifyDtoMapper.INSTANCE.apply(savedVerifyAcc);
