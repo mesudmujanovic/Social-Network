@@ -6,6 +6,7 @@ background-image: linear-gradient(315deg, #182b3a 0%, #20a4f3 74%);
       <a class="navbar-brand" [routerLink]="['/login']">Login</a>
       <a class="navbar-brand" [routerLink]="['/signUp']">Sign Up</a>
       <a class="navbar-brand" [routerLink]="['/profile']">Profile</a>
+      <a class="navbar-brand" [routerLink]="['/addVerifyUsers']">All Verify Users</a>
       <a class="navbar-brand" [routerLink]="['/logOut']" (click)="logOut()">LogOut</a>
     </div>
     <form class="d-flex" (ngSubmit)="search(searchKeyword.value)">

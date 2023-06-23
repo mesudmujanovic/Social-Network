@@ -11,9 +11,10 @@ import { PostComponent } from './component/post/post.component';
 import { VerifyComponent } from './component/verify/verify.component';
 import { HeaderComponent } from './component/flayout/header/header.component';
 import { ProfileComponent } from './component/profile/profile.component';
-import {StoreDevtools, StoreDevtoolsModule} from '@ngrx/store-devtools'
+import {StoreDevtoolsModule} from '@ngrx/store-devtools'
 import { StoreModule } from '@ngrx/store';
 import { appReducer } from './ngrx-store/reducers/app.reducer';
+import { AllVerifyUsersComponent } from './component/all-verify-users/all-verify-users.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { appReducer } from './ngrx-store/reducers/app.reducer';
     VerifyComponent,
     HeaderComponent,
     ProfileComponent,
+    AllVerifyUsersComponent,
   ],
   imports: [
     BrowserModule,
