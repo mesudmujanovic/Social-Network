@@ -15,6 +15,7 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools'
 import { StoreModule } from '@ngrx/store';
 import { appReducer } from './ngrx-store/reducers/app.reducer';
 import { AllVerifyUsersComponent } from './component/all-verify-users/all-verify-users.component';
+import { AllMyFriendsComponent } from './component/all-my-friends/all-my-friends.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { AllVerifyUsersComponent } from './component/all-verify-users/all-verify
     HeaderComponent,
     ProfileComponent,
     AllVerifyUsersComponent,
+    AllMyFriendsComponent,
   ],
   imports: [
     BrowserModule,

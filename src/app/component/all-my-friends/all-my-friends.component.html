@@ -1,0 +1,5 @@
+<div *ngIf="filteredFriends | async as allMyFriends">
+<div *ngFor="let friends of allMyFriends">
+{{friends.nameAccount}} {{friends.lastNameAccount}}
+</div>
+</div>

@@ -16,6 +16,7 @@ export class AllVerifyUsersComponent {
   verifyUsers: Observable<Verify[]> = this.verifyService.getAll();
   verifyId: number = this.localStorage.getLocalStorage("verifyId")
   friendsId: number;
+  
 
   constructor(private verifyService: VerifyService,
     private addFriendsService: AddFriendsService,
@@ -38,6 +39,8 @@ export class AllVerifyUsersComponent {
 
     })
   }
+
+
 
   viewFriend(verifyUsers) {
     this.selectedUsers = verifyUsers;
