@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/api")
 @CrossOrigin("*")
@@ -24,5 +27,11 @@ public class LikePostController {
         LikePostDto likePostDto = LikePostDto.fromRequestToDto(likePostRequest);
         LikePostDto serviceLike = likePostService.createLikePost(likePostDto,postId, verifyId);
         return ResponseEntity.ok( serviceLike.fromDtoToResponse() );
+    }
+
+    @GetMapping("/allLike")
+    public ResponseEntity<List<LikePostResponse>> getAllLike(){
+        List<LikePostDto> listPostDto = likePostService.getAll();
+        return ResponseEntity.ok( listPostDto.stream().map( likes -> likes.fromDtoToResponse() ).collect(Collectors.toList()));
     }
 }

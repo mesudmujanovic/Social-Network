@@ -13,6 +13,8 @@ public class LikePostDto {
 
     private int postCountDislike;
 
+    private Long postId;
+
     public static LikePostDto fromRequestToDto(LikePostRequest likePostRequest){
         LikePostDto likePostDto = new LikePostDto();
         likePostDto.setPostCountLike(likePostRequest.getPostCountLike());
@@ -24,7 +26,8 @@ public class LikePostDto {
         LikePostResponse likePostResponse = new LikePostResponse();
         likePostResponse.setId(this.getId());
         likePostResponse.setPostCountDislike(this.getPostCountDislike());
-        likePostResponse.setPostCountLike(this.postCountLike);
+        likePostResponse.setPostCountLike(this.getPostCountLike());
+        likePostResponse.setPostId(this.getPostId());
         return likePostResponse;
     }
 }

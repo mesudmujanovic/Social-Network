@@ -10,4 +10,6 @@ public class LikePostResponse {
     private int postCountLike;
 
     private int postCountDislike;
+
+    private Long postId;
 }

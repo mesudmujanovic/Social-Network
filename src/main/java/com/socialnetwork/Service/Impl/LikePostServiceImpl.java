@@ -14,6 +14,9 @@ import com.socialnetwork.Service.VerifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class LikePostServiceImpl implements LikePostService {
 
@@ -33,5 +36,11 @@ public class LikePostServiceImpl implements LikePostService {
         likePost.setVerifyAcc(VerifyMapper.INSTANCE.apply( verifyService.getVerifyById(verifyId) ));
         LikePost savePost = likePostRepository.save(likePost);
         return LikePostDtoMapper.INSTANCE.apply(savePost);
+    }
+
+    @Override
+    public List<LikePostDto> getAll() {
+       List<LikePost> likePostList = likePostRepository.findAll();
+       return likePostList.stream().map( likes -> LikePostDtoMapper.INSTANCE.apply(likes)).collect(Collectors.toList());
     }
 }

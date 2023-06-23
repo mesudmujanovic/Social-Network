@@ -13,6 +13,7 @@ public enum LikePostDtoMapper implements DtoMapper<LikePostDto, LikePost> {
         likePostDto.setId(likePost.getId());
         likePostDto.setPostCountDislike(likePost.getPostCountDislike());
         likePostDto.setPostCountLike(likePost.getPostCountLike());
+        likePostDto.setPostId(likePost.getPost().getId());
         return likePostDto;
     }
 }
