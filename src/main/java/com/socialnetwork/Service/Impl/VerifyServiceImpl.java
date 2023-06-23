@@ -68,6 +68,16 @@ public class VerifyServiceImpl implements VerifyService {
         return null;
     }
 
+    @Override
+    public List<VerifyDto> getConnectedVerifyAccsById(Long verifyAccId) {
+        VerifyAcc verifyAcc = verifyRepository.findById(verifyAccId).orElseThrow(() -> new RuntimeException("No such VerifyAcc"));
+        //dohvacanje svi friends accounta koji su povezani sa verifyAcc (verifyAcc.getConnectedVerifyAccs)
+        List<VerifyAcc> connectedVerifyAccs = verifyAcc.getConnectedVerifyAccs();
+        return connectedVerifyAccs.stream()
+                .map(vers -> VerifyDtoMapper.INSTANCE.apply(vers))
+                .collect(Collectors.toList());
+    }
+
 }
 
 

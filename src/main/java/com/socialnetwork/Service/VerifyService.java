@@ -16,5 +16,7 @@ public interface VerifyService {
 
      VerifyDto addConnectedVerifyAcc(Long verifyAccId, Long connectedVerifyAccId);
 
+     List<VerifyDto> getConnectedVerifyAccsById(Long verifyAccId);
+
 
 }

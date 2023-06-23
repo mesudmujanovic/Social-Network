@@ -39,6 +39,17 @@ public class VerifyController {
         }
     }
 
+    @GetMapping("/verify/{verifyAccId}/connectedVerifyAccs")
+    public ResponseEntity<List<VerifyDto>> getConnectedVerifyAccsById(@PathVariable Long verifyAccId) {
+        List<VerifyDto> connectedVerifyAccs = verifyService.getConnectedVerifyAccsById(verifyAccId);
+        if (!connectedVerifyAccs.isEmpty()) {
+            return ResponseEntity.ok(connectedVerifyAccs);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
     @GetMapping("/verifyById/{verId}")
     public ResponseEntity<VerifyResponse> gtById(@PathVariable Long verId){
         VerifyDto verifyDto = verifyService.getVerifyById(verId);
