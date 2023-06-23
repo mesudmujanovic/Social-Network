@@ -1,5 +1,13 @@
-<div *ngIf="filteredFriends | async as allMyFriends">
-<div *ngFor="let friends of allMyFriends">
-{{friends.nameAccount}} {{friends.lastNameAccount}}
-</div>
+<div class="container text-center d-flex justify-content-center align-items-center">
+    <div *ngIf="filteredFriends | async as allMyFriends">
+        <div *ngFor="let friends of allMyFriends">
+        <div class="card card-header text-white bg-primary mt-5" style="width: 200px;" >
+            {{friends.nameAccount}} {{friends.lastNameAccount}}
+        </div>
+        <div class="card card-body text-white bg-primary" style="width: 200px;">
+          <p> Age: {{friends.age}}</p>
+          <p> Job: {{friends.job}}</p>
+        </div>
+        </div>
+        </div>
 </div>

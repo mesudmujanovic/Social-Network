@@ -6,10 +6,10 @@ import { Verify } from 'src/app/interface/Verify-interface';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { PostService } from 'src/app/service/post.service';
 import { VerifyService } from '../../service/verify.service';
-import { HttpClient } from '@angular/common/http';
 import { CommentService } from 'src/app/service/comment.service';
 import { Comment } from 'src/app/interface/Comment-interface';
 import { Router } from '@angular/router';
+import { LikePostService } from 'src/app/service/like-post.service';
 
 @Component({
   selector: 'app-post',
@@ -27,13 +27,19 @@ export class PostComponent {
   verifyId: number;
   allComments$: Observable<Comment[]>;
   posts: { [postId: number]: Comment[] } = {};
-
+  postCountLike: number;
+  postCountDislike: number; 
+  postId: number;
+  counteLike: number = 0;
+  counteDislike: number = 0
+  
   constructor(private formBuilder: FormBuilder,
     private localStorage: LocalStorageService,
     private postService: PostService,
     private router: Router,
     private commentService: CommentService,
-    private verifyService: VerifyService) {
+    private verifyService: VerifyService,
+    private likePostService: LikePostService) {
 
     this.postForm = this.formBuilder.group({
       postText: ['', Validators.required]
@@ -44,8 +50,32 @@ export class PostComponent {
     });
   }
 
+  getLikeOrDislike(postId: number) {
+   console.log("thisPostId", this.postId);
+   this.postId = postId;
+    this.likePostService.addLike( this.postCountLike, this.postCountDislike, this.postId, this.verifyId ).pipe(
+      tap( response =>{
+        console.log("responseLike",response);
+      })
+    ).subscribe( response =>{
+      console.log("subsrcieLike",response);
+      
+    })
+  }
+
+  addLike(){
+  this.counteLike ++;
+  }
+
+  addDislike(){
+    this.counteDislike ++;
+  }
+
+
   getClickedPost(postId: number) {
     this.clickedPost = postId;
+    console.log("this.cliced", this.clickedPost);
+    
   }
 
   onPost() {
@@ -76,9 +106,9 @@ export class PostComponent {
     if (this.commentForm.valid) {
       const commentText = this.commentForm.value.commentText;
       const verId = this.localStorage.getLocalStorage('verifyId');
-      const postId = this.clickedPost;
+      this.postId = this.clickedPost;
       this.commentService.addCommentToNgrx(commentText);
-      this.commentService.addComment(commentText, this.verifyName, postId, verId).pipe(
+      this.commentService.addComment(commentText, this.verifyName, this.postId, verId).pipe(
         tap(response => {
         }),
         switchMap(() => this.allComments()),
@@ -154,7 +184,7 @@ export class PostComponent {
     this.allComments().subscribe();
     
     this.getVerifyById().subscribe()
-
+    
   }
 }
 
