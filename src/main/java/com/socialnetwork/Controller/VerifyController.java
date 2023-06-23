@@ -28,6 +28,17 @@ public class VerifyController {
         return ResponseEntity.ok(verifyDtoService.toResponse());
     }
 
+    @PostMapping("/verify/{verifyAccId}/addConnectedVerifyAcc/{connectedVerifyAccId}")
+    public ResponseEntity<VerifyResponse> addConnectedVerifyAcc(@PathVariable Long verifyAccId,
+                                                                @PathVariable Long connectedVerifyAccId) {
+        VerifyDto verifyDto = verifyService.addConnectedVerifyAcc(verifyAccId, connectedVerifyAccId);
+        if (verifyDto != null) {
+            return ResponseEntity.ok(verifyDto.toResponse());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @GetMapping("/verifyById/{verId}")
     public ResponseEntity<VerifyResponse> gtById(@PathVariable Long verId){
         VerifyDto verifyDto = verifyService.getVerifyById(verId);
@@ -46,14 +57,5 @@ public class VerifyController {
         return ResponseEntity.ok( verifyDto.toResponse() );
     }
 
-    @PostMapping("/verify/{verifyAccId}/addConnectedVerifyAcc/{connectedVerifyAccId}")
-    public ResponseEntity<VerifyResponse> addConnectedVerifyAcc(@PathVariable Long verifyAccId,
-                                                                @PathVariable Long connectedVerifyAccId) {
-        VerifyDto verifyDto = verifyService.addConnectedVerifyAcc(verifyAccId, connectedVerifyAccId);
-        if (verifyDto != null) {
-            return ResponseEntity.ok(verifyDto.toResponse());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
+
  }
