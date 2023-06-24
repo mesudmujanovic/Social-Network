@@ -34,4 +34,10 @@ public class LikePostController {
         List<LikePostDto> listPostDto = likePostService.getAll();
         return ResponseEntity.ok( listPostDto.stream().map( likes -> likes.fromDtoToResponse() ).collect(Collectors.toList()));
     }
+
+    @GetMapping("/byLikePostId/{likeId}")
+    public ResponseEntity<LikePostResponse> getById ( @PathVariable Long likeId ){
+        LikePostDto likePostDto = likePostService.getLikePostById(likeId);
+        return ResponseEntity.ok( likePostDto.fromDtoToResponse() );
+    }
 }

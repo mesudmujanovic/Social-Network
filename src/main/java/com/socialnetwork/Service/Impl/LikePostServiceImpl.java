@@ -43,4 +43,10 @@ public class LikePostServiceImpl implements LikePostService {
        List<LikePost> likePostList = likePostRepository.findAll();
        return likePostList.stream().map( likes -> LikePostDtoMapper.INSTANCE.apply(likes)).collect(Collectors.toList());
     }
+
+    @Override
+    public LikePostDto getLikePostById(Long likeId) {
+        LikePost likePost = likePostRepository.findById(likeId).orElseThrow( ()-> new RuntimeException("not found"));
+        return LikePostDtoMapper.INSTANCE.apply(likePost);
+    }
 }

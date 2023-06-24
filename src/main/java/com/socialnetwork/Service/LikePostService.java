@@ -9,4 +9,6 @@ public interface LikePostService {
     LikePostDto createLikePost (LikePostDto likePostDto, Long postId, Long verifyId);
 
     List<LikePostDto> getAll();
+
+    LikePostDto getLikePostById ( Long likeId);
 }
