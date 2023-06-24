@@ -7,6 +7,5 @@ export interface Verify {
     job: string;
     phone: string;
     userId: number;
-    image: string;
   }
   

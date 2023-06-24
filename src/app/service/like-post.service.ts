@@ -15,4 +15,12 @@ export class LikePostService {
     const likeDislike = {postCountLike, postCountDislike};
     return this.http.post<Like>(`${BASE_URL}/likePost/${postId}/verify/${verifyId}`,likeDislike)
   }
+
+  getLikePostById( likeId: number) :Observable<Like>{
+    return this.http.get<Like>(`${BASE_URL}/byLikePostId/${likeId}`)
+  }
+
+  getAllLike(): Observable<Like[]>{
+    return this.http.get<Like[]>(`${BASE_URL}/allLike`)
+  }
 }

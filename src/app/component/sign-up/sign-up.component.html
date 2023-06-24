@@ -1,6 +1,8 @@
+
 <div class="container d-flex justify-content-center align-items-center">
-    <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    <h2 class="text-center">Sign up</h2> 
+    <div class="form-group">
         <label for="username" class="d-flex justify-content-center align-items-center">Username</label>
         <input type="text" id="username" name="username" formControlName="username" class="form-control">
       </div>
@@ -11,6 +13,8 @@
         <button type="submit" class="btn btn-primary d-flex justify-content-center align-items-center form-control mt-2">Save</button>
         <a class="btn btn-primary d-flex justify-content-center align-items-center form-control mt-2" [routerLink]="['/login']">Login</a>
       </form>
-  </div>
-  
+    </div>
+    <app-footer class="footer">
+
+    </app-footer>
 

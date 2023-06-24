@@ -54,11 +54,15 @@ export class HeaderComponent {
 
   userView(user) {
     this.selectedUser = user;
+    this.filteredUsers = [];
   }
 
   closeView() {
     this.selectedUser = null;
   }
 
+  closeFoundUsers(){
+    this.filteredUsers = [];
+  }
 
 }

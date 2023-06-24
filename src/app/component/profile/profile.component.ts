@@ -7,6 +7,7 @@ import { PostService } from 'src/app/service/post.service';
 import { LoginService } from '../../service/login.service';
 import { User } from 'src/app/interface/User-interface';
 import { VerifyService } from 'src/app/service/verify.service';
+import { AddFriendsService } from 'src/app/service/add-friends.service';
 
 @Component({
   selector: 'app-profile',
@@ -18,12 +19,15 @@ export class ProfileComponent {
   postByPostName: Observable<Post[]>;
   userName: string;
   allVerifyUser: Observable<Verify>;
+  allMyFriends: Observable<Verify[]>
+  verifyId: number;
   
 
   constructor(private postService: PostService,
     private localStorage: LocalStorageService,
     private loginService: LoginService,
-    private verifyService: VerifyService) { }
+    private verifyService: VerifyService,
+    private addFriends: AddFriendsService) { }
 
   getPostByUsername(): Observable<Post[]> {
     return this.postByPostName = this.postService.getPostByUserName(this.userName).pipe(
@@ -49,7 +53,14 @@ export class ProfileComponent {
     )
   }
 
+  getAllFriends(): Observable<Verify[]>{
+   return this.allMyFriends = this.addFriends.getVerifyAccWithConnectedFriends(this.verifyId)
+    console.log("all",this.allMyFriends);
+    
+  }
+
   ngOnInit(): void {
+    this.verifyId = this.localStorage.getLocalStorage("verifyId");
     this.userName = this.localStorage.getLocalStorage('name');
 
     this.getAllUsers().subscribe();
@@ -58,5 +69,6 @@ export class ProfileComponent {
 
     this.getVeriByUsername().subscribe();
     
+    this.getAllFriends().subscribe();
   }
 }

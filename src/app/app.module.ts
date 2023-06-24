@@ -16,6 +16,7 @@ import { StoreModule } from '@ngrx/store';
 import { appReducer } from './ngrx-store/reducers/app.reducer';
 import { AllVerifyUsersComponent } from './component/all-verify-users/all-verify-users.component';
 import { AllMyFriendsComponent } from './component/all-my-friends/all-my-friends.component';
+import { FooterComponent } from './component/flayout/footer/footer.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { AllMyFriendsComponent } from './component/all-my-friends/all-my-friends
     ProfileComponent,
     AllVerifyUsersComponent,
     AllMyFriendsComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

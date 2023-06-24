@@ -7,20 +7,22 @@
   </div>
 </nav>
 
-<div class="d-flex mt-4">
-
+<div class="d-flex mt-4 main">
   <div class="d-flex" style="width: 20%; ">
     <div class="d-block">
-      <div class="m-3 text-center">
+      <div class="mt-5 text-center">
         <a href="#" class="text-decoration-none"><i class="fab fa-youtube"></i> Youtube</a>
       </div>
+      <br>
       <div class="m-3 text-center">
         <a href="#" class="text-decoration-none"><i class="fab fa-facebook"></i> Facebook</a>
       </div>
+      <br>
       <div class="m-3 text-center">
         <a href="#" class="text-decoration-none"><i class="fab fa-instagram"></i> Instagram</a>
       </div>
-      <div>
+      <br>
+      <div class="text-center">
         <span class="bi bi-heart"></span>
         <i class="fas fa-star"></i>
         <i class="fas fa-heart"></i>
@@ -28,46 +30,61 @@
     </div>
   </div>
 
-  <div class="d-flex justify-content-center align-items-center" style="background-color:white; width: 60%">
+  <div class="d-flex justify-content-center align-items-center" style="background-color: white; width: 60%">
     <div *ngIf="postByPostName | async as postName">
       <div *ngIf="postName.length > 0; else noPosts">
-        <h3>My Post</h3>
-        <div *ngFor="let allPost of postName; let i = index">
-          <div class="btn btn-primary" [routerLink]="['/post']">
-            {{ i + 1 }} {{ allPost.postText }}
+        <h3 class="text-center">My Posts</h3>
+        <div *ngFor="let allPost of postName; let i = index" class="post">
+          <div class="post-header">
+            <span class="post-number">Number of post-{{ i + 1 }} </span>
           </div>
-        </div>
+          <div class="post-header">
+            <span  class="post-number">UserName:{{allPost.postName}}</span>
+          </div>
+          <div class="post-content">
+           <div class="card card-footer">
+            <span class="post-numbet">Post Text: {{ allPost.postText }}</span>
+           </div>
+          </div>
+        </div> 
       </div>
       <ng-template #noPosts>
         <p>Ne postoji nijedan vaš post.</p>
       </ng-template>
     </div>
   </div>
-
-  <div class="d-flex" style="width: 20%">
+  
+  <div class="d-flex user-info text-white">
     <div *ngIf="(allVerifyUser | async) as verify; else noVerify" class="p-3">
+      <div *ngIf="allMyFriends | async as allMyFriends">
+        <div class="container mb-5">
+          All friends: {{allMyFriends.length}}
+        </div>
+      </div>
+      
       <div class="mb-2">
-        <strong>Last Name: </strong>{{ verify.lastNameAccount }}
+        <i class="fas fa-user"></i> <strong>Last Name:</strong> {{ verify.lastNameAccount }}
       </div>
       <div class="mb-2">
-        <strong>Age: </strong>{{ verify.age }}
+        <i class="fas fa-calendar-alt"></i> <strong>Age:</strong> {{ verify.age }}
       </div>
       <div class="mb-2">
-        <strong>Job: </strong>{{ verify.job }}
+        <i class="fas fa-briefcase"></i> <strong>Job:</strong> {{ verify.job }}
       </div>
       <div class="mb-2">
-        <strong>Phone: </strong>{{ verify.phone }}
+        <i class="fas fa-phone"></i> <strong>Phone:</strong> {{ verify.phone }}
       </div>
     </div>
+     
     <ng-template #noVerify>
       <div>
-        <h5>Molim vas verifukujte nalog kako bi mogli da komentarisete i postavljate komentare!!</h5>
-
+        <h5>Molim vas verifikujte nalog kako biste mogli da komentarišete i postavljate komentare!</h5>
         <button [routerLink]="['/verify']">Verify</button>
-
       </div>
-
     </ng-template>
   </div>
+  
+  
 
-</div>
+<app-footer
+></app-footer>

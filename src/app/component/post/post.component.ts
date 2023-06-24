@@ -10,6 +10,7 @@ import { CommentService } from 'src/app/service/comment.service';
 import { Comment } from 'src/app/interface/Comment-interface';
 import { Router } from '@angular/router';
 import { LikePostService } from 'src/app/service/like-post.service';
+import { Like } from 'src/app/interface/Like-interface';
 
 @Component({
   selector: 'app-post',
@@ -27,11 +28,12 @@ export class PostComponent {
   verifyId: number;
   allComments$: Observable<Comment[]>;
   posts: { [postId: number]: Comment[] } = {};
-  postCountLike: number;
-  postCountDislike: number; 
   postId: number;
-  counteLike: number = 0;
-  counteDislike: number = 0
+  postCountLike: number = 0;
+  postCountDislike: number = 0
+  likeById: Observable<Like>;
+  allLike: Observable<Like[]>
+
   
   constructor(private formBuilder: FormBuilder,
     private localStorage: LocalStorageService,
@@ -51,24 +53,38 @@ export class PostComponent {
   }
 
   getLikeOrDislike(postId: number) {
-   console.log("thisPostId", this.postId);
    this.postId = postId;
     this.likePostService.addLike( this.postCountLike, this.postCountDislike, this.postId, this.verifyId ).pipe(
       tap( response =>{
-        console.log("responseLike",response);
       })
-    ).subscribe( response =>{
-      console.log("subsrcieLike",response);
-      
+    ).subscribe(response => {
+      console.log("subsrcieLike", response);
+    });
+  };
+
+
+  getLikeById(): Observable<Like>{
+   return this.likeById = this.likePostService.getLikePostById(this.postId).pipe(
+    tap( response =>{
+      console.log("byIdLike",response);
     })
+   )
+  };
+
+  getAllLikes(): Observable<Like[]> {
+    return this.allLike = this.likePostService.getAllLike().pipe(
+      tap(response => {
+        console.log("alllikes", response);
+      })
+    );
   }
 
   addLike(){
-  this.counteLike ++;
+  this.postCountLike ++;
   }
 
   addDislike(){
-    this.counteDislike ++;
+    this.postCountDislike ++;
   }
 
 
@@ -171,6 +187,11 @@ export class PostComponent {
   }
 
   ngOnInit(): void {
+
+    this.getAllLikes().subscribe(res =>{
+      console.log("alllIKEsUBS",res);
+    })
+
      
     this.verifyName = this.localStorage.getLocalStorage("name")
 
@@ -184,7 +205,7 @@ export class PostComponent {
     this.allComments().subscribe();
     
     this.getVerifyById().subscribe()
-    
-  }
+  
+}
 }
 

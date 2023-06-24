@@ -1,24 +1,26 @@
-<p>all-verify-users works!</p>
-<div class="container">
+<div class="container mt-5" style="width: 400px;">
     <div *ngIf="verifyUsers | async as verifyUsers">
-        <div class="card card-header text-center" *ngFor="let allVerify of verifyUsers">
-            <div class="card card-body">
-                {{allVerify.nameAccount}} {{allVerify.lastNameAccount}}
-                <button class="btn btn-primary form-control" (click)="viewFriend(allVerify)">View or add
-                    friends</button>
-            </div>
-        </div>
+      <div class="text-center" *ngFor="let allVerify of verifyUsers">
+        <div class="container mt-4">
+            <ul class="user-list">
+              <li class="user-item" *ngFor="let allVerify of verifyUsers">
+                <div class="user-info">
+                  <h3>{{allVerify.nameAccount}} {{allVerify.lastNameAccount}}</h3>
+                  <button class="btn" (click)="viewFriend(allVerify)">Add Friends</button>
+                </div>
+              </li>
+            </ul>
+          </div>
+          
+      </div>
     </div>
-
     <div *ngIf="selectedUsers">
-        <a class="user-details" style="background-color: #182b3a;
-        background-image: linear-gradient(315deg, #182b3a 0%, #20a4f3 74%);
-        ">
-            <button class="btn btn-primary" (click)="viewClose()">X</button>
-            <button class="btn btn-warning" (click)="addFriends()">Add Friend</button>
-            <h4> {{selectedUsers.nameAccount}} </h4>
-            <h4> {{selectedUsers.lastNameAccount}} </h4>
-            <h4> {{selectedUsers.job}} </h4>
-        </a>
+        <div class="user-details">
+          <button class="close-btn" (click)="viewClose()">X</button>
+          <button class="btn btn-warning" (click)="addFriends()">Add Friend</button>
+          <h4>{{selectedUsers.nameAccount}}</h4>
+          <h4>{{selectedUsers.lastNameAccount}}</h4>
+          <h4>{{selectedUsers.job}}</h4>
+        </div>
+      </div>
     </div>
-</div>

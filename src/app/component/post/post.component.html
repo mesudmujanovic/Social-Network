@@ -1,5 +1,5 @@
 <div class="container mt-5">
- 
+
   <form class="form-group form-control mb-4" [formGroup]="postForm" (ngSubmit)="onPost()" style="background-color: #a55c1b;
   background-image: linear-gradient(315deg, #a55c1b 0%, #000000 74%)">
     <label class="d-flex justify-content-center align-items-center" for="postText" style="color: white;">Post</label>
@@ -41,19 +41,19 @@
                 <button class="btn" type="submit" style="color: white;" (click)="getClickedPost(post.id)">Add
                   Comment</button>
               </form>
-              <button class="btn btn primary" (click)="addLike()" (click)=" getLikeOrDislike(post.id)">Like
-              </button>  
-              <span>{{postCountLike}} {{counteLike}}</span>
-            <hr> <br>
-            <button class="btn btn primary" (click)="addDislike()" (click)=" getLikeOrDislike(post.id)">addDislike
-            </button>
-            <span>{{postCountDislike}}  {{counteDislike}}</span>
+            <div class="d-flex">
+              <button class="btn text-white" (click)="addLike(); getLikeOrDislike(post.id)">Like</button>
+              <h3 class="m-2  text-white">{{postCountLike}}</h3>
+              <hr><br>
+              <button class="btn  text-white" (click)="addDislike(); getLikeOrDislike(post.id)">addDislike</button>
+              <h3 class="m-2  text-white">{{postCountDislike}}</h3>
             </div>
-
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
+<app-footer
+></app-footer>
