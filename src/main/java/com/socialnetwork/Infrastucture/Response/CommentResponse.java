@@ -12,7 +12,6 @@ public class CommentResponse {
     private String commentText;
 
     private String commentName;
-
     private Long postId;
     private Long verId;
 
