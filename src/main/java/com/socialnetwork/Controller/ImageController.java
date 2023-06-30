@@ -1,6 +1,9 @@
 package com.socialnetwork.Controller;
 import com.socialnetwork.Entity.Image;
+import com.socialnetwork.Infrastucture.Response.ImageResponse;
 import com.socialnetwork.Repository.ImageRepository;
+import com.socialnetwork.Service.ImageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,38 +21,34 @@ import java.util.Optional;
 @CrossOrigin("*")
 public class ImageController {
 
-    private final ImageRepository imageRepository;
-
-    public ImageController(ImageRepository imageRepository) {
-        this.imageRepository = imageRepository;
-    }
+    @Autowired
+    public ImageService imageService;
 
     @PostMapping
-    public ResponseEntity<?> uploadImage(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<ImageResponse> uploadSliku(@RequestParam("file") MultipartFile file) {
         try {
-            Image image = new Image();
-            image.setName(file.getOriginalFilename());
-            image.setContent(file.getBytes());
-            System.out.println("Sadržaj slike: " + image.getContent());
-
-            imageRepository.save(image);
-            return ResponseEntity.ok().build();
+            Image slika = imageService.uploadImage(file);
+            ImageResponse imageResponse = new ImageResponse();
+            imageResponse.setId(slika.getId());
+            imageResponse.setName(slika.getName());
+            imageResponse.setContent(slika.getContent());
+            return ResponseEntity.ok(imageResponse);
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
+
     @GetMapping("/allImages")
     public ResponseEntity<List<Image>> getAllImages() {
-        List<Image> images = imageRepository.findAll();
+        List<Image> images = imageService.getAllImages();
         return ResponseEntity.ok(images);
     }
 
     @GetMapping("/images/{id}")
     public ResponseEntity<String> getImageById(@PathVariable("id") Long id) {
-        Optional<Image> imageOptional = imageRepository.findById(id);
-        if (imageOptional.isPresent()) {
-            Image image = imageOptional.get();
+        Image image = imageService.getImageById(id);
+        if (image != null) {
             String base64Image = Base64.getEncoder().encodeToString(image.getContent());
             return ResponseEntity.ok()
                     .contentType(MediaType.APPLICATION_JSON)
@@ -58,5 +57,6 @@ public class ImageController {
             return ResponseEntity.notFound().build();
         }
     }
+
 
 }
