@@ -1,42 +1,38 @@
 package com.socialnetwork.Controller;
 import com.socialnetwork.Entity.Image;
 import com.socialnetwork.Infrastucture.Response.ImageResponse;
-import com.socialnetwork.Repository.ImageRepository;
 import com.socialnetwork.Service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/api/images")
+@RequestMapping("/api")
 @CrossOrigin("*")
 public class ImageController {
 
     @Autowired
     public ImageService imageService;
 
-    @PostMapping
-    public ResponseEntity<ImageResponse> uploadSliku(@RequestParam("file") MultipartFile file) {
-        try {
-            Image slika = imageService.uploadImage(file);
-            ImageResponse imageResponse = new ImageResponse();
-            imageResponse.setId(slika.getId());
-            imageResponse.setName(slika.getName());
-            imageResponse.setContent(slika.getContent());
-            return ResponseEntity.ok(imageResponse);
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+    @PostMapping("/upload")
+    public ResponseEntity<ImageResponse> uploadSliku(@RequestParam("file") MultipartFile file) throws IOException {
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        ImageResponse imageResponse = new ImageResponse();
+        Image slika = imageService.uploadImage(file);
+        imageResponse.setId(slika.getId());
+        imageResponse.setName(fileName);
+        imageResponse.setContent(slika.getContent());
+        return ResponseEntity.ok(imageResponse);
     }
+
 
 
     @GetMapping("/allImages")

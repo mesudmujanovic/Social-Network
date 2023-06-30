@@ -13,4 +13,6 @@ public class ImageResponse {
 
     @Lob
     private byte[] content;
+
+    private Integer userId;
 }

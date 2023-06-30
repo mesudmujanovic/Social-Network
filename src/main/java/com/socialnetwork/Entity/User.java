@@ -1,11 +1,8 @@
 package com.socialnetwork.Entity;
 
 import lombok.*;
-import org.springframework.security.core.parameters.P;
-
 import javax.persistence.*;
-import java.util.List;
-import java.util.stream.DoubleStream;
+
 
 @Entity
 @AllArgsConstructor

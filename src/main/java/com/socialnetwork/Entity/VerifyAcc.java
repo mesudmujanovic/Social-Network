@@ -46,4 +46,5 @@ public class VerifyAcc {
 
     @OneToMany( mappedBy = "verifyAcc", fetch = FetchType.LAZY)
     private List<LikePost> likePostList;
+
 }

@@ -20,4 +20,6 @@ public class Image {
 
     @Lob
     private byte[] content;
+
+
 }

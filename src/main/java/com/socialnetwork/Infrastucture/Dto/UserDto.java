@@ -1,5 +1,6 @@
 package com.socialnetwork.Infrastucture.Dto;
 
+import com.socialnetwork.Entity.User;
 import com.socialnetwork.Infrastucture.Request.User.SignupRequest;
 import com.socialnetwork.Infrastucture.Response.UserResponse;
 import lombok.AllArgsConstructor;
@@ -31,5 +32,11 @@ public class UserDto {
         userResponse.setId(userDto.getId());
         userResponse.setUsername(userDto.getUsername());
         return userResponse;
+    }
+
+    public static User toEntity(UserDto userDto){
+        User user = new User();
+        user.setId(userDto.getId());
+        return user;
     }
 }

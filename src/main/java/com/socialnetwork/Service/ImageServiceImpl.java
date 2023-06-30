@@ -1,6 +1,8 @@
 package com.socialnetwork.Service;
 
 import com.socialnetwork.Entity.Image;
+import com.socialnetwork.Entity.User;
+import com.socialnetwork.Infrastucture.Dto.UserDto;
 import com.socialnetwork.Repository.ImageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +18,9 @@ public class ImageServiceImpl implements ImageService{
     @Autowired
     ImageRepository imageRepository;
 
-    @Override
+    @Autowired
+    UserService userService;
+
     public Image uploadImage(MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         Image image = new Image();
@@ -24,6 +28,7 @@ public class ImageServiceImpl implements ImageService{
         image.setContent(file.getBytes());
         return imageRepository.save(image);
     }
+
 
     @Override
     public List<Image> getAllImages() {
