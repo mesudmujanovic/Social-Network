@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,8 +16,7 @@ import { StoreModule } from '@ngrx/store';
 import { appReducer } from './ngrx-store/reducers/app.reducer';
 import { AllVerifyUsersComponent } from './component/all-verify-users/all-verify-users.component';
 import { AllMyFriendsComponent } from './component/all-my-friends/all-my-friends.component';
-import { FooterComponent } from './component/flayout/footer/footer.component';
-
+import { ImagesComponent } from './component/image/image.component';
 
 @NgModule({
   declarations: [
@@ -30,8 +29,8 @@ import { FooterComponent } from './component/flayout/footer/footer.component';
     ProfileComponent,
     AllVerifyUsersComponent,
     AllMyFriendsComponent,
-    FooterComponent,
-  ],
+    ImagesComponent
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,

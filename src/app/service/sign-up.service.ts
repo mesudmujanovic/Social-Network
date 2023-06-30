@@ -11,7 +11,7 @@ export class SignUpService {
 
   constructor( private http: HttpClient ) { }
 
-  signUp( username: string, password: number ): Observable<any> {
+  signUp( username: string, password: string ): Observable<any> {
     const userPass = {username, password}
     return this.http.post<User>(`${BASE_URL}/auth/signup`,userPass)
   }
