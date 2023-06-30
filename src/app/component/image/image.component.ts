@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Image } from 'src/app/interface/Image-interface';
 import { ImageService } from 'src/app/service/image.service';
+import { LocalStorageService } from 'src/app/service/local-storage.service';
 
 @Component({
   selector: 'app-image',
@@ -13,11 +15,12 @@ export class ImagesComponent implements OnInit {
   imagesId: Image;
   imageId: number
   imageSrc: any;
+  imageName: string;
 
-  constructor(private imageService: ImageService) {}
+  constructor(private imageService: ImageService, 
+    private localStorage: LocalStorageService) { }
 
   ngOnInit() {
-    this.imageId = 1;
     this.imageService.getAllImages().subscribe(
       (data: Image[]) => {
         this.images = data;
@@ -26,19 +29,22 @@ export class ImagesComponent implements OnInit {
       (error) => {
         console.log(error);
       }
-    );  
+    );
+
+  
   }
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
   }
 
-  uploadImage() {
+  uploadImage(){
     if (this.selectedFile) {
-      this.imageService.uploadImage(this.selectedFile).subscribe(
-         () => {
-          console.log('Image uploaded successfully');
-          this.selectedFile = null;
+    this.imageService.uploadImage(this.selectedFile).subscribe(
+        (res: Image) => {
+         this.imageId = res.id;
+         this.localStorage.setLocalStorage('imageId', this.imageId);
+         this.loadImage();
         },
         (error) => {
           console.error('Error uploading image:', error);
@@ -46,9 +52,9 @@ export class ImagesComponent implements OnInit {
       );
     }
   }
-  
- 
+
   loadImage() {
+    this.imageId = this.localStorage.getLocalStorage('imageId');
     this.imageService.getImageById(this.imageId).subscribe(
       (response: any) => {
         this.imageSrc = 'data:image/jpeg;base64,' + response;
@@ -58,12 +64,9 @@ export class ImagesComponent implements OnInit {
       }
     );
   }
-  
-  
-  
 
   getImageUrl(content: string): string {
     return 'data:image/jpeg;base64,' + content;
   }
-  
+
 }

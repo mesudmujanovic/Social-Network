@@ -11,25 +11,20 @@ export class ImageService {
 
   constructor(private http: HttpClient) { }
 
-  uploadImage(file: File): Observable<any> {
+  uploadImage(file: File): Observable<Image> {
     const formData = new FormData();
     formData.append('file', file);
     console.log('Sadržaj slike:', formData.get('file'));
-
-    return this.http.post(this.baseUrl, formData);
+    return this.http.post<Image>(this.baseUrl, formData);
   }
 
   getAllImages(): Observable<Image[]> {
     return this.http.get<Image[]>(`${this.baseUrl}/allImages`);
   }
 
-  // getImageById(id: number): Observable<HttpResponse<Image>> {
-  //   return this.http.get<Image>(`${this.baseUrl}/images/${id}`, { observe: 'response' });
-  // }
-  
   getImageById(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/images/${id}`, { responseType: 'text' });
   }
-  
+
 
 }
