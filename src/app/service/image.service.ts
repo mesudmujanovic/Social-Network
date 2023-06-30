@@ -7,7 +7,7 @@ import { Image } from '../interface/Image-interface';
   providedIn: 'root'
 })
 export class ImageService {
-  private baseUrl = 'http://localhost:8080/api/images';
+  private baseUrl = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient) { }
 
@@ -15,8 +15,10 @@ export class ImageService {
     const formData = new FormData();
     formData.append('file', file);
     console.log('Sadržaj slike:', formData.get('file'));
-    return this.http.post<Image>(this.baseUrl, formData);
+    console.log('UserID:', formData.get('userId'));
+    return this.http.post<Image>(`${this.baseUrl}/upload`, formData);
   }
+  
 
   getAllImages(): Observable<Image[]> {
     return this.http.get<Image[]>(`${this.baseUrl}/allImages`);

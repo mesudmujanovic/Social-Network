@@ -29,6 +29,8 @@ export class ProfileComponent {
     private verifyService: VerifyService,
     private addFriends: AddFriendsService) { }
 
+
+    
   getPostByUsername(): Observable<Post[]> {
     return this.postByPostName = this.postService.getPostByUserName(this.userName).pipe(
       tap(response => {

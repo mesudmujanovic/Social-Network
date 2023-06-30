@@ -30,8 +30,6 @@ export class ImagesComponent implements OnInit {
         console.log(error);
       }
     );
-
-  
   }
 
   onFileSelected(event: any) {

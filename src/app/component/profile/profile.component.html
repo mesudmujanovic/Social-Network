@@ -1,4 +1,6 @@
-<nav class="navbar navbar-light navbar-brand bg-primary">
+<nav class="navba" style="background-color: #182b3a;
+background-image: linear-gradient(315deg, #182b3a 0%, #20a4f3 74%);
+">
   <div class="d-flex justify-content-center align-items-center w-100">
     <a class="navbar-brand" [routerLink]="['/post']">Home</a>
     <a class="navbar-brand" [routerLink]="['/friends']">Friends</a>
@@ -30,29 +32,41 @@
     </div>
   </div>
 
-  <div class="d-flex justify-content-center align-items-center" style="background-color: white; width: 60%">
+
+
+  <div class="d-flex flex-column justify-content-center align-items-center" style="background-color: white; width: 60%">
+
+    <div class="app-image" style="margin-bottom: 20px;">
+      <app-image>
+      </app-image>
+    </div>
+  
     <div *ngIf="postByPostName | async as postName">
       <div *ngIf="postName.length > 0; else noPosts">
+  
         <h3 class="text-center">My Posts</h3>
         <div *ngFor="let allPost of postName; let i = index" class="post">
           <div class="post-header">
             <span class="post-number">Number of post-{{ i + 1 }} </span>
           </div>
           <div class="post-header">
-            <span  class="post-number">UserName:{{allPost.postName}}</span>
+            <span class="post-number">UserName:{{allPost.postName}}</span>
           </div>
           <div class="post-content">
-           <div class="card card-footer">
-            <span class="post-numbet">Post Text: {{ allPost.postText }}</span>
-           </div>
+            <div class="card card-footer">
+              <span class="post-number">Post Text: {{ allPost.postText }}</span>
+            </div>
           </div>
-        </div> 
+        </div>
       </div>
       <ng-template #noPosts>
         <p>Ne postoji nijedan vaš post.</p>
       </ng-template>
     </div>
   </div>
+  
+  
+
   
   <div class="d-flex user-info text-white">
     <div *ngIf="(allVerifyUser | async) as verify; else noVerify" class="p-3">
