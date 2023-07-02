@@ -11,6 +11,12 @@
           <a class="navbar-brand" [routerLink]="['/profile']">
             <i class="fas fa-edit"></i>
           </a>
+          <a class="navbar-brand">
+            <i class="fas fa-search search-icon" (click)="show()"></i>
+            <app-search class="search" *ngIf="showSearch"></app-search>
+          </a>
+          
+          
         </div>
     </div>
 

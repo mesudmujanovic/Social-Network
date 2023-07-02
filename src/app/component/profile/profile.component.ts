@@ -21,6 +21,7 @@ export class ProfileComponent {
   allVerifyUser: Observable<Verify>;
   allMyFriends: Observable<Verify[]>
   verifyId: number;
+  showSearch: boolean = false;
   
   constructor(private postService: PostService,
     private localStorage: LocalStorageService,
@@ -29,6 +30,11 @@ export class ProfileComponent {
     private addFriends: AddFriendsService) { }
 
 
+    show(){
+     this.showSearch = !this.showSearch
+    }
+
+    
     
   getPostByUsername(): Observable<Post[]> {
     return this.postByPostName = this.postService.getPostByUserName(this.userName).pipe(
