@@ -1,6 +1,9 @@
 package com.socialnetwork.Infrastucture.Request;
 
 import lombok.Data;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
+import javax.persistence.Lob;
 
 @Data
 public class VerifyRequest {
@@ -9,11 +12,10 @@ public class VerifyRequest {
 
     public String lastNameAccount;
 
-    public int age;
+    private String age;
 
     public String job;
 
     public String phone;
-
 
 }

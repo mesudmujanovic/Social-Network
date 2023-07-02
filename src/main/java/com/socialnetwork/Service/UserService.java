@@ -1,5 +1,6 @@
 package com.socialnetwork.Service;
 
+import com.socialnetwork.Entity.User;
 import com.socialnetwork.Infrastucture.Dto.UserDto;
 
 import java.util.List;

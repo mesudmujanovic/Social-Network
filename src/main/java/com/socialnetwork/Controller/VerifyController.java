@@ -1,6 +1,7 @@
 package com.socialnetwork.Controller;
 
 
+import com.socialnetwork.Entity.VerifyAcc;
 import com.socialnetwork.Infrastucture.Dto.VerifyDto;
 import com.socialnetwork.Infrastucture.Request.VerifyRequest;
 import com.socialnetwork.Infrastucture.Response.VerifyResponse;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -69,4 +71,4 @@ public class VerifyController {
     }
 
 
- }
+}

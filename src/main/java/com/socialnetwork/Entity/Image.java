@@ -3,7 +3,6 @@ package com.socialnetwork.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 
 @Data
@@ -18,8 +17,21 @@ public class Image {
 
     private String name;
 
+    public String getVerName() {
+        return verName;
+    }
+
+
+    public Image(String verName) {
+        this.verName = verName;
+    }
+
+    private String verName;
+
     @Lob
     private byte[] content;
+
+
 
 
 }

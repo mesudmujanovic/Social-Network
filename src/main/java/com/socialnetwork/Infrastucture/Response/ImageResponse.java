@@ -11,8 +11,9 @@ public class ImageResponse {
 
     private String name;
 
+    private String verName;
+
     @Lob
     private byte[] content;
 
-    private Integer userId;
 }

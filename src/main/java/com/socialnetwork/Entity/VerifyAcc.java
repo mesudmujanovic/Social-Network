@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -20,7 +21,7 @@ public class VerifyAcc {
 
     private String lastNameAccount;
 
-    private int age;
+    private String age;
 
     private String job;
 
@@ -46,5 +47,8 @@ public class VerifyAcc {
 
     @OneToMany( mappedBy = "verifyAcc", fetch = FetchType.LAZY)
     private List<LikePost> likePostList;
+
+
+
 
 }

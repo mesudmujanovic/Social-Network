@@ -3,6 +3,9 @@ package com.socialnetwork.Infrastucture.Dto;
 import com.socialnetwork.Infrastucture.Request.VerifyRequest;
 import com.socialnetwork.Infrastucture.Response.VerifyResponse;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.persistence.Lob;
 
 @Data
 public class VerifyDto {
@@ -10,7 +13,7 @@ public class VerifyDto {
     private Long id;
     private String nameAccount;
     private String lastNameAccount;
-    private int age;
+    private String age;
     private String job;
     private String phone;
 
