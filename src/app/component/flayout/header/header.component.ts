@@ -45,24 +45,4 @@ export class HeaderComponent {
     )
   }
 
-  search(keyword: string): void {
-    this.filteredUsers = this.users.filter(user => {
-      return user.nameAccount.toLowerCase().includes(keyword.toLowerCase()) ||
-        user.lastNameAccount.toLowerCase().includes(keyword.toLowerCase());
-    })
-  }
-
-  userView(user) {
-    this.selectedUser = user;
-    this.filteredUsers = [];
-  }
-
-  closeView() {
-    this.selectedUser = null;
-  }
-
-  closeFoundUsers(){
-    this.filteredUsers = [];
-  }
-
 }

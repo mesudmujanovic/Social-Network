@@ -18,6 +18,7 @@ import { AllVerifyUsersComponent } from './component/all-verify-users/all-verify
 import { AllMyFriendsComponent } from './component/all-my-friends/all-my-friends.component';
 import { ImagesComponent } from './component/image/image.component';
 import { SafeUrl } from '@angular/platform-browser';
+import { SearchComponent } from './component/flayout/search/search.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import { SafeUrl } from '@angular/platform-browser';
     ProfileComponent,
     AllVerifyUsersComponent,
     AllMyFriendsComponent,
-    ImagesComponent
+    ImagesComponent,
+    SearchComponent
    ],
   imports: [
     BrowserModule,
