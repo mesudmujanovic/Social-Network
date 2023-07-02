@@ -22,7 +22,6 @@ export class ProfileComponent {
   allMyFriends: Observable<Verify[]>
   verifyId: number;
   
-
   constructor(private postService: PostService,
     private localStorage: LocalStorageService,
     private loginService: LoginService,
@@ -54,6 +53,7 @@ export class ProfileComponent {
       }) )
     )
   }
+  
 
   getAllFriends(): Observable<Verify[]>{
    return this.allMyFriends = this.addFriends.getVerifyAccWithConnectedFriends(this.verifyId)

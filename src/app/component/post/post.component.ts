@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable, catchError, distinctUntilChanged, map, of, switchMap, take, tap } from 'rxjs';
+import { Observable, catchError, of, switchMap, take, tap } from 'rxjs';
 import { Post } from 'src/app/interface/Post-interface';
 import { Verify } from 'src/app/interface/Verify-interface';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
@@ -142,7 +142,6 @@ export class PostComponent {
       tap(comments => {
         console.log(comments);
         comments.forEach(comment => {
-          //all postId from Comment
           const postId = comment.postId;
        
           if (postId in this.posts) {

@@ -1,11 +1,11 @@
+
 export interface Verify {
   
-    id: number;
     nameAccount: string;
     lastNameAccount: string;
-    age: number;
+    age: string;
     job: string;
     phone: string;
-    userId: number;
+    id: number
   }
   

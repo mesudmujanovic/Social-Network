@@ -1,9 +1,17 @@
-<p>image works!</p>
-<input type="file" (change)="onFileSelected($event)" accept="image/*">
-<button (click)="uploadImage()">Upload</button>
 
 
-   <div *ngIf="imageSrc">
-    <img [src]="imageSrc" alt="Image" class="img-profile">
+<div class="container">
+  <div *ngIf="imageVerName; else uploadSection">
+    <img [src]="imageVerName" alt="Image" class="img-profile">
   </div>
   
+  <ng-template #uploadSection>
+    <input class="file-input" type="file" (change)="onFileSelected($event)" accept="image/*">
+    <button class="upload-button" (click)="uploadImage()">Upload</button>
+  </ng-template>
+  
+</div>
+  
+<!-- <div *ngIf="imageSrc">
+  <img [src]="imageSrc" alt="Image" class="img-profile">
+</div> -->

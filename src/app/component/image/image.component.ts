@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Image } from 'src/app/interface/Image-interface';
 import { ImageService } from 'src/app/service/image.service';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
@@ -16,20 +15,27 @@ export class ImagesComponent implements OnInit {
   imageId: number
   imageSrc: any;
   imageName: string;
+  verName: string;
+  imageVerName: string;
 
   constructor(private imageService: ImageService, 
     private localStorage: LocalStorageService) { }
 
   ngOnInit() {
+    this.verName = this.localStorage.getLocalStorage("name");
+
     this.imageService.getAllImages().subscribe(
       (data: Image[]) => {
         this.images = data;
-        this.loadImage();
+        console.log("imag",data);
+        
+        this.getName()
       },
       (error) => {
         console.log(error);
       }
     );
+   
   }
 
   onFileSelected(event: any) {
@@ -38,12 +44,17 @@ export class ImagesComponent implements OnInit {
 
   uploadImage(){
     if (this.selectedFile) {
-    this.imageService.uploadImage(this.selectedFile).subscribe(
+      const formData = new FormData();
+    formData.append('file', this.selectedFile);
+    formData.append('verName', this.verName);
+    this.imageService.uploadImage(formData).subscribe(
         (res: Image) => {
          this.imageId = res.id;
          this.localStorage.setLocalStorage('imageId', this.imageId);
-         this.loadImage();
-        },
+         console.log("res",res);
+         this.getName();
+      //  this.loadImage();
+      },
         (error) => {
           console.error('Error uploading image:', error);
         }
@@ -51,11 +62,24 @@ export class ImagesComponent implements OnInit {
     }
   }
 
+  getName(){
+    this.imageService.getImageByName(this.verName).subscribe(
+      (response: any) => {
+        this.imageVerName = 'data:image/jpeg;base64,' + response;
+        console.log("this.getName",this.imageVerName);
+      },
+      (error) => {
+        console.error('Error retrieving image:', error);
+      }
+    )
+  }
+
   loadImage() {
     this.imageId = this.localStorage.getLocalStorage('imageId');
     this.imageService.getImageById(this.imageId).subscribe(
       (response: any) => {
         this.imageSrc = 'data:image/jpeg;base64,' + response;
+        console.log("imageserc",this.imageSrc);
       },
       (error) => {
         console.error('Error retrieving image:', error);

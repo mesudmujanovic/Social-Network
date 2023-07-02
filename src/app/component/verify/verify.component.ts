@@ -68,6 +68,7 @@ export class VerifyComponent {
     }
   }
 
+
   allVerifuUsers(): Observable<Verify[]> {
     return this.allVerify = this.verifyService.getAll().pipe(
       tap(response => {

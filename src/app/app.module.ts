@@ -17,7 +17,7 @@ import { appReducer } from './ngrx-store/reducers/app.reducer';
 import { AllVerifyUsersComponent } from './component/all-verify-users/all-verify-users.component';
 import { AllMyFriendsComponent } from './component/all-my-friends/all-my-friends.component';
 import { ImagesComponent } from './component/image/image.component';
-
+import { SafeUrl } from '@angular/platform-browser';
 @NgModule({
   declarations: [
     AppComponent,
