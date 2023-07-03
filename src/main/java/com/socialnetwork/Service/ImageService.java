@@ -12,6 +12,8 @@ public interface ImageService {
 
     List<Image> getAllImages();
 
+    List<Image> getAllImagesAndName();
+
     Image getImageById(Long id);
 
     Image getImageByVerName(String verName);

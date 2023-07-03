@@ -38,6 +38,11 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
+    public List<Image> getAllImagesAndName() {
+        return imageRepository.findAll();
+    }
+
+    @Override
     public Image getImageById(Long id) {
         return imageRepository.findById(id).orElse(null);
     }

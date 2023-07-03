@@ -21,7 +21,6 @@ public class SocialnetworkApplication {
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
 		return multipartResolver;
 	}
-
 	@Bean
 	public Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder() {
 		Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();

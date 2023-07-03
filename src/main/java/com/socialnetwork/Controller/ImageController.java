@@ -11,6 +11,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
@@ -73,12 +74,36 @@ public class ImageController {
         }
     }
 
-
-    @GetMapping("/allImages")
-    public ResponseEntity<List<Image>> getAllImages() {
-        List<Image> images = imageService.getAllImages();
+    @GetMapping("/allImagesVerName")
+    public ResponseEntity<List<Image>> getAllImagesVerName() {
+        List<Image> images = imageService.getAllImagesAndName();
         return ResponseEntity.ok(images);
     }
+
+    @GetMapping("/allImages")
+    public ResponseEntity<List<String>> getAllImages() {
+        List<Image> images = imageService.getAllImages();
+        List<String> base64Images = new ArrayList<>();
+
+        for (Image image : images) {
+            String base64Image = Base64.getEncoder().encodeToString(image.getContent());
+            base64Images.add(base64Image);
+        }
+        if (!base64Images.isEmpty()) {
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(base64Images);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
+
+
+
+
+
 
 
 }
