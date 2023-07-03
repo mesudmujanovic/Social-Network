@@ -22,6 +22,9 @@ export class ProfileComponent {
   allMyFriends: Observable<Verify[]>
   verifyId: number;
   showSearch: boolean = false;
+  showAllMyPosts: boolean = false;
+  showAllMyComments: boolean = false;
+  showMyTexts: boolean = false
   
   constructor(private postService: PostService,
     private localStorage: LocalStorageService,
@@ -29,10 +32,26 @@ export class ProfileComponent {
     private verifyService: VerifyService,
     private addFriends: AddFriendsService) { }
 
+    showAllText(){
+    this.showMyTexts = !this.showMyTexts
+
+    }
+
+    showAllComm(){
+      this.showAllMyComments = !this.showAllMyComments
+      this.showAllMyPosts = false
+      this.showMyTexts = false;
+    }
+
+    showAllPost(){
+      this.showAllMyPosts = !this.showAllMyPosts
+      this.showAllMyComments = false;
+      this.showMyTexts = false;
+    }
 
     show(){
-     this.showSearch = !this.showSearch
-    }
+      this.showSearch = !this.showSearch;
+     }
 
     
     

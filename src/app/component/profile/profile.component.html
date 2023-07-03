@@ -1,66 +1,117 @@
 <div class="d-flex main">
 
-    <div class="header-profile mt-4cx" style="width: 14%; ">
-        <div  style="display: flex; flex-direction: column; justify-content: end; align-items: end;">
-          <a class="navbar-brand" [routerLink]="['/post']">
-            <i class="fas fa-home"></i>
-          </a>
-          <a class="navbar-brand" [routerLink]="['/friends']">
-            <i class="fas fa-users"></i> 
-          </a>
-          <a class="navbar-brand" [routerLink]="['/profile']">
-            <i class="fas fa-edit"></i>
-          </a>
-          <a class="navbar-brand">
-            <i class="fas fa-search search-icon" (click)="show()"></i>
-            <app-search class="search" *ngIf="showSearch"></app-search>
-          </a>
-          
-          
+  <div class="header-profile  mt-4" style="width: 14%;">
+    <div class="icon-meny">
+      <a class="navbar-brand" [routerLink]="['/post']">
+        <i class="fas fa-home"></i>
+      </a>
+      <a class="navbar-brand" [routerLink]="['/friends']">
+        <i class="fas fa-users"></i>
+      </a>
+      <a class="navbar-brand" [routerLink]="['/profile']">
+        <i class="fas fa-edit"></i>
+      </a>
+      <a class="navbar-brand" style="cursor:pointer;">
+        <i class="fas fa-search search-icon" (click)="show()"></i>
+        <app-search class="search" *ngIf="showSearch"></app-search>
+      </a>
+    </div>
+  </div>
+  <!--header end-->
+
+  <!-- main start -->
+  <div class="profile-image d-flex flex-column justify-content-center align-items-center">
+    <div class="app-image">
+      <app-image></app-image>
+    </div>
+    <div class="main2 d-flex user-info">
+      <div *ngIf="(allVerifyUser | async) as verify" class="p-3">
+        <div class="all-info">
+          <div class="mb-2">
+            <strong>{{ userName }} {{ verify.lastNameAccount }}</strong>
+          </div>
+          <div class="mb-2" style="color: darkgrey; cursor: pointer;">
+            <i style="color: darkgrey;" class="fas fa-calendar-alt info"></i> <strong >Age:</strong> {{ verify.age }}
+          </div>
+          <div class="mb-2" style="color: darkgrey;cursor: pointer;">
+            <i style="color: darkgrey;" class="fas fa-briefcase info"></i> <strong style="color: darkgrey;">Job:</strong> {{ verify.job }}
+          </div>
+          <div *ngIf="allMyFriends | async as allMyFriends; else noFriend">
+            <div class="mb-2" style="color: darkgrey; cursor: pointer;">
+              <i class="fas fa-briefcase info" style="color: darkgrey;"></i>  <strong style="color: darkgrey;">All Friends</strong> {{allMyFriends.length}}
+            </div>
+          </div>
         </div>
+      </div>
+
+      <ng-template #noFriend>
+        <div>
+          <h5>
+            You don't have friends
+          </h5>
+        </div>
+      </ng-template>
     </div>
 
-    <div class="profile-image d-flex flex-column justify-content-center align-items-center">
-      <div class="app-image">
-        <app-image></app-image>
-      </div>
-     
-  <div class="main2 d-flex user-info">
-    <div *ngIf="(allVerifyUser | async) as verify; else noVerify" class="p-3">
-      <div class="all-info">
-        <div class="mb-2">
-         <strong>{{ userName }} {{ verify.lastNameAccount }}</strong> 
-        </div>
-        <div class="mb-2">
-          <i class="fas fa-calendar-alt"></i> <strong>Age:</strong> {{ verify.age }}
-        </div>
-        <div class="mb-2">
-          <i class="fas fa-briefcase"></i> <strong>Job:</strong> {{ verify.job }}
-        </div>
-        <div *ngIf="allMyFriends | async as allMyFriends; else noFriend">
-          <div class="mb-2">
-            <i class="fas fa-briefcase"></i> <strong>All Friends</strong> {{allMyFriends.length}}
+    <!-- /////// -->
+    <div class="razd">
+      <div (click)="showAllPost()" class="levo">
+          <h5 >All My Posts</h5>
+        <div *ngIf="showAllMyPosts">
+          <div  *ngIf="postByPostName | async as postNames">
+            <div *ngIf="postNames.length > 0; else noPosts">
+              <div  *ngFor="let allPost of postNames; let i = index" class="post">
+               <div class="text-levo">
+                  <span>UserName:{{allPost.postName}}</span>
+                  <span>Number of post-{{ i + 1 }} </span>
+                  <span>Post Text: {{ allPost.postText }}</span>
+               </div>
+              </div>
+            </div>
+            <ng-template #noPosts>
+              <p>Ne postoji nijedan vaš post.</p>
+            </ng-template>
           </div>
-        </div> 
-      </div>
+        </div>
       </div>
 
-    <ng-template #noVerify>
-      <div>
-        <h5>Molim vas verifikujte nalog kako biste mogli da komentarišete i postavljate komentare!</h5>
-        <button [routerLink]="['/verify']">Verify</button>
+      <div (click)="showAllText()" class="sredina">
+        <h5>All My text</h5>
+        <div *ngIf="showMyTexts">
+        <div class="text-sredina">
+          <span>Lorem ipsum dolo.</span>
+        <span>Lorem ipsum dolor.</span>
+        <span>Lorem ipsum .</span>
+       
+        <span>Lorem ipsum .</span>
+        <span>Lorem ipsum.</span>
+        <span>Lorem ipsum d.</span>
+        </div>
+        </div>
       </div>
-    </ng-template>
-    <ng-template #noFriend>
-      <div>
-        <h5>
-          You don't have friends
-        </h5>
+
+      <div (click)="showAllComm()" class="desno">
+        <h5>All My lorem</h5>
+        <div *ngIf="showAllMyComments">
+        <div class="text-desno">
+          <span>Lorem ipsum dolo.</span>
+        <span>Lorem ipsum dolor.</span>
+        <span>Lorem ipsum .</span>
+        <span>Lorem ipsum.</span>
+        <span>Lorem ipsum d.</span>
+        <span>Lorem ipsum dolo.</span>
+        <span>Lorem ipsum dolor.</span>
+        <span>Lorem ipsum .</span>
+        <span>Lorem ipsum.</span>
+        <span>Lorem ipsum d.</span>
+        </div>
+
+        </div>
       </div>
-    </ng-template>
+    </div>
+<!---->
   </div>
-</div>
-  
+
 
   <div class="d-flex" *ngIf="postByPostName | async as postName">
     <div *ngIf="postName.length > 0; else noPosts">
@@ -84,7 +135,6 @@
     </ng-template>
   </div>
 
-  
 
 
 </div>
