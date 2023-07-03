@@ -14,8 +14,6 @@ export class ImageService {
 
   uploadImage(formData: FormData): Observable<Image> {
   
-    // console.log('Sadržaj slike:', formData.get('file'));
-    // console.log('nameImage:', formData.get('verName'));
     return this.http.post<Image>(`${this.baseUrl}/upload`, formData);
   }
   
@@ -32,5 +30,8 @@ export class ImageService {
     return this.http.get(`${this.baseUrl}/getImages/${verName}`, { responseType: 'text' })
   }
 
+  getImageVerName(): Observable<Image[]>{
+    return this.http.get<Image[]>(`${this.baseUrl}/allImagesVerName`)
+  }
 
 }

@@ -26,8 +26,7 @@ export class LoginComponent {
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private localStorage: LocalStorageService,
-    private router: Router,
-    private verifyService: VerifyService) {
+    private router: Router) {
 
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],

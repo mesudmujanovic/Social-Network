@@ -27,8 +27,6 @@ export class ImagesComponent implements OnInit {
     this.imageService.getAllImages().subscribe(
       (data: Image[]) => {
         this.images = data;
-        console.log("imag",data);
-        
         this.getName()
       },
       (error) => {

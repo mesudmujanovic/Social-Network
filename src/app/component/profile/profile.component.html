@@ -2,6 +2,9 @@
 
   <div class="header-profile  mt-4" style="width: 14%;">
     <div class="icon-meny">
+      <a class="navbar-brand">
+        <i class="fab fa-twitter" style="font-size: 50px;" ></i>
+      </a>
       <a class="navbar-brand" [routerLink]="['/post']">
         <i class="fas fa-home"></i>
       </a>
@@ -31,14 +34,16 @@
             <strong>{{ userName }} {{ verify.lastNameAccount }}</strong>
           </div>
           <div class="mb-2" style="color: darkgrey; cursor: pointer;">
-            <i style="color: darkgrey;" class="fas fa-calendar-alt info"></i> <strong >Age:</strong> {{ verify.age }}
+            <i style="color: darkgrey;" class="fas fa-calendar-alt info"></i> <strong>Age:</strong> {{ verify.age }}
           </div>
           <div class="mb-2" style="color: darkgrey;cursor: pointer;">
-            <i style="color: darkgrey;" class="fas fa-briefcase info"></i> <strong style="color: darkgrey;">Job:</strong> {{ verify.job }}
+            <i style="color: darkgrey;" class="fas fa-briefcase info"></i> <strong
+              style="color: darkgrey;">Job:</strong> {{ verify.job }}
           </div>
           <div *ngIf="allMyFriends | async as allMyFriends; else noFriend">
             <div class="mb-2" style="color: darkgrey; cursor: pointer;">
-              <i class="fas fa-briefcase info" style="color: darkgrey;"></i>  <strong style="color: darkgrey;">All Friends</strong> {{allMyFriends.length}}
+              <i class="fas fa-briefcase info" style="color: darkgrey;"></i> <strong style="color: darkgrey;">All
+                Friends</strong> {{allMyFriends.length}}
             </div>
           </div>
         </div>
@@ -56,16 +61,25 @@
     <!-- /////// -->
     <div class="razd">
       <div (click)="showAllPost()" class="levo">
-          <h5 >All My Posts</h5>
+        <h5>All My Posts</h5>
         <div *ngIf="showAllMyPosts">
-          <div  *ngIf="postByPostName | async as postNames">
-            <div *ngIf="postNames.length > 0; else noPosts">
-              <div  *ngFor="let allPost of postNames; let i = index" class="post">
-               <div class="text-levo">
-                  <span>UserName:{{allPost.postName}}</span>
-                  <span>Number of post-{{ i + 1 }} </span>
-                  <span>Post Text: {{ allPost.postText }}</span>
-               </div>
+          <div class="d-flex" *ngIf="postByPostName | async as postName">
+            <div *ngIf="postName.length > 0; else noPosts">
+              <h3 class="text-center">My Posts</h3>
+              <div *ngFor="let allPost of postName; let i = index" class="post">
+                <div class="text-levo">
+                  <div class="post-header">
+                    <span class="post-number">UserName:{{allPost.postName}}</span>
+                  </div>
+                  <div class="post-headesr">
+                    <span class="post-number">Number of post-{{ i + 1 }} </span>
+                  </div>
+                  <div class="post-content">
+                    <div class="card card-footer">
+                      <span class="post-number">Post Text: {{ allPost.postText }}</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <ng-template #noPosts>
@@ -78,63 +92,73 @@
       <div (click)="showAllText()" class="sredina">
         <h5>All My text</h5>
         <div *ngIf="showMyTexts">
-        <div class="text-sredina">
-          <span>Lorem ipsum dolo.</span>
-        <span>Lorem ipsum dolor.</span>
-        <span>Lorem ipsum .</span>
-       
-        <span>Lorem ipsum .</span>
-        <span>Lorem ipsum.</span>
-        <span>Lorem ipsum d.</span>
-        </div>
+          <div class="text-sredina">
+            <span>Lorem ipsum dolo.</span>
+            <span>Lorem ipsum dolor.</span>
+            <span>Lorem ipsum .</span>
+
+            <span>Lorem ipsum .</span>
+            <span>Lorem ipsum.</span>
+            <span>Lorem ipsum d.</span>
+          </div>
         </div>
       </div>
 
       <div (click)="showAllComm()" class="desno">
         <h5>All My lorem</h5>
         <div *ngIf="showAllMyComments">
-        <div class="text-desno">
-          <span>Lorem ipsum dolo.</span>
-        <span>Lorem ipsum dolor.</span>
-        <span>Lorem ipsum .</span>
-        <span>Lorem ipsum.</span>
-        <span>Lorem ipsum d.</span>
-        <span>Lorem ipsum dolo.</span>
-        <span>Lorem ipsum dolor.</span>
-        <span>Lorem ipsum .</span>
-        <span>Lorem ipsum.</span>
-        <span>Lorem ipsum d.</span>
-        </div>
+          <div class="text-desno">
+            <span>Lorem ipsum dolo.</span>
+            <span>Lorem ipsum dolor.</span>
+            <span>Lorem ipsum .</span>
+            <span>Lorem ipsum.</span>
+            <span>Lorem ipsum d.</span>
+            <span>Lorem ipsum dolo.</span>
+            <span>Lorem ipsum dolor.</span>
+            <span>Lorem ipsum .</span>
+            <span>Lorem ipsum.</span>
+            <span>Lorem ipsum d.</span>
+          </div>
 
         </div>
       </div>
     </div>
-<!---->
+    <!---->
   </div>
 
+  <div class="asside-right">
+    Lorem, ipsum dolor.
+   
+    <div class="mainDivAllUsers" *ngIf="getAllImageUsers">
+      <strong>You might like</strong>
+      <div class="allUsersDiv" *ngIf="getAllverName | async as getAllverName">
+        <div class="imageContainer" *ngFor="let user of getAllverName; let i = index">
+          <img [src]="getAllImageUsers[i]" alt="Image" class="img-profile">
+          <h5>{{user.verName}}</h5>
+        </div>
+      </div>
+    </div>
+    
+    
 
-  <div class="d-flex" *ngIf="postByPostName | async as postName">
-    <div *ngIf="postName.length > 0; else noPosts">
-      <h3 class="text-center">My Posts</h3>
-      <div *ngFor="let allPost of postName; let i = index" class="post">
-        <div class="post-header">
-          <span class="post-number">UserName:{{allPost.postName}}</span>
-        </div>
-        <div class="post-headesr">
-          <span class="post-number">Number of post-{{ i + 1 }} </span>
-        </div>
-        <div class="post-content">
-          <div class="card card-footer">
-            <span class="post-number">Post Text: {{ allPost.postText }}</span>
+    
+        <div class="assideMain">
+          <div class="assideMainDiv">
+            <div class="text-assideMain">
+              <p>Trending in Serbia</p>
+              <strong class="strongtext-assideMain">Belgrade</strong>
+            </div>
+            <div class="text-assideMain">
+              <p>Trending in Serbia</p>
+              <strong class="strongtext-assideMain">Political</strong>
+            </div>
+            <div class="text-assideMain">
+              <p>Trending in Serbia</p>
+              <strong class="strongtext-assideMain">Sport</strong>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    <ng-template #noPosts>
-      <p>Ne postoji nijedan vaš post.</p>
-    </ng-template>
+
   </div>
-
-
 
 </div>

@@ -4,8 +4,7 @@
   width: 60%;
   border-left: 1px solid black;
   border-right: 1px solid black;
-  background-color: darkgrey;;
-
+  background-color: rgb(209, 222, 233);;
 }
 
 .info{
@@ -37,6 +36,8 @@
 }
 
 .all-info {
+  display: flex;
+  flex-direction: column;
   margin-top: 120px;
   margin-left: 15px;
 }
@@ -44,6 +45,11 @@
 
 .fas {
   color: black;
+  font-size: 25px;
+}
+
+a{
+  margin: 20px;
 }
 
 .fas:hover{
@@ -57,7 +63,7 @@
   justify-content: end;
   align-items: end;
   position: fixed;
-  left: 100px;
+  left: 15px;
 }
 
 .razd {
@@ -91,26 +97,31 @@
 position: absolute;
 width: 100%;
 top: 0;
-left: 47%;
+left: 43%;
 }
 
 
 .text-desno{
   width: 100%;
+  top: 100px;
   position: absolute;
   left: -80%;
   text-align: center;
 }
 
 .text-levo{
-  width: 100%;
-  position: absolute;
-  left: -5%;
-  text-align: center;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ text-align: center;
+ width: 700px;
+ color: black;
 }
 
 .text-sredina{
   width: 100%;
+  top: 100px;
   position: absolute;
   right: 47%;
   text-align: center;
@@ -119,4 +130,60 @@ left: 47%;
 .levo:hover, .sredina:hover, .desno:hover {
 cursor: pointer;
 color: black;
+}
+
+
+.asside-right{
+  width: 25%;
+}
+
+
+.mainDivAllUsers{
+  background-color: rgb(249, 246, 246);
+  height: 400px;
+  margin-top: 20px;
+  margin-left: 20px;
+  border-radius: 20px;
+}
+
+.allUsersDiv{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-left: 10px;
+}
+
+.imageContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+
+.trongtext-assideMain{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.assideMain{
+  background-color: rgb(249, 246, 246);
+  height: 400px;
+  margin-top: 20px;
+  margin-left: 20px;
+  border-radius: 20px;
+} 
+
+ .text-assideMain{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  
+} 
+
+.img-profile{
+  width: 50px;
+  border-radius: 50%;
+
 }
