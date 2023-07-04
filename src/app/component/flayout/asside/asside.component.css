@@ -1,0 +1,50 @@
+
+  .mainDivAllUsers{
+    background-color: rgb(249, 246, 246);
+    height: 400px;
+    margin-top: 20px;
+    margin-left: 20px;
+    border-radius: 20px;
+  }
+  
+  .allUsersDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-left: 10px;
+  }
+  
+  .imageContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  
+  .trongtext-assideMain{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .assideMain{
+    background-color: rgb(249, 246, 246);
+    height: 400px;
+    margin-top: 20px;
+    margin-left: 20px;
+    border-radius: 20px;
+  } 
+  
+   .text-assideMain{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+  } 
+  
+  .img-profile{
+    width: 50px;
+    border-radius: 50%;
+  
+  }

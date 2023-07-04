@@ -25,6 +25,7 @@ export class AllMyFriendsComponent {
    this.verId = this.localStorage.getLocalStorage('verifyId');
   
    this.allMyFriends = this.addFriends.getVerifyAccWithConnectedFriends(this.verId);
+  console.log("allMyFriends", this.allMyFriends);
   
    this.filteredFriends = this.allMyFriends.pipe(
     map(friends => {
@@ -38,7 +39,6 @@ export class AllMyFriendsComponent {
   this.filteredFriends.subscribe(
     frnd => {
       console.log("friends",frnd);
-      
     }
   )
   

@@ -19,6 +19,7 @@ import { AllMyFriendsComponent } from './component/all-my-friends/all-my-friends
 import { ImagesComponent } from './component/image/image.component';
 import { SafeUrl } from '@angular/platform-browser';
 import { SearchComponent } from './component/flayout/search/search.component';
+import { AssideComponent } from './component/flayout/asside/asside.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,8 @@ import { SearchComponent } from './component/flayout/search/search.component';
     AllVerifyUsersComponent,
     AllMyFriendsComponent,
     ImagesComponent,
-    SearchComponent
+    SearchComponent,
+    AssideComponent
    ],
   imports: [
     BrowserModule,

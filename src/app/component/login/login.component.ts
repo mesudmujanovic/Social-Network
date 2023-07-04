@@ -21,6 +21,7 @@ export class LoginComponent {
   getAllUsers$: Observable<User[]>
   userId: number;
   verifyId: number
+  imageUrl: string = 'assets/downloadtw.jpeg';
 
   constructor(
     private formBuilder: FormBuilder,

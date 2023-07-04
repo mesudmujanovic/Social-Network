@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { Observable, catchError, of, take, tap } from 'rxjs';
+import { Image } from 'src/app/interface/Image-interface';
+import { User } from 'src/app/interface/User-interface';
 import { Verify } from 'src/app/interface/Verify-interface';
 import { AddFriendsService } from 'src/app/service/add-friends.service';
+import { ImageService } from 'src/app/service/image.service';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { VerifyService } from 'src/app/service/verify.service';
 
@@ -17,10 +20,14 @@ export class AllVerifyUsersComponent {
   verifyId: number = this.localStorage.getLocalStorage("verifyId")
   friendsId: number;
   
+  getAllUsers$: Observable<User[]>
+  getAllImageUsers: string[]=[];
+  getAllverName: Observable<Image[]>
 
   constructor(private verifyService: VerifyService,
     private addFriendsService: AddFriendsService,
-    private localStorage: LocalStorageService) {
+    private localStorage: LocalStorageService,
+    private imageService: ImageService) {
   }
 
   addFriends() {
@@ -52,8 +59,29 @@ export class AllVerifyUsersComponent {
     this.selectedUsers = null;
   }
 
+   
+  allImages(){ 
+    return this.imageService.getAllImages().subscribe(
+      (response: Image[]) =>{
+        console.log("allimages",response);
+        this.getAllImageUsers = response.map(response => 'data:image/jpeg;base64,' + response);
+      }
+    )     
+  }
+
+  allImagesName(): Observable<Image[]>{
+    return this.getAllverName = this.imageService.getImageVerName().pipe(
+      tap( response =>{
+       console.log("response",response);
+       
+      })
+    )
+  }
+
   ngOnInit(): void {
 
     this.verifyUsers.subscribe();
+    this.allImages()
+    this.allImagesName().subscribe()
   }
 }

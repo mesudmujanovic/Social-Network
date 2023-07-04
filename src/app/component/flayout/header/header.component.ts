@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
-import { LoginService } from 'src/app/service/login.service';
 import { VerifyService } from '../../../service/verify.service';
 import { Verify } from 'src/app/interface/Verify-interface';
 
@@ -16,11 +15,17 @@ export class HeaderComponent {
   users: Verify[] = [];
   filteredUsers: Verify[] = [];
   selectedUser: Verify | null = null;
+  showSearch: boolean = false;
+
 
   constructor(
     private router: Router,
     private localStorage: LocalStorageService,
     private VerifyService: VerifyService) { }
+
+    show() {
+      this.showSearch = !this.showSearch;
+    }
 
   logOut(): void {
     this.localStorage.removeLocalStorage("token");

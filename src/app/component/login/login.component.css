@@ -1,24 +1,43 @@
-.container {
+.containerDiv {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.left-side {
+  height: 100vh;
+  width: 50%;
+  background-color: red;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: left top;
+}
+
+.imgTwitter {
+  background-color: red;
+  z-index: 999;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left top;
+  
+}
+
+.right-side {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 90vh;
+  margin-left: 50px;
 }
 
-input{
-  border-radius: 10px;
-  border: 2px solid blue;
+.login-form {
+  max-width: 300px; /* Prilagodite širinu forme prema potrebama */
 }
 
-
-
-p{
-  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
-
-app-footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
+label, input, button{
+  border-radius: 50px;
 }

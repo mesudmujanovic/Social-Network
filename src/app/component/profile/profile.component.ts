@@ -68,8 +68,6 @@ export class ProfileComponent {
     )
   }
 
-
-
   getPostByUsername(): Observable<Post[]> {
     return this.postByPostName = this.postService.getPostByUserName(this.userName).pipe(
       tap(response => {

@@ -1,4 +1,5 @@
 <div class="container mt-5" style="width: 400px;">
+  <div>
     <div *ngIf="verifyUsers | async as verifyUsers">
       <div class="text-center">
         <div class="container mt-4">
@@ -21,6 +22,27 @@
           <h4>{{selectedUsers.nameAccount}}</h4>
           <h4>{{selectedUsers.lastNameAccount}}</h4>
           <h4>{{selectedUsers.job}}</h4>
+        </div>
+      </div>
+  </div>
+      <div>
+        <div>
+          Follow page
+           <div class="mainDivAllUsers" *ngIf="getAllImageUsers">
+             <strong>You might like</strong>
+        <div class="allUsersDiv" *ngIf="getAllverName | async as getAllverName">
+        <div class="imageContainer" *ngFor="let user of getAllverName; let i = index">
+              <div class="right">
+                <img [src]="getAllImageUsers[i]" style="width: 120px; height: 150px; border-radius: 40px;" alt="Image" class="img-profile">
+              </div>
+        <div class="left">
+          <h5>{{user.verName}}</h5>
+        </div>
+
+        </div>
+      </div>
+    </div>
+    
         </div>
       </div>
     </div>

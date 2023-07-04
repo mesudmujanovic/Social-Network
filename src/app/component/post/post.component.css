@@ -1,14 +1,118 @@
-body {
-    background-image: linear-gradient(315deg, #63a4ff 0%, #83eaf1 74%);
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+ }
+
+ .inputImage{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+ }
+
+
+ /* .img-input{
+display: flex;
+align-items: start;
+justify-content: start;
+ } */
+
+ .input-Img{
+display: flex;
+justify-content: center;
+align-items: center;
+width: 100%;
+
+ } 
+
+.img-profile{
+  width: 50px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.commentImg{
+  display: flex;
+  justify-content: start;
+  align-items: start;
+
+}
+
+.comment-textDiv{
+width: 100%;
+display: flex;
+flex-direction: column;
+justify-content: start;
+align-items: start;
+}
+
+.post-imageName{
+  display: flex;
+  align-items: start;
+  justify-content: start;
+}
+ 
+.main {
+  width: 60%;
+  padding: 20px;
+  margin-right: 10px;
 }
   
-.container{
-    max-width: 700px;
-}
+  .asside-right {
+    width: 30%;
+    padding: 20px;
+    margin-left: 10px;
+    height: 500px;
+  }
+  
 
 .btnPost{
     display: flex;
     width: 100%; 
-    justify-content: center;
+    top: 0;
+}
+
+.assideMain{
+    background-color: rgb(249, 246, 246);
+    height: 400px;
+    margin-top: 20px;
+    margin-left: 20px;
+    border-radius: 20px;
+  } 
+  
+   .text-assideMain{
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    
+  } 
+
+  .search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+   
+  }
+
+.elon{
+
+  position: relative;
+  top: 269px;
+  right: 605px;
+}
+
+.amel{
+
+  position: relative;
+  top: 335px;
+  right: 652.5px;
+}
+
+.twitter{
+  position: relative;
+  top: 399px;
+  right: 701px;
 }

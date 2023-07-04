@@ -1,9 +1,11 @@
-<form class="d-flex" (ngSubmit)="search(searchKeyword.value)">
-    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" #searchKeyword>
+<div class="container search">
+  <form class="d-flex" (ngSubmit)="search(searchKeyword.value)">
+    <input class="input-search form-control me-2" type="search" placeholder="Search" aria-label="Search" #searchKeyword>
     <button class="btn btn-dark" type="submit">Search</button>
   </form>
-  <div *ngIf="filteredUsers.length > 0" class="search-results">
-    <h4 class="results-heading">Found Users:</h4>
+</div>
+  <div class="search-results" *ngIf="filteredUsers.length > 0">
+  
     <button (click)="closeFoundUsers()" class="buttonClose btn">close</button>
     <ul class="user-list">
       <li class="user-item" *ngFor="let user of filteredUsers">
@@ -13,9 +15,7 @@
   </div>
   
   <div *ngIf="selectedUser">
-    <a class="user-details" style="background-color: #182b3a;
-    background-image: linear-gradient(315deg, #182b3a 0%, #20a4f3 74%);
-    ">
+    <a class="user-details">
       <button class="close-btn" (click)="closeView()">Close</button>
       <h4>Job: {{selectedUser.job}}</h4>
       <h4>NameAccount: {{selectedUser.nameAccount}}</h4>

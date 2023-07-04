@@ -18,6 +18,7 @@ export class AppComponent {
     if(event instanceof NavigationEnd){
       //navigationEnd je klasa koja se emituje kada se ucita /profile u potpunosti
       this.isProfileRoute = this.router.url.includes('/profile');
+     
     }
    })
 };

@@ -11,6 +11,7 @@ import { Comment } from 'src/app/interface/Comment-interface';
 import { Router } from '@angular/router';
 import { LikePostService } from 'src/app/service/like-post.service';
 import { Like } from 'src/app/interface/Like-interface';
+import { ImageService } from 'src/app/service/image.service';
 
 @Component({
   selector: 'app-post',
@@ -33,6 +34,17 @@ export class PostComponent {
   postCountDislike: number = 0
   likeById: Observable<Like>;
   allLike: Observable<Like[]>
+  imageVerName: string;
+  toggleCommentForm: boolean = false;
+  imageElon: string;
+  imageAmel: string;
+  imageTwitter: string;
+  like: number = 32312;
+  dislike: number = 0;
+  postsMock: any[] = [
+    { id: 1, likes: 233199, dislikes: 0 },
+    { id: 2, likes:33, dislikes: 2 },
+  ];
 
   
   constructor(private formBuilder: FormBuilder,
@@ -41,7 +53,8 @@ export class PostComponent {
     private router: Router,
     private commentService: CommentService,
     private verifyService: VerifyService,
-    private likePostService: LikePostService) {
+    private likePostService: LikePostService,
+    private imageService: ImageService) {
 
     this.postForm = this.formBuilder.group({
       postText: ['', Validators.required]
@@ -52,15 +65,19 @@ export class PostComponent {
     });
   }
 
-  getLikeOrDislike(postId: number) {
-   this.postId = postId;
-    this.likePostService.addLike( this.postCountLike, this.postCountDislike, this.postId, this.verifyId ).pipe(
-      tap( response =>{
-      })
-    ).subscribe(response => {
-      console.log("subsrcieLike", response);
-    });
-  };
+  showComment(){
+  this.toggleCommentForm = !this.toggleCommentForm;
+  }
+
+  // getLikeOrDislike(postId: number) {
+  //  this.postId = postId;
+  //   this.likePostService.addLike( this.postCountLike, this.postCountDislike, this.postId, this.verifyId ).pipe(
+  //     tap( response =>{
+  //     })
+  //   ).subscribe(response => {
+  //     console.log("subsrcieLike", response);
+  //   });
+  // };
 
 
   getLikeById(): Observable<Like>{
@@ -79,12 +96,26 @@ export class PostComponent {
     );
   }
 
-  addLike(){
-  this.postCountLike ++;
+  addLike(postId: number) {
+    const post = this.postsMock.find(p => p.id === postId);
+    if (post) {
+      post.likes++;
+    }
+  }
+  
+  addDislike(postId: number) {
+    const post = this.postsMock.find(p => p.id === postId);
+    if (post) {
+      post.dislikes++;
+    }
   }
 
-  addDislike(){
-    this.postCountDislike ++;
+  getLikeOrDislike(postId: number) {
+    const post = this.postsMock.find(p => p.id === postId);
+    if (post) {
+      return { likes: post.likes, dislikes: post.dislikes };
+    }
+    return { likes: 0, dislikes: 0 };
   }
 
 
@@ -183,17 +214,67 @@ export class PostComponent {
       tap ( response => {
       })
     )
+  };
+
+  //image
+
+  getName(){
+    this.imageService.getImageByName(this.verifyName).subscribe(
+      (response: any) => {
+        this.imageVerName = 'data:image/jpeg;base64,' + response;
+      },
+      (error) => {
+        console.error('Error retrieving image:', error);
+      }
+    )
+  }
+  getName3(){
+    const verifyName: string = "Elon" 
+    this.imageService.getImageByName(verifyName).subscribe(
+      (response: any) => {
+        this.imageElon = 'data:image/jpeg;base64,' + response;
+      },
+      (error) => {
+        console.error('Error retrieving image:', error);
+      }
+    )
+  }
+  getName1(){
+    const verifyName: string = "Amel"
+    this.imageService.getImageByName(verifyName).subscribe(
+      (response: any) => {
+        this.imageAmel = 'data:image/jpeg;base64,' + response;
+      },
+      (error) => {
+        console.error('Error retrieving image:', error);
+      }
+    )
+  }
+  getName2(){
+    const verifyName: string = "Twitter"
+    this.imageService.getImageByName(verifyName).subscribe(
+      (response: any) => {
+        this.imageTwitter = 'data:image/jpeg;base64,' + response;
+      },
+      (error) => {
+        console.error('Error retrieving image:', error);
+      }
+    )
   }
 
   ngOnInit(): void {
 
+    this.verifyName = this.localStorage.getLocalStorage("name")
+
+    this.getName(); 
+    this.getName3();
+    this.getName2();
+    this.getName1();
+
     this.getAllLikes().subscribe(res =>{
       console.log("alllIKEsUBS",res);
     })
-
-     
-    this.verifyName = this.localStorage.getLocalStorage("name")
-
+  
     this.getVerifyByUserName().subscribe( byVerify =>{
       this.verifyId = byVerify.id;
       this.localStorage.setLocalStorage("verifyId", this.verifyId)    

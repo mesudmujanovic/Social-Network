@@ -1,17 +1,54 @@
-<nav class="navbar" style="background-color: #182b3a;
-background-image: linear-gradient(315deg, #182b3a 0%, #20a4f3 74%);
-">
-  <div class="container-fluid">
-    <div class="d-flex">
-      <a class="navbar-brand text-white" [routerLink]="['/login']">Login</a>
-      <a class="navbar-brand text-white" [routerLink]="['/signUp']">Sign Up</a>
-      <a class="navbar-brand text-white" [routerLink]="['/profile']">Profile</a>
-      <a class="navbar-brand text-white" [routerLink]="['/addVerifyUsers']">All Verify Users</a>
-      <a class="navbar-brand text-white" [routerLink]="['/logOut']" (click)="logOut()">LogOut</a>
+<!-- <div>
+  <div class="header-profile  mt-4" style="width: 14%;">
+    <div class="icon-meny">
+      <a class="navbar-brand" [routerLink]="['/login']">
+        <i class="fas fa-sign-in-alt"></i> Login
+      </a>
+      <a class="navbar-brand" [routerLink]="['/signUp']">
+        <i class="fas fa-user-plus"></i> Sign Up
+      </a>
+      <a class="navbar-brand" [routerLink]="['/profile']">
+        <i class="fas fa-user"></i> Profile
+      </a>
+      <a class="navbar-brand" [routerLink]="['/addVerifyUsers']">
+        <i class="fas fa-users"></i> All Verify Users
+      </a>
+      <a class="navbar-brand" [routerLink]="['/logOut']" (click)="logOut()">
+        <i class="fas fa-sign-out-alt"></i> LogOut
+      </a>
     </div>
 
     <app-search>
     </app-search>
 
   </div>
-</nav>
+</div> -->
+<div class="header-profile  mt-4" style="width: 14%;">
+  <div class="icon-meny">
+    <a class="navbar-brand">
+      <i class="fab fa-twitter twitter" ></i>
+    </a>
+    <a class="navbar-brand" [routerLink]="['/post']">
+      <i class="fas fa-home"></i>
+    </a>
+    <a class="navbar-brand" [routerLink]="['/friends']">
+      <i class="fas fa-users"></i>
+    </a>
+    <a class="navbar-brand" [routerLink]="['/profile']">
+      <i class="fas fa-user-circle"></i>
+    </a>
+    <a class="navbar-brand" [routerLink]="['/verify']">
+      <i class="fas fa-check-circle"></i>
+    </a>
+    
+    <a class="navbar-brand" [routerLink]="['/logOut']" (click)="logOut()">
+      <i class="fas fa-sign-out-alt"></i>
+    </a>
+    <a class="navbar-brand" style="cursor:pointer;"  [routerLink]="['/search']">
+      <i class="fas fa-search search-icon"></i>
+    </a>
+    <a class="navbar-brand" style="cursor:pointer;"  [routerLink]="['/addVerifyUsers']">
+      <i class="fas fa-user-plus friend-icon"></i>
+    </a>
+  </div>
+</div>

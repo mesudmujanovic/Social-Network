@@ -1,0 +1,29 @@
+<div class="asside-right">
+    <div class="mainDivAllUsers" *ngIf="getAllImageUsers">
+      <strong>You might like</strong>
+      <div class="allUsersDiv" *ngIf="getAllverName | async as getAllverName">
+        <div class="imageContainer" *ngFor="let user of getAllverName; let i = index">
+          <img [src]="getAllImageUsers[i]" alt="Image" class="img-profile">
+          <h5>{{user.verName}}</h5>
+        </div>
+      </div>
+    </div>
+    
+        <div class="assideMain">
+          <div class="assideMainDiv">
+            <div class="text-assideMain">
+              <p>Trending in Serbia</p>
+              <strong class="strongtext-assideMain">Belgrade</strong>
+            </div>
+            <div class="text-assideMain">
+              <p>Trending in Serbia</p>
+              <strong class="strongtext-assideMain">Political</strong>
+            </div>
+            <div class="text-assideMain">
+              <p>Trending in Serbia</p>
+              <strong class="strongtext-assideMain">Sport</strong>
+            </div>
+          </div>
+        </div>
+
+  </div>

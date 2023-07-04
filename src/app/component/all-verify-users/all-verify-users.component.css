@@ -1,3 +1,8 @@
+.container{
+  display: flex;
+  flex-direction: row;
+}
+
 .user-details {
   position: fixed;
   top: 50%;
@@ -120,4 +125,20 @@
 
   .btn:hover {
     background-color: #0056b3;
+  }
+
+  .imageContainer{
+    display: flex;
+    flex-direction: row;
+ 
+  }
+
+  .left{
+
+  }
+
+  .right{
+    margin-top: 20px;
+    height: 200px;
+    text-align: center;
   }
