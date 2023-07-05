@@ -14,5 +14,5 @@ export class AuthService {
     return this.http.get<string>(`${BASE_URL}/auth/users/${userId}/username`);
   }
 
-  
+
 }

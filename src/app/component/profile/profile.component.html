@@ -1,9 +1,8 @@
 <div class="d-flex main">
-
   <div class="header-profile  mt-4" style="width: 14%;">
     <div class="icon-meny">
       <a class="navbar-brand">
-        <i class="fab fa-twitter" style="font-size: 50px;" ></i>
+        <i class="fab fa-twitter" style="font-size: 50px;"></i>
       </a>
       <a class="navbar-brand" [routerLink]="['/post']">
         <i class="fas fa-home"></i>
@@ -48,7 +47,6 @@
           </div>
         </div>
       </div>
-
       <ng-template #noFriend>
         <div>
           <h5>
@@ -57,7 +55,6 @@
         </div>
       </ng-template>
     </div>
-
     <!-- /////// -->
     <div class="razd">
       <div (click)="showAllPost()" class="levo">
@@ -88,7 +85,6 @@
           </div>
         </div>
       </div>
-
       <div (click)="showAllText()" class="sredina">
         <h5>All My text</h5>
         <div *ngIf="showMyTexts">
@@ -103,7 +99,6 @@
           </div>
         </div>
       </div>
-
       <div (click)="showAllComm()" class="desno">
         <h5>All My lorem</h5>
         <div *ngIf="showAllMyComments">
@@ -119,47 +114,10 @@
             <span>Lorem ipsum.</span>
             <span>Lorem ipsum d.</span>
           </div>
-
         </div>
       </div>
     </div>
     <!---->
   </div>
-
   <app-asside class="asside-right">
-
   </app-asside>
-
-  <!-- <div class="asside-right">
-    Lorem, ipsum dolor.
-   
-    <div class="mainDivAllUsers" *ngIf="getAllImageUsers">
-      <strong>You might like</strong>
-      <div class="allUsersDiv" *ngIf="getAllverName | async as getAllverName">
-        <div class="imageContainer" *ngFor="let user of getAllverName; let i = index">
-          <img [src]="getAllImageUsers[i]" alt="Image" class="img-profile">
-          <h5>{{user.verName}}</h5>
-        </div>
-      </div>
-    </div>
-    
-        <div class="assideMain">
-          <div class="assideMainDiv">
-            <div class="text-assideMain">
-              <p>Trending in Serbia</p>
-              <strong class="strongtext-assideMain">Belgrade</strong>
-            </div>
-            <div class="text-assideMain">
-              <p>Trending in Serbia</p>
-              <strong class="strongtext-assideMain">Political</strong>
-            </div>
-            <div class="text-assideMain">
-              <p>Trending in Serbia</p>
-              <strong class="strongtext-assideMain">Sport</strong>
-            </div>
-          </div>
-        </div>
-
-  </div> -->
-
-</div>

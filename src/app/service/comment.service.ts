@@ -12,23 +12,23 @@ import { AddComment } from '../ngrx-store/acionts/actions';
 })
 export class CommentService {
 
-  constructor( private http: HttpClient,
-    private store: Store<AppState> ) { }
+  constructor(private http: HttpClient,
+    private store: Store<AppState>) { }
 
-  addComment( commentText: string, commentName: string, postId: number, verId: number ): Observable<Comment>{
-   const commentRequest = { commentText, commentName };
-    return this.http.post<Comment>(`${BASE_URL}/saveComment/postId/${postId}/verId/${verId}`,commentRequest)
+  addComment(commentText: string, commentName: string, postId: number, verId: number): Observable<Comment> {
+    const commentRequest = { commentText, commentName };
+    return this.http.post<Comment>(`${BASE_URL}/saveComment/postId/${postId}/verId/${verId}`, commentRequest)
   };
 
-  getAllComments(): Observable<any>{
+  getAllComments(): Observable<any> {
     return this.http.get<any>(`${BASE_URL}/allComments`)
   }
 
-  get comment () {
-    return this.store.select( getComment )
+  get comment() {
+    return this.store.select(getComment)
   }
 
-  addCommentToNgrx( comment: Comment ) {
-    this.store.dispatch( new AddComment(comment));
+  addCommentToNgrx(comment: Comment) {
+    this.store.dispatch(new AddComment(comment));
   }
 }

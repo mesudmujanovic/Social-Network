@@ -17,15 +17,14 @@ export class HeaderComponent {
   selectedUser: Verify | null = null;
   showSearch: boolean = false;
 
-
   constructor(
     private router: Router,
     private localStorage: LocalStorageService,
     private VerifyService: VerifyService) { }
 
-    show() {
-      this.showSearch = !this.showSearch;
-    }
+  show() {
+    this.showSearch = !this.showSearch;
+  }
 
   logOut(): void {
     this.localStorage.removeLocalStorage("token");
@@ -41,8 +40,6 @@ export class HeaderComponent {
     this.VerifyService.getAll().subscribe(
       (users: Verify[]) => {
         this.users = users;
-        console.log("this.users", this.users);
-
       },
       (error: any) => {
         console.error(error);

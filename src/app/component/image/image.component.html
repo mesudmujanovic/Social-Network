@@ -1,21 +1,15 @@
-
-
 <div class="container">
   <div *ngIf="imageVerName; else uploadSection">
     <img [src]="imageVerName" alt="Image" class="img-profile">
   </div>
-   
 </div>
-
-  <ng-template #uploadSection>
-<div class="control">
-   <div class="inputDiv">
-    <input class="file-input" type="file" (change)="onFileSelected($event)" accept="image/*">
-   </div>
-   <div class="buttonDiv">
-    <button class="upload-button" (click)="uploadImage()">Upload</button>
-   </div>
- </div>
-  </ng-template>
- 
-  
+<ng-template #uploadSection>
+  <div class="control">
+    <div class="inputDiv">
+      <input class="file-input" type="file" (change)="onFileSelected($event)" accept="image/*">
+    </div>
+    <div class="buttonDiv">
+      <button class="upload-button" (click)="uploadImage()">Upload</button>
+    </div>
+  </div>
+</ng-template>

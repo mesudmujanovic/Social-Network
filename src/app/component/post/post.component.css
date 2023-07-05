@@ -98,21 +98,31 @@ align-items: start;
   }
 
 .elon{
-
+  width: 55px;
+  height: 45px;
   position: relative;
   top: 269px;
-  right: 605px;
+  right: 564px;
 }
 
 .amel{
-
+  width: 55px;
   position: relative;
   top: 335px;
-  right: 652.5px;
+  right: 611px;
 }
 
 .twitter{
+  width: 55px;
   position: relative;
   top: 399px;
-  right: 701px;
+  right: 665px;
+}
+
+.erdal{
+  width: 55px;
+  height: 55px;
+  position: relative;
+  top: 612px;
+  right: 718px;
 }

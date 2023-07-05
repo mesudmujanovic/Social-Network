@@ -6,7 +6,6 @@ import { User } from 'src/app/interface/User-interface';
 import { Verify } from 'src/app/interface/Verify-interface';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
 import { LoginService } from 'src/app/service/login.service';
-import { VerifyService } from 'src/app/service/verify.service';
 
 @Component({
   selector: 'app-login',

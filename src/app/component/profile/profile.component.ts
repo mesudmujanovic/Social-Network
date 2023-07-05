@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable, catchError, map, of, tap } from 'rxjs';
+import { Observable, catchError, of, tap } from 'rxjs';
 import { Post } from 'src/app/interface/Post-interface';
 import { Verify } from 'src/app/interface/Verify-interface';
 import { LocalStorageService } from 'src/app/service/local-storage.service';
@@ -28,7 +28,7 @@ export class ProfileComponent {
   showAllMyComments: boolean = false;
   showMyTexts: boolean = false
   getAllUsers$: Observable<User[]>
-  getAllImageUsers: string[]=[];
+  getAllImageUsers: string[] = [];
   getAllverName: Observable<Image[]>;
 
   constructor(private postService: PostService,
@@ -92,30 +92,27 @@ export class ProfileComponent {
     )
   }
 
-
   getAllFriends(): Observable<Verify[]> {
     return this.allMyFriends = this.addFriends.getVerifyAccWithConnectedFriends(this.verifyId)
   }
 
-
-  allImages(){ 
+  allImages() {
     return this.imageService.getAllImages().subscribe(
-      (response: Image[]) =>{
-        console.log("allimages",response);
+      (response: Image[]) => {
+        console.log("allimages", response);
         this.getAllImageUsers = response.map(response => 'data:image/jpeg;base64,' + response);
       }
-    )     
-  }
-
-  allImagesName(): Observable<Image[]>{
-    return this.getAllverName = this.imageService.getImageVerName().pipe(
-      tap( response =>{
-       console.log("response",response);
-       
-      })
     )
   }
 
+  allImagesName(): Observable<Image[]> {
+    return this.getAllverName = this.imageService.getImageVerName().pipe(
+      tap(response => {
+        console.log("response", response);
+
+      })
+    )
+  }
 
   ngOnInit(): void {
     this.allImages()
@@ -132,8 +129,6 @@ export class ProfileComponent {
     this.getAllFriends().subscribe();
 
     this.allUsers().subscribe()
-
-
   }
 
 }

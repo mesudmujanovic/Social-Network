@@ -13,10 +13,9 @@ export class ImageService {
 
 
   uploadImage(formData: FormData): Observable<Image> {
-  
+
     return this.http.post<Image>(`${this.baseUrl}/upload`, formData);
   }
-  
 
   getAllImages(): Observable<Image[]> {
     return this.http.get<Image[]>(`${this.baseUrl}/allImages`);
@@ -26,11 +25,11 @@ export class ImageService {
     return this.http.get(`${this.baseUrl}/images/${id}`, { responseType: 'text' });
   }
 
-  getImageByName( verName: string ): Observable<any>{
+  getImageByName(verName: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/getImages/${verName}`, { responseType: 'text' })
   }
 
-  getImageVerName(): Observable<Image[]>{
+  getImageVerName(): Observable<Image[]> {
     return this.http.get<Image[]>(`${this.baseUrl}/allImagesVerName`)
   }
 

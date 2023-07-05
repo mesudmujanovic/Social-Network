@@ -24,8 +24,6 @@ export class SearchComponent {
     this.VerifyService.getAll().subscribe(
       (users: Verify[]) => {
         this.users = users;
-        console.log("this.users", this.users);
-
       },
       (error: any) => {
         console.error(error);

@@ -7,7 +7,6 @@
 .left-side {
   height: 100vh;
   width: 50%;
-  background-color: red;
   position: relative;
   overflow: hidden;
   background-size: cover;
@@ -15,7 +14,6 @@
 }
 
 .imgTwitter {
-  background-color: red;
   z-index: 999;
   position: absolute;
   top: 0;
@@ -41,3 +39,4 @@
 label, input, button{
   border-radius: 50px;
 }
+

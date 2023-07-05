@@ -19,9 +19,9 @@ export class AllVerifyUsersComponent {
   verifyUsers: Observable<Verify[]> = this.verifyService.getAll();
   verifyId: number = this.localStorage.getLocalStorage("verifyId")
   friendsId: number;
-  
+
   getAllUsers$: Observable<User[]>
-  getAllImageUsers: string[]=[];
+  getAllImageUsers: string[] = [];
   getAllverName: Observable<Image[]>
 
   constructor(private verifyService: VerifyService,
@@ -35,23 +35,17 @@ export class AllVerifyUsersComponent {
       tap(response => {
         alert("Uspesno dodat prijatelj!")
         this.selectedUsers = null;
-        console.log("AddFriends", response);
       }),
       catchError(error => {
         console.log("addFriends", error);
         return of()
       })
     ).subscribe(response => {
-      console.log("addFriendsSubs", response);
-
     })
   }
 
-
-
   viewFriend(verifyUsers) {
     this.selectedUsers = verifyUsers;
-    console.log("friends", this.selectedUsers);
     this.friendsId = this.selectedUsers.id;
   }
 
@@ -59,27 +53,22 @@ export class AllVerifyUsersComponent {
     this.selectedUsers = null;
   }
 
-   
-  allImages(){ 
+  allImages() {
     return this.imageService.getAllImages().subscribe(
-      (response: Image[]) =>{
-        console.log("allimages",response);
+      (response: Image[]) => {
         this.getAllImageUsers = response.map(response => 'data:image/jpeg;base64,' + response);
       }
-    )     
+    )
   }
 
-  allImagesName(): Observable<Image[]>{
+  allImagesName(): Observable<Image[]> {
     return this.getAllverName = this.imageService.getImageVerName().pipe(
-      tap( response =>{
-       console.log("response",response);
-       
+      tap(response => {
       })
     )
   }
 
   ngOnInit(): void {
-
     this.verifyUsers.subscribe();
     this.allImages()
     this.allImagesName().subscribe()

@@ -18,7 +18,7 @@ export class ImagesComponent implements OnInit {
   verName: string;
   imageVerName: string;
 
-  constructor(private imageService: ImageService, 
+  constructor(private imageService: ImageService,
     private localStorage: LocalStorageService) { }
 
   ngOnInit() {
@@ -33,26 +33,24 @@ export class ImagesComponent implements OnInit {
         console.log(error);
       }
     );
-   
+
   }
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
   }
 
-  uploadImage(){
+  uploadImage() {
     if (this.selectedFile) {
       const formData = new FormData();
-    formData.append('file', this.selectedFile);
-    formData.append('verName', this.verName);
-    this.imageService.uploadImage(formData).subscribe(
+      formData.append('file', this.selectedFile);
+      formData.append('verName', this.verName);
+      this.imageService.uploadImage(formData).subscribe(
         (res: Image) => {
-         this.imageId = res.id;
-         this.localStorage.setLocalStorage('imageId', this.imageId);
-         console.log("res",res);
-         this.getName();
-      //  this.loadImage();
-      },
+          this.imageId = res.id;
+          this.localStorage.setLocalStorage('imageId', this.imageId);
+          this.getName();
+        },
         (error) => {
           console.error('Error uploading image:', error);
         }
@@ -60,12 +58,10 @@ export class ImagesComponent implements OnInit {
     }
   }
 
-  getName(){
+  getName() {
     this.imageService.getImageByName(this.verName).subscribe(
       (response: any) => {
-        this.imageVerName = 'data:image/jpeg;base64,' + response;
-        console.log("this.getName",this.imageVerName);
-      },
+        this.imageVerName = 'data:image/jpeg;base64,' + response   },
       (error) => {
         console.error('Error retrieving image:', error);
       }
@@ -77,7 +73,6 @@ export class ImagesComponent implements OnInit {
     this.imageService.getImageById(this.imageId).subscribe(
       (response: any) => {
         this.imageSrc = 'data:image/jpeg;base64,' + response;
-        console.log("imageserc",this.imageSrc);
       },
       (error) => {
         console.error('Error retrieving image:', error);

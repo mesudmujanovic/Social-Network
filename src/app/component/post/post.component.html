@@ -1,125 +1,116 @@
 <div class="container mt-5">
- 
   <div class="main">
-    <form class="form-group form-control mb-4" [formGroup]="postForm" (ngSubmit)="onPost()" >
-    <label class="d-flex justify-content-center align-items-center" for="postText" >Post</label>
-   <div class="inputImage">
-    <div *ngIf="imageVerName" class="img-input">
-      <img [src]="imageVerName" alt="Image" class="img-profile">
-    </div>
-    <div class="input-Img">
-      <input placeholder="Unesite Post" class="form-control" type="text" name="postText" formControlName="postText">
-    </div>
-   </div>
-    <button type="submit" class="btn btnPost">Add Post</button>
-  </form>
-
-  <div *ngIf="allPosts$ | async as allPosts">
-    <div *ngFor="let post of allPosts; let i = index">
-      <div class="row">
-        <div class="col-12">
-          <div class="card mb-5">
-            <div class="card-head text-center">
-              <div class="post-imageName m-3" >
-                <div *ngIf="imageVerName">
-                  <img [src]="imageVerName" alt="Image" style="width: 50px; height: 50px; border-radius: 50%;">
-                </div>
-                <div>
-                  <strong class="postName">Post by: {{ post.postName }}</strong>
-                  <p class="postName"> text: {{ post.postText }}</p>
-                </div>
-                
-              </div>
-            </div>
-
-            <div class="card-body">
-              <div  class="text-center"
-                *ngFor="let comment of posts[post.id]"> 
-                <div *ngIf="imageVerName" class="commentImg">
+    <form class="form-group form-control mb-4" [formGroup]="postForm" (ngSubmit)="onPost()">
+      <label class="d-flex justify-content-center align-items-center" for="postText">Post</label>
+      <div class="inputImage">
+        <div *ngIf="imageVerName" class="img-input">
+          <img [src]="imageVerName" alt="Image" class="img-profile">
+        </div>
+        <div class="input-Img">
+          <input placeholder="Unesite Post" class="form-control" type="text" name="postText" formControlName="postText">
+        </div>
+      </div>
+      <button type="submit" class="btn btnPost">Add Post</button>
+    </form>
+    <div *ngIf="allPosts$ | async as allPosts">
+      <div *ngFor="let post of allPosts; let i = index">
+        <div class="row">
+          <div class="col-12">
+            <div class="card mb-5">
+              <div class="card-head text-center">
+                <div class="post-imageName m-3">
+                  <div *ngIf="imageVerName">
+                    <img [src]="imageVerName" alt="Image" style="width: 50px; height: 50px; border-radius: 50%;">
+                  </div>
                   <div>
-                    <img [src]="imageVerName" alt="Image" class="img-profile">
+                    <strong class="postName">Post by: {{ post.postName }}</strong>
+                    <p class="postName"> text: {{ post.postText }}</p>
                   </div>
-                  <div class="comment-textDiv">
-                    <div>
-                      <strong class="comentName">Comment by:{{comment.commentName}}</strong>
-                    </div>
-                   <div>
-                    <p class="commentText">{{ comment.commentText }}</p>
-                   </div>
-                   </div>
-                  </div>
+
+                </div>
               </div>
-            </div>
-            <div class="card-footer">
-            
-              <form class="form-group form-control d-flex justify-content-center align-items-center"
-              [formGroup]="commentForm" (ngSubmit)="onComment()" *ngIf="toggleCommentForm">
-              <input placeholder="Unesite Komentar" type="text" name="commentText" formControlName="commentText">
-              <button class="btn" type="submit" (click)="getClickedPost(post.id)">
-                <i class="fas fa-comment">Add</i>
-              </button>
-            </form>
-           
-            <div class="d-flex">
-              <button class="btn" (click)="addLike(post.id); getLikeOrDislike(post.id)">
-                <i class="fas fa-thumbs-up"></i>
-              </button>
-              <h3 class="m-2">{{ getLikeOrDislike(post.id).likes }}</h3>
-              <hr><br>
-              <button class="btn" (click)="addDislike(post.id); getLikeOrDislike(post.id)">
-                <i class="fas fa-thumbs-down"></i>
-              </button>
-              <h3 class="m-2">{{ getLikeOrDislike(post.id).dislikes }}</h3>
-              <button class="btn">
-                <i class="fas fa-comment" (click)="showComment()"></i>
-              </button>
-            </div>
-            
+
+              <div class="card-body">
+                <div class="text-center" *ngFor="let comment of posts[post.id]">
+                  <div *ngIf="imageVerName" class="commentImg">
+                    <div>
+                      <img [src]="imageVerName" alt="Image" class="img-profile">
+                    </div>
+                    <div class="comment-textDiv">
+                      <div>
+                        <strong class="comentName">Comment by:{{comment.commentName}}</strong>
+                      </div>
+                      <div>
+                        <p class="commentText">{{ comment.commentText }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <form class="form-group form-control d-flex justify-content-center align-items-center"
+                  [formGroup]="commentForm" (ngSubmit)="onComment()" *ngIf="toggleCommentForm">
+                  <input placeholder="Unesite Komentar" type="text" name="commentText" formControlName="commentText">
+                  <button class="btn" type="submit" (click)="getClickedPost(post.id)">
+                    <i class="fas fa-comment">Add</i>
+                  </button>
+                </form>
+                <div class="d-flex">
+                  <button class="btn" (click)="addLike(post.id); getLikeOrDislike(post.id)">
+                    <i class="fas fa-thumbs-up"></i>
+                  </button>
+                  <h3 class="m-2">{{ getLikeOrDislike(post.id).likes }}</h3>
+                  <hr><br>
+                  <button class="btn" (click)="addDislike(post.id); getLikeOrDislike(post.id)">
+                    <i class="fas fa-thumbs-down"></i>
+                  </button>
+                  <h3 class="m-2">{{ getLikeOrDislike(post.id).dislikes }}</h3>
+                  <button class="btn">
+                    <i class="fas fa-comment" (click)="showComment()"></i>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  </div>
-
   <img [src]="imageElon" alt="Image" class="img-profile elon">
   <img [src]="imageAmel" alt="Image" class="img-profile amel">
   <img [src]="imageTwitter" alt="Image" class="img-profile twitter">
-
- <div class="asside-right">
-  <div>
-    <a class="navbar-brand search" style="cursor:pointer;"  [routerLink]="['/search']">
-      <i class="fas fa-search search-icon">Search</i>
+  <img [src]="imageErdal" alt="Image" class="img-profile erdal">
+  <div class="asside-right">
+    <div>
+      <a class="navbar-brand search" style="cursor:pointer;" [routerLink]="['/search']">
+        <i class="fas fa-search search-icon">Search</i>
       </a>
-  </div>
-  
-  <div class="assideMain">
-    <div class="assideMainDiv">
-      <div class="text-assideMain">
-        <p>Trending in Serbia</p>
-        <strong class="strongtext-assideMain">Belgrade</strong>
-      </div>
-      <div class="text-assideMain">
-        <p>Trending in Serbia</p>
-        <strong class="strongtext-assideMain">Political</strong>
-      </div>
-      <div class="text-assideMain">
-        <p>Trending in Serbia</p>
-        <strong class="strongtext-assideMain">Political</strong>
-      </div>
-      <div class="text-assideMain">
-        <p>Trending in Serbia</p>
-        <strong class="strongtext-assideMain">IT</strong>
-      </div>
-      <div class="text-assideMain">
-        <p>Trending in Serbia</p>
-        <strong class="strongtext-assideMain">Sport</strong>
+    </div>
+    <div class="assideMain">
+      <div class="assideMainDiv">
+        <div class="text-assideMain">
+          <p>Trending in Serbia</p>
+          <strong class="strongtext-assideMain">Belgrade</strong>
+        </div>
+        <div class="text-assideMain">
+          <p>Trending in Serbia</p>
+          <strong class="strongtext-assideMain">Political</strong>
+        </div>
+        <div class="text-assideMain">
+          <p>Trending in Serbia</p>
+          <strong class="strongtext-assideMain">Political</strong>
+        </div>
+        <div class="text-assideMain">
+          <p>Trending in Serbia</p>
+          <strong class="strongtext-assideMain">IT</strong>
+        </div>
+        <div class="text-assideMain">
+          <p>Trending in Serbia</p>
+          <strong class="strongtext-assideMain">Sport</strong>
+        </div>
       </div>
     </div>
+    <app-asside>
+    </app-asside>
   </div>
-  <app-asside>
-    
-  </app-asside>
- </div>
 </div>

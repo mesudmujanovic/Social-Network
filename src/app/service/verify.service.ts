@@ -13,32 +13,31 @@ import { AddVerify } from '../ngrx-store/acionts/actions';
 })
 export class VerifyService {
 
-  constructor( private http: HttpClient,
-    private store: Store<AppState> ) { }
+  constructor(private http: HttpClient,
+    private store: Store<AppState>) { }
 
   addVerify(verify: Verify, userId: number): Observable<Verify> {
     return this.http.post<Verify>(`${BASE_URL}/saveVerify/user/${userId}`, verify);
-}
+  }
 
+  getVerifybyId(verId: number): Observable<Verify> {
+    return this.http.get<Verify>(`${BASE_URL}/verifyById/${verId}`);
+  }
 
-getVerifybyId(verId: number): Observable<Verify> {
-  return this.http.get<Verify>(`${BASE_URL}/verifyById/${verId}`);
-}
+  getAll(): Observable<Verify[]> {
+    return this.http.get<Verify[]>(`${BASE_URL}/allVerify`)
+  }
 
-getAll(): Observable<Verify[]> {
-  return this.http.get<Verify[]>(`${BASE_URL}/allVerify`)
-}
+  getByVerifyName(nameAccount: string): Observable<Verify> {
+    return this.http.get<Verify>(`${BASE_URL}/verifyUsername/${nameAccount}`)
+  }
 
-getByVerifyName( nameAccount: string ): Observable<Verify>{
-  return this.http.get<Verify>(`${BASE_URL}/verifyUsername/${nameAccount}`)
-}
+  get verify() {
+    return this.store.select(getVerify)
+  }
 
-get verify() {
-  return this.store.select( getVerify )
-}
-
-saveVerifyToNgrx( verify: Verify ){
-  this.store.dispatch( new AddVerify( verify ));
-}
+  saveVerifyToNgrx(verify: Verify) {
+    this.store.dispatch(new AddVerify(verify));
+  }
 
 }

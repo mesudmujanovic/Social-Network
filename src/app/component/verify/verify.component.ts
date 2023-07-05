@@ -54,7 +54,6 @@ export class VerifyComponent {
           const allVerifys = response;
           this.localStorage.setLocalStorage("verifyId", verifyId);
           this.localStorage.setLocalStorage("allVerify", allVerifys)
-          console.log("verifyRes", response);
         }),
         catchError((error) => {
           console.log("verError", error);
@@ -72,13 +71,10 @@ export class VerifyComponent {
   allVerifuUsers(): Observable<Verify[]> {
     return this.allVerify = this.verifyService.getAll().pipe(
       tap(response => {
-        console.log("ver", response);
         this.fromDBtoLocalStorage = response;
       })
     )
   }
-
- 
 
   getAllUsers(): Observable<User[]> {
     return this.loginService.getAllUsers().pipe(
@@ -88,18 +84,14 @@ export class VerifyComponent {
   }
 
   ngOnInit(): void {
-
     this.userId += this.localStorage.getLocalStorage("user");
     this.getAllUsers().subscribe(response => {
       const verifyDtoList = response[this.userId].verifyDtoList;
       if (verifyDtoList) {
         this.verifyId = verifyDtoList[0].id;
-        console.log("thisver", this.verifyId);
       }
     });
-
     this.allVerifuUsers().subscribe(response => { });
-
     this.nameAccounts = this.localStorage.getLocalStorage("name")
   }
 }
